@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FERY NUR INDAHSARI — UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #5a4b51;
+  --primary: #d4a5a5;
+  --secondary: #a39193;
+  --accent: #e8caca;
+  --white: #ffffff;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); overflow-x: hidden; }
+
+/* Canvas for soft particles/gears */
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.6; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(15px); background: rgba(255,251,251,0.85); border-bottom: 1px solid var(--accent); }
+.logo-container { display: flex; align-items: center; gap: 1rem; }
+.ust-logo { height: 40px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+.logo-uni { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; color: var(--text); letter-spacing: 1px; text-transform: uppercase; max-width: 250px; line-height: 1.2; }
+nav ul { list-style: none; display: flex; gap: 2rem; }
+nav a { color: var(--text); text-decoration: none; font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; transition: color .3s; font-family: var(--font-body); font-weight: 500; }
+nav a:hover { color: var(--primary); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; }
+.menu-toggle span { width: 24px; height: 2px; background: var(--text); transition: transform .3s, opacity .3s; }
+
+/* HERO */
+#hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; padding: 2rem; z-index: 1; overflow: hidden; }
+.hero-bg-gears { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; z-index: -1; opacity: 0.15; }
+.gear-icon { position: absolute; fill: var(--primary); transform-origin: center; animation: spin linear infinite; }
+.gear-1 { width: 200px; height: 200px; top: 10%; left: 10%; animation-duration: 20s; }
+.gear-2 { width: 300px; height: 300px; bottom: 5%; right: 5%; animation-duration: 30s; animation-direction: reverse; fill: var(--secondary); }
+.gear-3 { width: 120px; height: 120px; top: 40%; right: 25%; animation-duration: 15s; }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.hero-content { position: relative; z-index: 2; background: rgba(255,255,255,0.6); padding: 3rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 20px 40px rgba(212,165,165,0.15); backdrop-filter: blur(10px); }
+.hero-portfolio-title { font-family: 'Great Vibes', cursive; font-size: clamp(2.2rem, 5vw, 4rem); background: linear-gradient(to right, #d4a5a5, #e5c1b6, #e8caca, #cda79e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(212,165,165,0.2); }
+.hero-name { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; letter-spacing: 2px; line-height: 1.1; margin-bottom: .5rem; color: var(--text); }
+.hero-role { font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.5rem); color: var(--primary); letter-spacing: 4px; margin-bottom: 1rem; font-style: italic; }
+.hero-tagline { font-size: clamp(.9rem, 1.5vw, 1.1rem); color: var(--secondary); font-weight: 400; margin-bottom: 2.5rem; letter-spacing: 1px; }
+.hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+/* BUTTONS */
+.btn { position: relative; padding: 0.8rem 2rem; font-family: var(--font-body); font-size: .85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-radius: 30px; text-decoration: none; transition: all .3s var(--ease); overflow: hidden; z-index: 1; }
+.btn.primary { background: var(--primary); color: var(--white); border: none; box-shadow: 0 5px 15px rgba(212,165,165,0.4); }
+.btn.primary:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212,165,165,0.6); background: #c69494; }
+.btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--secondary); }
+.btn.secondary:hover { background: var(--secondary); color: var(--white); transform: translateY(-3px); }
+.icon-btn { padding: 0.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; }
+.icon-btn svg { width: 22px; height: 22px; transition: transform .3s var(--ease); }
+.icon-btn:hover svg { transform: scale(1.1); }
+
+/* SECTION BASE */
+section { position: relative; z-index: 1; padding: 6rem 2rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 600; text-align: center; margin-bottom: 3rem; letter-spacing: 2px; color: var(--text); }
+.section-title .accent { color: var(--primary); font-style: italic; }
+.section-title::after { content: '⚙'; display: block; font-size: 1.5rem; color: var(--accent); margin-top: 0.5rem; animation: spin 10s linear infinite; text-align: center; }
+
+/* PROFIL */
+#profil { max-width: 900px; margin: 0 auto; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: flex-start; }
+.about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; z-index: 1; }
+.about-img { width: 100%; aspect-ratio: 4/5; background: url('foto-profil-terbaru.jpg') center bottom/contain no-repeat; position: relative; z-index: 2; }
+.bg-name { position: absolute; font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 700; white-space: nowrap; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0.15; z-index: 0; pointer-events: none; }
+.bg-name-1 { top: 5%; left: -30%; transform: rotate(-15deg); }
+.bg-name-2 { bottom: 15%; right: -30%; transform: rotate(15deg); }
+.bg-name-3 { top: 30%; right: -20%; transform: rotate(-5deg); opacity: 0.1; }
+.bg-name-4 { bottom: 5%; left: -20%; transform: rotate(5deg); opacity: 0.1; }
+.about-text p { color: var(--text); line-height: 1.8; margin-bottom: 1rem; font-weight: 400; }
+.about-text strong { color: var(--primary); font-weight: 600; }
+blockquote { border-left: 3px solid var(--primary); padding-left: 1.5rem; margin-top: 1.5rem; font-style: italic; color: var(--secondary); font-size: 1.05rem; line-height: 1.6; }
+
+/* MODEL GURU / SKILLS */
+#model-guru { max-width: 900px; margin: 0 auto; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.skill-card { background: var(--white); border: 1px solid var(--accent); border-radius: 16px; padding: 2rem; transition: transform .3s, box-shadow .3s; box-shadow: 0 5px 15px rgba(0,0,0,0.03); text-align: center; position: relative; overflow: hidden; }
+.skill-card::before { content: '⚙'; position: absolute; top: -10px; right: -10px; font-size: 4rem; color: var(--accent); opacity: 0.3; animation: spin 30s linear infinite; }
+.skill-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212,165,165,0.15); border-color: var(--primary); }
+.skill-card h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); margin-bottom: .8rem; font-weight: 600; }
+.skill-card p { color: var(--secondary); font-size: .9rem; line-height: 1.6; font-weight: 400; }
+
+/* ANALISIS ARTEFAK */
+#analisis { max-width: 1100px; margin: 0 auto; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.project-card { background: var(--white); border: 1px solid var(--accent); border-radius: 16px; padding: 2.5rem; transition: transform .3s, box-shadow .3s; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212,165,165,0.15); }
+.project-card h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--primary); margin-bottom: 1rem; }
+.project-card p { color: var(--text); line-height: 1.7; font-weight: 400; }
+
+/* LAMPIRAN */
+#lampiran { max-width: 800px; margin: 0 auto; }
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--accent); }
+.timeline-item { position: relative; margin-bottom: 3rem; padding-left: 2rem; }
+.timeline-item::before { content: '⚙'; position: absolute; left: -2.8rem; top: 0; font-size: 1.5rem; color: var(--primary); background: var(--bg); border-radius: 50%; padding: 2px; animation: spin 10s linear infinite; }
+.timeline-item h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); margin-bottom: .3rem; font-weight: 600; }
+.timeline-item .company { color: var(--primary); font-size: .9rem; font-weight: 500; margin-bottom: .8rem; }
+.timeline-item p { color: var(--secondary); font-size: .95rem; line-height: 1.6; }
+
+/* CONTACT */
+#contact { max-width: 700px; margin: 0 auto; text-align: center; }
+#contact p { color: var(--secondary); line-height: 1.8; margin-bottom: 2.5rem; }
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+/* FOOTER */
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--accent); color: var(--secondary); font-size: .8rem; background: var(--white); }
+
+/* FADE IN */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+  nav ul { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; transition: right .4s var(--ease); box-shadow: -5px 0 20px rgba(0,0,0,0.05); }
+  nav ul.open { right: 0; }
+  .menu-toggle { display: flex; }
+  .about-grid { grid-template-columns: 1fr; text-align: center; }
+  .about-img { max-width: 300px; margin: 0 auto; }
+  blockquote { border-left: none; border-top: 3px solid var(--primary); padding-left: 0; padding-top: 1rem; }
+  .hero-bg-gears { width: 300px; height: 300px; }
+  .gear-1 { width: 100px; height: 100px; }
+  .gear-2 { width: 150px; height: 150px; }
+  .gear-3 { width: 60px; height: 60px; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+<div class="logo-container">
+<img src="ust-logo.png" alt="UST Logo" class="ust-logo">
+<span class="logo-uni">Universitas Sarjanawiyata Tamansiswa</span>
+</div>
+<div class="menu-toggle" id="menuToggle" onclick="document.querySelector('nav ul').classList.toggle('open');"><span></span><span></span><span></span></div>
+<ul>
+<li><a href="#profil">Profil</a></li>
+<li><a href="#analisis">Analisis Artefak</a></li>
+<li><a href="#lampiran">Lampiran</a></li>
+<li><a href="#model-guru">Model Guru</a></li>
+<li><a href="#contact">Kontak</a></li>
+</ul>
+</nav>
+
+<section id="hero">
+<div class="hero-bg-gears">
+  <!-- Simple SVG Gears -->
+  <svg class="gear-icon gear-1" viewBox="0 0 100 100"><path d="M50,20 C33.4,20 20,33.4 20,50 C20,66.6 33.4,80 50,80 C66.6,80 80,66.6 80,50 C80,33.4 66.6,20 50,20 Z M50,65 C41.7,65 35,58.3 35,50 C35,41.7 41.7,35 50,35 C58.3,35 65,41.7 65,50 C65,58.3 58.3,65 50,65 Z M45,10 L55,10 L57,22 L43,22 Z M45,90 L55,90 L57,78 L43,78 Z M10,45 L10,55 L22,57 L22,43 Z M90,45 L90,55 L78,57 L78,43 Z M20,20 L27,27 L33,20 L25,13 Z M80,80 L73,73 L67,80 L75,87 Z M80,20 L73,27 L67,20 L75,13 Z M20,80 L27,73 L33,80 L25,87 Z"/></svg>
+  <svg class="gear-icon gear-2" viewBox="0 0 100 100"><path d="M50,25 C36.2,25 25,36.2 25,50 C25,63.8 36.2,75 50,75 C63.8,75 75,63.8 75,50 C75,36.2 63.8,25 50,25 Z M50,60 C44.5,60 40,55.5 40,50 C40,44.5 44.5,40 50,40 C55.5,40 60,44.5 60,50 C60,55.5 55.5,60 50,60 Z M46,5 L54,5 L56,26 L44,26 Z M46,95 L54,95 L56,74 L44,74 Z M5,46 L5,54 L26,56 L26,44 Z M95,46 L95,54 L74,56 L74,44 Z M18,18 L24,24 L30,17 L22,11 Z M82,82 L76,76 L70,83 L78,89 Z M82,18 L76,24 L70,17 L78,11 Z M18,82 L24,76 L30,83 L22,89 Z"/></svg>
+  <svg class="gear-icon gear-3" viewBox="0 0 100 100"><path d="M50,30 C39,30 30,39 30,50 C30,61 39,70 50,70 C61,70 70,61 70,50 C70,39 61,30 50,30 Z M50,58 C45.6,58 42,54.4 42,50 C42,45.6 45.6,42 50,42 C54.4,42 58,45.6 58,50 C58,54.4 54.4,58 50,58 Z M47,15 L53,15 L55,32 L45,32 Z M47,85 L53,85 L55,68 L45,68 Z M15,47 L15,53 L32,55 L32,45 Z M85,47 L85,53 L68,55 L68,45 Z"/></svg>
+</div>
+<div class="hero-content fade-in">
+<h2 class="hero-portfolio-title">Portofolio Refleksi Pembelajaran</h2>
+<h1 class="hero-name">FERY NUR INDAHSARI</h1>
+<h3 class="hero-role">Calon Guru PPG Prajab Gelombang 1 tahun 2025/2026</h3>
+<p class="hero-tagline">Mendidik dengan Inovasi, Dedikasi, dan Hati</p>
+<div class="hero-buttons">
+<a href="#profil" class="btn primary">Mulai Eksplorasi</a>
+<a href="#contact" class="btn secondary">Hubungi Saya</a>
+</div>
+</div>
+</section>
+
+<section id="profil">
+<h2 class="section-title fade-in">Profil <span class="accent">Mahasiswa</span></h2>
+<div class="about-grid">
+<div class="about-img-wrapper fade-in">
+<div class="bg-name bg-name-1">Fery Nur Indahsari</div>
+<div class="bg-name bg-name-2">Fery Nur Indahsari</div>
+<div class="bg-name bg-name-3">Fery Nur Indahsari</div>
+<div class="bg-name bg-name-4">Fery Nur Indahsari</div>
+<div class="about-img"></div>
+</div>
+<div class="about-text">
+<h3 class="about-subtitle fade-in" style="font-family: var(--font-display); font-size: 1.6rem; color: var(--primary); margin-bottom: 0.8rem; font-weight: 700;">👋 Pengenalan Diri</h3>
+<p class="fade-in">Perkenalkan saya <strong>Fery Nur Indahsari</strong> mahasiswa PPG calon Guru Gel. 1 di Universitas Sarjanawiyata Tamansiswa. Pada jurusan Teknik Mesin. Sebelumnya saya menempuh studi S1 di Universitas Negeri Yogyakarta jurusan Pendidikan Teknik Mesin lulus tahun 2016 silam.</p>
+<h3 class="about-subtitle fade-in" style="font-family: var(--font-display); font-size: 1.6rem; color: var(--primary); margin-bottom: 0.8rem; margin-top: 1.5rem; font-weight: 700;">✨ Motivasi Menjadi Guru</h3>
+<p class="fade-in">Motivasi saya menjadi seorang guru berawal dari keinginan kedua orang tua, karena beliau bercita-cita menjadi seorang guru namun tidak tercapai. Dengan begitu mendorong saya agar menjadi seorang guru. Seiring berjalannya waktu, saya memahami mengapa orang tua begitu kuat agar saya menjadi seorang guru, karena menjadi seorang guru bukan hanya sebuah pekerjaan, melainkan sebuah tanggung jawab yang sangat besar—bukan hanya mengajar namun juga mendidik, membentuk karakter serta membangun harapan untuk murid-murid saya. Dengan begitu besar harapan saya agar tetap bisa menjadi seorang guru yang selalu dirindukan murid di setiap kehadirannya.</p>
+<blockquote class="fade-in">"Jadilah guru yang mengajar dengan hati, bukan hanya dengan mulut. Karena pendidikan sejati adalah menuntun, bukan menuntut." <br><small style="color:var(--primary);font-weight:600;font-style:normal;">— Ki Hadjar Dewantara</small></blockquote>
+</div>
+</div>
+</section>
+
+<section id="analisis">
+<h2 class="section-title fade-in">Analisis <span class="accent">Artefak Pembelajaran</span></h2>
+<div class="projects-grid">
+<div class="project-card fade-in">
+<h3>RPP (Rencana Pelaksanaan Pembelajaran)</h3>
+<p>Rancangan pembelajaran yang disusun secara sistematis untuk mencapai tujuan pembelajaran, disesuaikan dengan karakteristik dan kebutuhan peserta didik, serta kurikulum yang berlaku.</p>
+</div>
+<div class="project-card fade-in">
+<h3>Media Pembelajaran</h3>
+<p>Pengembangan dan pemanfaatan alat bantu belajar yang relevan dan interaktif untuk memfasilitasi pemahaman peserta didik secara lebih efektif dan menyenangkan.</p>
+</div>
+<div class="project-card fade-in">
+<h3>Bahan Ajar</h3>
+<p>Materi pembelajaran komprehensif yang dirancang untuk mendukung proses belajar mengajar, mencakup konsep dasar hingga penerapan praktis yang kontekstual.</p>
+</div>
+<div class="project-card fade-in">
+<h3>Instrumen Assesmen</h3>
+<p>Alat ukur yang dikembangkan secara valid dan reliabel untuk mengevaluasi pencapaian kognitif, afektif, dan psikomotorik peserta didik secara komprehensif.</p>
+</div>
+<div class="project-card fade-in">
+<h3>Penilaian DPL dan GP</h3>
+<p>Hasil evaluasi dan umpan balik konstruktif dari Dosen Pembimbing Lapangan (DPL) serta Guru Pamong (GP) sebagai acuan refleksi dan peningkatan kualitas praktik mengajar.</p>
+</div>
+</div>
+</section>
+
+<section id="lampiran">
+<h2 class="section-title fade-in">Lampiran <span class="accent">Penilaian</span></h2>
+<div class="timeline">
+<div class="timeline-item fade-in">
+<h3>Lampiran 7</h3>
+<div class="company">Instrumen Penilaian Penyusunan Perangkat Pembelajaran</div>
+<p>Penilaian dari guru pamong dan Dosen Pembimbing Lapangan terkait kualitas RPP, modul ajar, dan perangkat asesmen yang telah disusun. Mendapat umpan balik yang sangat positif terutama pada aspek kesesuaian indikator dan tujuan pembelajaran.</p>
+</div>
+<div class="timeline-item fade-in">
+<h3>Lampiran 8</h3>
+<div class="company">Instrumen Penilaian Praktik Mengajar (3 Siklus)</div>
+<p>Dokumentasi hasil penilaian kinerja selama melaksanakan praktik mengajar di sekolah mitra dalam 3 siklus berturut-turut. Terdapat peningkatan signifikan pada penguasaan kelas, variasi intonasi suara, dan kemampuan memberikan <em>scaffolding</em> kepada peserta didik yang membutuhkan.</p>
+</div>
+</div>
+</section>
+
+<section id="model-guru">
+<h2 class="section-title fade-in">Model <span class="accent">Guru yang Dituju</span></h2>
+<div class="skills-grid">
+<div class="skill-card fade-in"><h3>Guru Transformatif</h3><p>Misi utama: Membawa inovasi dalam pembelajaran yang relevan dengan tuntutan kompetensi abad 21.</p></div>
+<div class="skill-card fade-in"><h3>Kompetensi Pedagogik</h3><p>Mampu merancang, melaksanakan, dan mengevaluasi pembelajaran bermakna yang berpusat pada siswa.</p></div>
+<div class="skill-card fade-in"><h3>Kompetensi Profesional</h3><p>Menguasai materi pelajaran secara mendalam dan luas sesuai dengan bidang keilmuan yang diampu.</p></div>
+<div class="skill-card fade-in"><h3>Kompetensi Kepribadian</h3><p>Menjadi teladan yang baik, memiliki akhlak mulia, berwibawa, dan mantap dalam bersikap sehari-hari.</p></div>
+<div class="skill-card fade-in"><h3>Kompetensi Sosial</h3><p>Mampu berkomunikasi dan berkolaborasi secara efektif dengan peserta didik, sesama pendidik, dan masyarakat.</p></div>
+<div class="skill-card fade-in"><h3>Karakter Welas Asih</h3><p>Membangun lingkungan belajar yang aman, inklusif, dan penuh empati sesuai dengan filosofi Ki Hajar Dewantara.</p></div>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="section-title fade-in">Thank <span class="accent">You</span></h2>
+<div class="contact-links fade-in" style="margin-top: 2rem;">
+<a href="mailto:feryindahsari.54@gmail.com" target="_blank" class="btn secondary icon-btn" title="Email" aria-label="Email">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+</a>
+<a href="https://www.youtube.com/channel/UCepBe9y51MGllxAV8zUc7YQ" target="_blank" class="btn secondary icon-btn" title="YouTube" aria-label="YouTube">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+</a>
+<a href="https://www.instagram.com/feryindahsari" target="_blank" class="btn secondary icon-btn" title="Instagram" aria-label="Instagram">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+</a>
+<a href="https://wa.me/6281391030787" target="_blank" class="btn secondary icon-btn" title="WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+</a>
+</div>
+</section>
+
+<footer><p>&copy; 2026 FERY NUR INDAHSARI. Designed with ⚙ & ✿.</p></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* ===== FADE IN OBSERVER ===== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  
+  /* ===== CANVAS GEARS BACKGROUND ===== */
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  
+  class FloatingGear {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height + canvas.height;
+      this.size = Math.random() * 15 + 10;
+      this.speedY = -(Math.random() * 0.5 + 0.2);
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.05;
+      this.opacity = Math.random() * 0.3 + 0.1;
+      this.color = Math.random() > 0.5 ? '#d4a5a5' : '#a39193';
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotationSpeed;
+      if (this.y + this.size < 0) {
+        this.reset();
+        this.y = canvas.height + this.size;
+      }
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
+      
+      // Draw simple gear
+      ctx.beginPath();
+      const teeth = 8;
+      const innerRadius = this.size * 0.5;
+      const outerRadius = this.size;
+      for (let i = 0; i < teeth; i++) {
+        const angle = (i * Math.PI * 2) / teeth;
+        const nextAngle = ((i + 1) * Math.PI * 2) / teeth;
+        const midAngle = angle + (nextAngle - angle) / 2;
+        
+        ctx.lineTo(Math.cos(angle - 0.2) * innerRadius, Math.sin(angle - 0.2) * innerRadius);
+        ctx.lineTo(Math.cos(angle) * outerRadius, Math.sin(angle) * outerRadius);
+        ctx.lineTo(Math.cos(midAngle) * outerRadius, Math.sin(midAngle) * outerRadius);
+        ctx.lineTo(Math.cos(midAngle + 0.2) * innerRadius, Math.sin(midAngle + 0.2) * innerRadius);
+      }
+      ctx.closePath();
+      ctx.fill();
+      
+      // Inner hole
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(0, 0, innerRadius * 0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+      
+      ctx.restore();
+    }
+  }
+  
+  const gears = [];
+  for (let i = 0; i < 20; i++) {
+    gears.push(new FloatingGear());
+    gears[i].y = Math.random() * canvas.height; // initial scatter
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gears.forEach(g => {
+      g.update();
+      g.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  
+  // Mobile Nav Close
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      const ul = document.querySelector('nav ul');
+      if (ul.classList.contains('open')) ul.classList.remove('open');
+    });
+  });
+  
+  // Initial Fade
+  setTimeout(() => {
+    document.querySelectorAll('#hero .fade-in').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 150);
+    });
+  }, 100);
+});
+</script>
+</body>
+</html>
