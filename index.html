@@ -884,6 +884,66 @@
       border-radius: 50px;
     }
 
+    /* Graded/Hasil LKM design style */
+    .card-cover-preview.student-work {
+      background: #f0f5f2 !important;
+      background-image: 
+        linear-gradient(rgba(85, 122, 96, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(85, 122, 96, 0.05) 1px, transparent 1px);
+      background-size: 15px 15px;
+      border-bottom: 1px solid var(--accent);
+    }
+    
+    .card-cover-preview.student-work .blueprint-corner {
+      border-color: #557a60;
+    }
+    
+    .card-cover-preview.student-work .blueprint-frame {
+      border: 1px dashed rgba(85, 122, 96, 0.35);
+      color: #3b5c45;
+    }
+    
+    .card-cover-preview.student-work .blueprint-cycle {
+      color: #3b5c45;
+      background: rgba(85, 122, 96, 0.12);
+      border: 1px solid rgba(85, 122, 96, 0.25);
+    }
+    
+    .card-cover-preview.student-work .blueprint-label {
+      color: #557a60;
+    }
+    
+    .card-cover-preview.student-work .blueprint-title {
+      color: #2d4534;
+    }
+    
+    .card-cover-preview.student-work .blueprint-subtitle {
+      color: #557a60;
+    }
+    
+    .card-cover-preview.student-work .blueprint-footer {
+      border-top: 1px solid rgba(85, 122, 96, 0.2);
+      color: #557a60;
+    }
+    
+    .card-cover-preview.student-work .cover-footer-left {
+      color: #557a60;
+    }
+    
+    .card-cover-preview.student-work .cover-footer-right {
+      position: absolute;
+      bottom: 0.8rem;
+      right: 1rem;
+      background: #557a60;
+      color: #ffffff;
+      font-size: 0.58rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      z-index: 3;
+    }
+
+
     /* Media Slide Screen Styling (Slide Deck design) */
     .card-cover-preview.media-cover {
       background: #faf6f5 !important;
@@ -1133,7 +1193,7 @@
 
     .capsule-tabs {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       gap: 0.8rem;
       width: 100%;
     }
@@ -1246,6 +1306,9 @@
       display: none !important;
     }
     .projects-grid[data-active-type="lkm"] .project-card:not([data-type="lkm"]) {
+      display: none !important;
+    }
+    .projects-grid[data-active-type="hasil-lkm"] .project-card:not([data-type="hasil-lkm"]) {
       display: none !important;
     }
     .projects-grid[data-active-type="media"] .project-card:not([data-type="media"]) {
@@ -2057,6 +2120,12 @@
             </div>
             <span class="tab-thumbnail-label">LKM</span>
           </button>
+          <button class="capsule-tab-btn" data-type="hasil-lkm">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #e5ebd9, #c8ccb4);">
+              <span class="tab-thumbnail-icon">📋</span>
+            </div>
+            <span class="tab-thumbnail-label">Hasil Lembar Murid</span>
+          </button>
           <button class="capsule-tab-btn" data-type="asesmen">
             <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #ebdcdb, #cdb4b2);">
               <span class="tab-thumbnail-icon">📊</span>
@@ -2481,6 +2550,148 @@
             <span class="footer-tag">Teamwork</span>
             <span class="footer-tag">Eksperimen</span>
             <span class="footer-tag">Kolaboratif</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HASIL LEMBAR MURID Standalone Cards -->
+      <!-- Hasil LKM Siklus 1 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="1" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus1.png"
+           data-title="Hasil LKM Siklus 1 - Identifikasi Peluang Usaha" 
+           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
+           data-konteks="Dokumentasi hasil pengerjaan LKM Siklus 1 oleh murid. Berisi hasil wawancara dengan pemilik bengkel bubut lokal, pemetaan SWOT usaha pemesinan, dan analisis potensi pasar di sekitar sekolah."
+           data-tujuan="Menunjukkan portofolio otentik murid dalam melakukan riset lapangan secara mandiri serta mengidentifikasi peluang wirausaha riil berdasarkan analisis SWOT terstruktur."
+           data-kelebihan="Murid mampu memetakan potensi usaha lokal dengan sangat detail, mengaitkan teori kewirausahaan dengan kondisi bengkel nyata, serta menyusun analisis SWOT secara objektif."
+           data-kekurangan="Beberapa kelompok masih membutuhkan bimbingan intensif dalam mengestimasikan proyeksi kelayakan finansial sederhana dari peluang usaha yang mereka temukan.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus1.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Hasil S1</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div>
+            <div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div>
+            <div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S1</h4>
+              <p class="blueprint-subtitle">Pertemuan 1</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 1 - Identifikasi Peluang Usaha</h3>
+          <p class="card-item-desc">Lembar Kerja Murid yang telah diisi lengkap dengan hasil observasi wawancara bengkel bubut lokal dan peta analisis SWOT...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Hasil Wawancara</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Analisis SWOT</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Portofolio</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 2 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="2" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus2.png"
+           data-title="Hasil LKM Siklus 2 - Analisis Studi Kasus HAKI" 
+           data-url="https://docs.google.com/document/d/1cvqnGdP1CQkJOVdjQjnnBZld6rlaSPeQ/preview"
+           data-konteks="Portofolio pengerjaan LKM Siklus 2 berbasis Problem-Based Learning (PBL). Murid secara berkelompok menganalisis sengketa hak paten desain industri (HAKI) baik komponen otomotif dan lainnya guna merumuskan solusi etis perlindungannya."
+           data-tujuan="Mendokumentasikan nalar kritis dan pemahaman hukum murid dalam menganalisis kasus plagiarisme karya cipta intelektual secara objektif di bidang manufaktur."
+           data-kelebihan="Hasil diskusi menunjukkan kedalaman analisis hukum yang luar biasa dari murid, serta kemampuan memformulasikan modifikasi desain yang legal dan etis."
+           data-kekurangan="Keterbatasan pemahaman teknis istilah hukum formal sempat memperlambat pengerjaan, namun berhasil diatasi melalui fasilitasi reduksi didaktis oleh pendidik.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus2.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Hasil S2</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div>
+            <div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div>
+            <div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">STUDI KASUS PBL</span>
+              <h4 class="blueprint-title">HASIL S2</h4>
+              <p class="blueprint-subtitle">Analisis HAKI</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 2 - Analisis Studi Kasus HAKI</h3>
+          <p class="card-item-desc">Dokumentasi nalar kritis kelompok dalam memformulasikan solusi perlindungan HAKI dan modifikasi desain produk legal...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Problem Solving</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Legalitas HAKI</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Diskusi Tim</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 3 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="3" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus3.png"
+           data-title="Hasil LKM Siklus 3 - Perencanaan Produksi Massal" 
+           data-url="https://docs.google.com/document/d/10db256nSPqcROkVkCwQP1HZd80TBf94j/preview"
+           data-konteks="Portofolio LKM Siklus 3 berbasis evaluasi individu. Murid kelas XII TFLM menguraikan konsep teoretis perencanaan produksi massal, karakteristik utama proses produksi, keuntungan efisiensi tenaga kerja dan waktu, serta memecahkan soal pilihan ganda dan essay terkait."
+           data-tujuan="Mengukur tingkat pemahaman kognitif murid mengenai karakteristik, keuntungan, dan aspek perencanaan produksi massal manufaktur secara komprehensif."
+           data-kelebihan="Murid mampu menjabarkan sifat produksi massal dengan sangat terstruktur dan detail, serta menunjukkan ketelitian tinggi dalam menjawab evaluasi teoretis."
+           data-kekurangan="Beberapa murid masih memerlukan bimbingan dalam merumuskan definisi formal perencanaan produksi menurut literatur ahli secara lengkap.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus3.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Hasil S3</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div>
+            <div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div>
+            <div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">PRODUKSI MASSAL</span>
+              <h4 class="blueprint-title">HASIL S3</h4>
+              <p class="blueprint-subtitle">Perencanaan &amp; Teori</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 3 - Perencanaan Produksi Massal</h3>
+          <p class="card-item-desc">Lembar Kerja Murid yang telah diisi lengkap dengan lembar jawaban evaluasi pilihan ganda dan esai mengenai konsep perencanaan produksi massal...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Produksi Massal</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Evaluasi Teori</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Pilihan Ganda</span>
           </div>
         </div>
       </div>
@@ -3191,16 +3402,31 @@
       window.openPreviewModal = function(btn) {
         const title = btn.getAttribute('data-title');
         const url = btn.getAttribute('data-url');
+        const previewImage = btn.getAttribute('data-preview-image');
         const konteks = btn.getAttribute('data-konteks') || 'Belum ada data konteks.';
         const tujuan = btn.getAttribute('data-tujuan') || 'Belum ada data tujuan.';
         const kelebihan = btn.getAttribute('data-kelebihan') || 'Belum ada data kelebihan.';
         const kekurangan = btn.getAttribute('data-kekurangan') || 'Belum ada data kekurangan.';
 
         document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalIframe').src = url;
         
-        let viewUrl = url.replace('/preview', '/view').replace('/embed', '/view');
-        document.getElementById('modalExternalLink').href = viewUrl;
+        const iframe = document.getElementById('modalIframe');
+        const img = document.getElementById('modalImage');
+
+        if (previewImage) {
+          iframe.style.display = 'none';
+          iframe.src = '';
+          img.style.display = 'block';
+          img.src = previewImage;
+          document.getElementById('modalExternalLink').href = previewImage;
+        } else {
+          img.style.display = 'none';
+          img.src = '';
+          iframe.style.display = 'block';
+          iframe.src = url;
+          let viewUrl = url.replace('/preview', '/view').replace('/embed', '/view');
+          document.getElementById('modalExternalLink').href = viewUrl;
+        }
 
         // Populate tab contents
         document.getElementById('tab-konteks-content').innerHTML = konteks;
@@ -3218,6 +3444,8 @@
       window.closePreviewModal = function() {
         document.getElementById('previewModal').classList.remove('active');
         document.getElementById('modalIframe').src = '';
+        const img = document.getElementById('modalImage');
+        if (img) img.src = '';
         document.body.style.overflow = '';
       };
 
@@ -3256,6 +3484,7 @@
       <div class="preview-modal-body">
         <div class="preview-modal-iframe-wrapper">
           <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
+          <img id="modalImage" src="" style="width: 100%; height: 100%; object-fit: contain; background: #fafafa; display: none;" alt="Pratinjau Foto" />
         </div>
         <div class="preview-modal-sidebar">
           <div class="modal-tabs-header">
