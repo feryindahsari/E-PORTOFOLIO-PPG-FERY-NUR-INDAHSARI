@@ -2000,6 +2000,59 @@
     @keyframes fadeInUp {
       to { opacity: 1; transform: translateY(0); }
     }
+    
+    /* CARD BUTTONS STYLE */
+    .card-buttons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: auto;
+      border-top: 1px solid var(--accent);
+      padding-top: 1rem;
+    }
+
+    .card-btn {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+
+    .card-btn.btn-refleksi {
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      box-shadow: 0 4px 10px rgba(212, 165, 165, 0.2);
+    }
+
+    .card-btn.btn-refleksi:hover {
+      background: #c69494;
+      border-color: #c69494;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(212, 165, 165, 0.35);
+    }
+
+    .card-btn.btn-artefak {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--secondary);
+    }
+
+    .card-btn.btn-artefak:hover {
+      background: var(--secondary);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
   </style>
 </head>
 
@@ -2086,7 +2139,7 @@
       <!-- RPP Siklus 1 -->
       <div class="project-card fade-in" data-type="rpp" data-siklus="1" onclick="openPreviewModal(this)"
            data-title="Identifikasi Diri - Mengidentifikasi Visi Pribadi" 
-           data-url="https://drive.google.com/file/d/16rUnLVNkbr8O9vwDG-BzJr4er3auxnPi/preview"
+           data-url="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/preview"
            data-konteks="Lembar kerja ini berfokus pada proses refleksi mendalam mengenai visi pribadi sebagai calon pendidik profesional dalam program Seminar Pendidikan Profesi Guru (PPG)."
            data-tujuan="Bertujuan untuk membantu mahasiswa merumuskan cita-cita pendidikan, memetakan potensi diri, serta menyusun strategi konkret untuk mencapai visi pribadi sebagai guru yang inspiratif."
            data-kelebihan="Struktur lembar kerja yang terarah memudahkan mahasiswa untuk melakukan introspeksi diri secara terstruktur dan merumuskan langkah-langkah pencapaian yang realistis."
@@ -2113,14 +2166,18 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Identifikasi Diri</h3>
-          <p class="card-item-desc">Perencanaan pembelajaran mendalam untuk Peluang Usaha bidang wirausaha produk kreatif pemesinan bagi kelas XI TP...</p>
+          <p class="card-item-desc">Menguraikan visi pribadi untuk pendidikan Indonesia, latar belakang dan motivasi menjadi guru, visi sebagai calon pendidik, serta langkah-langkah konkret untuk mewujudkannya.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+          </div>
         </div>
       </div>
 
       <!-- RPP Siklus 2 -->
       <div class="project-card fade-in" data-type="rpp" data-siklus="2" onclick="openPreviewModal(this)"
            data-title="Filosofi Pendidikan" 
-           data-url="https://drive.google.com/file/d/1B-DsGtF-G4tnMNdyQO1ZTM11Yq3h9C33/preview"
+           data-url="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/preview"
            data-konteks="Dokumen ini berisi refleksi mendalam mengenai filosofi pendidikan Ki Hajar Dewantara dan penerapannya dalam konteks pembelajaran abad 21."
            data-tujuan="Bertujuan untuk menginternalisasi nilai-nilai luhur pendidikan dan merumuskan pendekatan pedagogis yang berpusat pada peserta didik."
            data-kelebihan="Memberikan fondasi pemikiran yang kuat bagi calon guru dalam memaknai peran strategisnya sebagai pendidik."
@@ -2147,14 +2204,18 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Filosofi Pendidikan</h3>
-          <p class="card-item-desc">Rancangan pembelajaran terstruktur Siklus 2 untuk membekali pemahaman murid tentang Hak Atas Kekayaan Intelektual...</p>
+          <p class="card-item-desc">Menyajikan refleksi filosofi pendidikan dengan model 4C (Connection, Challenge, Concept, Change) untuk menghubungkan pengalaman belajar PPG dengan pemikiran Ki Hajar Dewantara demi mewujudkan aksi nyata dalam pembelajaran.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+          </div>
         </div>
       </div>
 
       <!-- RPP Siklus 3 -->
       <div class="project-card fade-in" data-type="rpp" data-siklus="3" onclick="openPreviewModal(this)"
            data-title="Pemahaman Peserta Didik" 
-           data-url="https://drive.google.com/file/d/1qIzYHclAF9TAztxMjlnycvkZtlJDZIwA/preview"
+           data-url="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/preview"
            data-konteks="Laporan observasi dan analisis karakteristik, kebutuhan, serta gaya belajar peserta didik di lingkungan sekolah tempat praktik mengajar."
            data-tujuan="Memetakan profil peserta didik guna merancang strategi pembelajaran yang diferensiatif, inklusif, dan sesuai dengan tahap perkembangan kognitif mereka."
            data-kelebihan="Membantu pendidik mengenali keberagaman siswa secara mendalam sehingga pendekatan pengajaran menjadi lebih relevan, personal, dan empatik."
@@ -2181,7 +2242,11 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Pemahaman Peserta Didik</h3>
-          <p class="card-item-desc">Modul ajar lengkap Siklus 3 berfokus pada metodologi kendali mutu (quality control) dan tata cara pengujian kelayakan produk manufaktur...</p>
+          <p class="card-item-desc">Refleksi mata kuliah Pemahaman Peserta Didik dan Pembelajaran (PPDP) menggunakan model 4C untuk mengidentifikasi keragaman, potensi, dan kebutuhan belajar peserta didik guna merancang pembelajaran yang lebih efektif dan bermakna.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+          </div>
         </div>
       </div>
 
@@ -2189,7 +2254,7 @@
       <!-- Bahan Ajar Siklus 1 -->
       <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="1" onclick="openPreviewModal(this)"
            data-title="Pembelajaran Mendalam dan Asesmen Dasar" 
-           data-url="https://drive.google.com/file/d/184eXPQpb93poXbwRy1zipsY6R9-7ybKu/preview"
+           data-url="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/preview"
            data-konteks="Rancangan dan implementasi siklus pembelajaran mendalam (deep learning) yang dipadukan dengan desain asesmen dasar untuk mengukur pemahaman konsep secara holistik."
            data-tujuan="Meningkatkan kualitas interaksi pedagogis serta mengevaluasi efektivitas rubrik asesmen dalam memonitor kemajuan proses belajar dan pemahaman kognitif siswa."
            data-kelebihan="Secara efektif mendorong kemampuan berpikir tingkat tinggi (HOTS) peserta didik dan memberikan umpan balik yang lebih representatif terhadap performa mereka."
@@ -2215,14 +2280,18 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Pembelajaran Mendalam dan Asesmen Dasar</h3>
-          <p class="card-item-desc">Panduan komprehensif penemuan dan identifikasi peluang wirausaha kreatif berbasis potensi lokal bidang pemesinan...</p>
+          <p class="card-item-desc">Refleksi mata kuliah Pembelajaran Mendalam dan Asesmen (PMA) di SMK dengan model 4C untuk memahami penerapan Deep Learning, Constructive Alignment, dan Understanding by Design (UbD) dalam rancangan pembelajaran vokasional.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+          </div>
         </div>
       </div>
 
       <!-- Bahan Ajar Siklus 2 -->
       <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="2" onclick="openPreviewModal(this)"
            data-title="Praktik Pengalaman Lapangan (PPL) Terbimbing" 
-           data-url="https://drive.google.com/file/d/1yv33CzpSHTvsaVGo99TllwxI5UkjSa4f/preview"
+           data-url="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/preview"
            data-konteks="Dokumentasi dan refleksi komprehensif atas pelaksanaan kegiatan mengajar terbimbing selama masa Praktik Pengalaman Lapangan di sekolah mitra PPG."
            data-tujuan="Mengaplikasikan teori-teori pedagogi ke dalam praktik mengajar nyata di kelas bawah bimbingan dan pengawasan intensif dari guru pamong serta dosen pembimbing lapangan."
            data-kelebihan="Memberikan pengalaman faktual dan adaptasi kultural yang tak ternilai dalam menghadapi situasi pengelolaan dinamika kelas yang sesungguhnya."
@@ -2248,14 +2317,18 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Praktik Pengalaman Lapangan (PPL) Terbimbing</h3>
-          <p class="card-item-desc">Membekali murid dengan pemahaman aspek legalitas kekayaan intelektual, perbedaan paten, merek dagang, dan hak cipta...</p>
+          <p class="card-item-desc">Refleksi mata kuliah PPL Terbimbing di SMK Negeri 2 Depok melalui tahapan observasi, praktik asistensi, dan tiga siklus praktik mengajar terbimbing untuk meningkatkan kompetensi mengajar secara nyata.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+          </div>
         </div>
       </div>
 
       <!-- Bahan Ajar Siklus 3 -->
       <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="3" onclick="openPreviewModal(this)"
            data-title="Pola Pikir Bertumbuh (Growth Mindset)" 
-           data-url="https://drive.google.com/file/d/17ARaFdkfSPYEM2OzZOAreb3utZy5iMpT/preview"
+           data-url="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/preview"
            data-konteks="Kajian kritis dan strategi pengembangan pola pikir bertumbuh (growth mindset) yang berorientasi pada peningkatan ketangguhan mental bagi pendidik dan peserta didik."
            data-tujuan="Menstimulasi kesadaran diri untuk terus belajar, meningkatkan resiliensi dalam menghadapi tantangan, dan merekonstruksi cara pandang bahwa kegagalan adalah ruang esensial untuk berkembang."
            data-kelebihan="Sangat efektif dalam membangun lingkungan belajar yang positif, suportif, serta mendorong kemandirian dan rasa percaya diri siswa di dalam kelas."
@@ -2281,48 +2354,14 @@
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
           <h3 class="card-item-title">Pola Pikir Bertumbuh (Growth Mindset)</h3>
-          <p class="card-item-desc">Menyajikan parameter lengkap pengujian kelayakan fisik produk kreatif manufaktur sesuai standar industri...</p>
-      <!-- LKM Standalone Cards -->
-      <!-- LKM Siklus 1 -->
-      <div class="project-card fade-in" data-type="lkm" data-siklus="1" onclick="openPreviewModal(this)"
-           data-title="Lembar Kerja 2" 
-           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
-           data-konteks="Lembar kerja lanjutan yang disusun sebagai instrumen evaluasi diri dan dasar merancang rencana tindak lanjut pasca refleksi pengalaman Praktik Pengalaman Lapangan."
-           data-tujuan="Berfungsi sebagai kerangka evaluasi formatif untuk mengukur tingkat keberhasilan implementasi strategi pengajaran, serta memetakan aspek yang memerlukan peningkatan."
-           data-kelebihan="Mengarahkan mahasiswa secara sistematis untuk merumuskan tindakan perbaikan yang bersifat konkret, terukur, dan berbasis pada kendala lapangan nyata."
-           data-kekurangan="Proses evaluasi ini menuntut tingkat objektivitas yang tinggi, sehingga rencana tindak lanjut yang disusun tidak terjebak pada solusi-solusi yang terlalu teoretis.">
-        <div class="card-cover-preview blueprint">
-          <span class="cover-format-badge">PDF</span>
-          <span class="cover-category-badge">Preview</span>
-          <div class="blueprint-frame">
-            <div class="blueprint-corner tl"></div>
-            <div class="blueprint-corner tr"></div>
-            <div class="blueprint-corner bl"></div>
-            <div class="blueprint-corner br"></div>
-            <div class="blueprint-header">
-              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
-            </div>
-            <div class="blueprint-body">
-              <span class="blueprint-cycle">LEMBAR KERJA</span>
-              <h4 class="blueprint-title">Lembar Kerja 2</h4>
-              <p class="blueprint-subtitle"></p>
-            </div>
-            <div class="blueprint-footer">
-              <span>SEKOLAH: SMK NEGERI 2 DEPOK SLEMAN</span>
-            </div>
+          <p class="card-item-desc">Refleksi mata kuliah Pola Pikir Bertumbuh dengan model 4C untuk memahami pentingnya growth mindset dan neuroplastisitas otak dalam proses belajar serta pengembangan diri yang berkelanjutan.</p>
+          <div class="card-buttons">
+            <button class="card-btn btn-refleksi">Refleksi</button>
+            <a href="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
           </div>
-          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
-          <span class="cover-footer-right">Lihat Refleksi</span>
-        </div>
-        <div class="card-content-area">
-          <div class="card-tags">
-            <span class="card-tag tag-category">Preview</span>
-            <span class="card-tag tag-cycle">Lihat Refleksi</span>
-          </div>
-          <h3 class="card-item-title">Lembar Kerja 2</h3>
-          <p class="card-item-desc">Lembar Kerja Murid yang memuat aktivitas Tugas Individu, Tugas Kelompok dan Latihan soal Pilihan ganda dan Essay yang memuat aktivitas terstruktur penjelajahan lingkungan untuk memetakan potensi wirausaha teknik di sekitar sekolah</p>
         </div>
       </div>
+
 
     </div>
   </section>
