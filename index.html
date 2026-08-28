@@ -1929,10 +1929,82 @@
         gap: 1.2rem;
       }
     }
+    /* SPLASH SCREEN SELECTOR */
+    #splash-selector {
+      position: relative;
+      width: 100%;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 5rem 2rem;
+      z-index: 10;
+    }
+    .splash-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text);
+      margin-bottom: 3rem;
+      text-align: center;
+      animation: fadeInUp 0.8s var(--ease) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .splash-cards {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 2rem;
+    }
+    .splash-card {
+      background: #ffffff;
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      width: 300px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(212, 165, 165, 0.1);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s;
+      text-decoration: none;
+      color: inherit;
+      animation: fadeInUp 0.8s var(--ease) forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .splash-card:nth-child(1) { animation-delay: 0.2s; }
+    .splash-card:nth-child(2) { animation-delay: 0.4s; }
+    .splash-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 45px rgba(212, 165, 165, 0.25);
+      border-color: var(--primary);
+    }
+    .splash-card h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .splash-card p {
+      font-size: 0.95rem;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+    .splash-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 
 <body>
+
   <canvas id="bg-canvas"></canvas>
 
   <nav>
@@ -1943,6 +2015,7 @@
     <div class="menu-toggle" id="menuToggle" onclick="document.querySelector('nav ul').classList.toggle('open');">
       <span></span><span></span><span></span></div>
     <ul>
+      <li><a href="#splash-selector" style="color: var(--primary); font-weight: bold;">⬅ Pilih Semester</a></li>
       <li><a href="#profil">Profil</a></li>
       <li><a href="#analisis">Analisis Artefak</a></li>
       <li><a href="#dokumentasi">Dokumentasi</a></li>
@@ -1972,6 +2045,7 @@
       </svg>
     </div>
     <div class="hero-content fade-in">
+      <div style="display:inline-block; padding: 0.35rem 1.2rem; background: var(--accent); color: var(--text); border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.8rem; letter-spacing: 1.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">SEMESTER 1</div>
       <h1 class="hero-name">FERY NUR INDAHSARI</h1>
       <h3 class="hero-role">Calon Guru PPG Prajab Gelombang 1 tahun 2025/2026</h3>
       <p class="hero-tagline">Mendidik dengan Inovasi, Dedikasi, dan Hati</p>
@@ -2072,6 +2146,22 @@
       </div>
     </div>
   </section>
+
+  <div id="splash-selector">
+    <h1 class="splash-title">Pilih Portofolio</h1>
+    <div class="splash-cards">
+      <a href="#analisis" class="splash-card">
+        <div class="splash-icon">📚</div>
+        <h3>Semester 1</h3>
+        <p>Portofolio Praktik Pengalaman Lapangan Terbimbing.</p>
+      </a>
+      <a href="semester2.html" class="splash-card">
+        <div class="splash-icon">🚀</div>
+        <h3>Semester 2</h3>
+        <p>Eksplorasi dan pengembangan kompetensi lanjutan.</p>
+      </a>
+    </div>
+  </div>
 
   <section id="analisis">
     <h2 class="section-title fade-in">Analisis <span class="accent">Artefak Pembelajaran</span></h2>
