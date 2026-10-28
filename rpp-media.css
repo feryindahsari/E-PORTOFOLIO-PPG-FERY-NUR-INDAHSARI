@@ -12,3 +12,10 @@
 
 .ppl-empty-state { max-width:740px; margin:30px auto; padding:24px; border:1px solid var(--accent); border-radius:18px; text-align:center; color:var(--secondary); font:400 13px/1.8 var(--font-body); }
 .ppl-empty-state[hidden] { display:none; }
+
+.project-card[data-status="pending"] { cursor:default; }
+.pending-document-cover { background:linear-gradient(135deg,#f7f1ee,#e9ded9); border-bottom:1px solid var(--accent); }
+.pending-document-cover .cover-main-title { color:var(--text); font-family:var(--font-display); font-size:1.35rem; margin:12px 0 8px; }
+.pending-document-cover .cover-sub-title { color:var(--secondary); font-size:.75rem; line-height:1.5; max-width:230px; margin:0 auto; }
+.pending-document-icon { font-size:2.3rem; line-height:1; }
+.pending-asset-status { display:inline-block; margin-top:12px; padding:7px 12px; border:1px solid var(--accent); border-radius:20px; color:var(--secondary); font:500 11px/1.4 var(--font-body); }
