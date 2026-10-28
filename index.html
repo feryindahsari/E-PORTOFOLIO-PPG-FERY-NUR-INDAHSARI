@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>FERY NUR INDAHSARI — UI/UX Designer</title>
+  <title>FERY NUR INDAHSARI — E-Portofolio Digital</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap"
     rel="stylesheet">
@@ -2001,34 +2001,43 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="dashboard.js" defer></script>
 </head>
 
-<body>
+<body class="dashboard-layout">
 
   <canvas id="bg-canvas"></canvas>
 
-  <nav>
-    <div class="logo-container">
-      <img src="ust-logo.png" alt="UST Logo" class="ust-logo">
-      <span class="logo-uni">Universitas Sarjanawiyata Tamansiswa</span>
-    </div>
-    <div class="menu-toggle" id="menuToggle" onclick="document.querySelector('nav ul').classList.toggle('open');">
-      <span></span><span></span><span></span></div>
-    <ul>
-      <li><a href="#splash-selector" style="color: var(--primary); font-weight: bold;">⬅ Pilih Semester</a></li>
-      <li><a href="#profil">Profil</a></li>
-      <li><a href="#analisis">Analisis Artefak</a></li>
-      <li><a href="#dokumentasi">Dokumentasi</a></li>
-      <li><a href="#analisis-produk">Analisis Produk</a></li>
-      <li><a href="#lampiran">Lampiran</a></li>
-      <li><a href="#model-guru">Model Guru</a></li>
-      <li><a href="#refleksi-akhir">Refleksi Akhir</a></li>
-      <li><a href="#filosofi-mengajar">Filosofi Mengajar</a></li>
-      <li><a href="#contact">Kontak</a></li>
-    </ul>
+  <a class="skip-dashboard" href="#dashboard">Lewati ke dashboard</a>
+  <button class="dashboard-mobile-toggle" type="button" aria-controls="dashboard-sidebar" aria-expanded="false" aria-label="Buka menu navigasi"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <button class="dashboard-scrim" type="button" tabindex="-1" aria-label="Tutup menu navigasi"></button>
+  <nav class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Navigasi e-portofolio">
+    <div class="logo-container"><img src="ust-logo.png" alt="UST Logo" class="ust-logo"><span class="logo-uni">Universitas Sarjanawiyata Tamansiswa</span></div>
+    <div class="sidebar-person"><img src="foto-profil-terbaru.jpg" alt="Foto Fery Nur Indahsari"><div><strong>Fery Nur Indahsari</strong><small>PPG Prajabatan · 2025/2026</small></div></div>
+    <p class="sidebar-label">RUANG PORTOFOLIO</p>
+    <ul><li><a href="#dashboard" aria-current="location"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Dashboard</span></a></li>
+    <li><a href="#layanan-portofolio"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>Layanan E-Portofolio</span></a></li>
+    <li><a href="#splash-selector"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>⬅ Pilih Semester</span></a></li>
+<li><a href="#profil"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Profil</span></a></li>
+<li><a href="#analisis"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg><span>Analisis Artefak</span></a></li>
+<li><a href="#dokumentasi"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-7 5 8"/></svg><span>Dokumentasi</span></a></li>
+<li><a href="#analisis-produk"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>Analisis Produk</span></a></li>
+<li><a href="#lampiran"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg><span>Lampiran</span></a></li>
+<li><a href="#model-guru"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Model Guru</span></a></li>
+<li><a href="#refleksi-akhir"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Refleksi Akhir</span></a></li>
+<li><a href="#filosofi-mengajar"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><span>Filosofi Mengajar</span></a></li>
+<li><a href="#contact"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H3l1.5-4A9 9 0 1 1 21 11Z"/><path d="M8 9h8M8 13h5"/></svg><span>Kontak</span></a></li></ul>
+    <div class="sidebar-bottom"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><div><span>E-Portofolio Digital</span><small>Mendidik dengan dedikasi & hati</small></div></div>
   </nav>
 
-  <section id="hero">
+  <section id="dashboard" aria-label="Dashboard e-portofolio digital">
+    <header class="dashboard-topbar">
+      <div class="dashboard-heading"><p class="dashboard-eyebrow">E-Portofolio Digital · PPG</p><h2>Dashboard</h2></div>
+      <label class="dashboard-search" for="dashboard-search"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><input id="dashboard-search" type="search" placeholder="Cari layanan portofolio…" aria-label="Cari layanan portofolio" aria-controls="dashboard-services" autocomplete="off"><button type="button" id="dashboard-search-clear" aria-label="Hapus pencarian" hidden>×</button></label>
+      <span class="dashboard-semester">Semester 1</span>
+    </header>
+      <section id="hero">
     <div class="hero-bg-gears">
       <!-- Simple SVG Gears -->
       <svg class="gear-icon gear-1" viewBox="0 0 100 100">
@@ -2052,6 +2061,43 @@
       <div class="hero-buttons">
         <a href="#profil" class="btn primary">Mulai Eksplorasi</a>
         <a href="#contact" class="btn secondary">Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="dashboard-portrait"><img src="foto-profil-terbaru.jpg" alt="Fery Nur Indahsari"></div>
+  </section>
+    <div class="dashboard-stats" aria-label="Ringkasan portofolio"><a class="dashboard-stat" href="#splash-selector"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><div><strong>2</strong><span>Semester portofolio</span></div></a><a class="dashboard-stat" href="#layanan-portofolio"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><div><strong>5</strong><span>Layanan e-portofolio</span></div></a><a class="dashboard-stat" href="semester2.html#ppl-mandiri"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-3 2 2 3 3-1 2 4 3-1 1-3 3-1-1-3 3-2-2-3-3 1-2-4Z"/><circle cx="11" cy="10" r="3"/></svg><div><strong>6</strong><span>Komponen pembelajaran</span></div></a><a class="dashboard-stat" href="semester2.html#analisis"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg><div><strong>6</strong><span>LK 2 refleksi semester 2</span></div></a></div>
+    <div class="dashboard-grid">
+      <div class="dashboard-panel" id="layanan-portofolio">
+        <div class="dashboard-panel-head"><h2>Layanan E-Portofolio PPG</h2><small id="dashboard-search-status" role="status" aria-live="polite">Klik untuk masuk</small></div>
+        <div class="dashboard-services" id="dashboard-services"><a class="dashboard-service" href="index.html#analisis"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 1 · UTS PPL I</span><h3>E-Portofolio 1: PPL Terbimbing</h3><p>Perangkat pembelajaran, dokumentasi praktik, analisis produk & lampiran penilaian.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="index.html#refleksi-akhir"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 1 · UAS PPL I</span><h3>E-Portofolio 2: Refleksi & Filosofi</h3><p>Refleksi akhir PPL Terbimbing, model guru dan filosofi mengajar.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#ppl-mandiri"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-3 2 2 3 3-1 2 4 3-1 1-3 3-1-1-3 3-2-2-3-3 1-2-4Z"/><circle cx="11" cy="10" r="3"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · Praktik Mandiri</span><h3>E-Portofolio: 6 Komponen Mandiri</h3><p>RPP, bahan ajar, media, LKM, hasil lembar murid dan asesmen.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#ppl-mandiri"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="m8 12-2 10 6-3 6 3-2-10"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · UTS & UAS Mandiri</span><h3>E-Portofolio 2: UTS & UAS PPL II</h3><p>Perangkat praktik mandiri dalam 5 siklus beserta dokumentasi pembelajaran.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#analisis"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · Seminar PPG</span><h3>Seminar PPG: Refleksi 5 MK</h3><p>Refleksi pengalaman belajar, PPT, LK 2 dan refleksi keseluruhan PPG.</p></div><span class="service-arrow" aria-hidden="true">›</span></a></div>
+        <p class="dashboard-empty" id="dashboard-search-empty" hidden>Layanan belum ditemukan. Coba kata “refleksi”, “mandiri”, atau “seminar”.</p>
+        <div class="dashboard-links" aria-label="Pintasan isi portofolio"><a href="index.html#profil">Profil mahasiswa</a><a href="#lampiran">Lampiran penilaian</a><a href="#filosofi-mengajar">Filosofi mengajar</a><a href="#contact">Kontak</a></div>
+      </div>
+      <div class="dashboard-right">
+        <div class="dashboard-panel">  <div id="splash-selector">
+    <h1 class="splash-title">Pilih Portofolio</h1>
+    <div class="splash-cards">
+      <a href="#analisis" class="splash-card">
+        <div class="splash-icon">📚</div>
+        <h3>Semester 1</h3>
+        <p>Portofolio Praktik Pengalaman Lapangan Terbimbing.</p>
+      </a>
+      <a href="semester2.html" class="splash-card">
+        <div class="splash-icon">🚀</div>
+        <h3>Semester 2</h3>
+        <p>Eksplorasi dan pengembangan kompetensi lanjutan.</p>
+      </a>
+    </div>
+  </div>
+<p class="dashboard-note">Pilih semester untuk menjelajahi materi dan pengalaman belajar.</p></div>
+        <div class="dashboard-panel">
+          <div class="dashboard-panel-head"><h2>Galeri Kegiatan</h2><a href="#dokumentasi">Lihat semua ›</a></div>
+          <div class="dashboard-gallery"><a href="#dokumentasi" aria-label="Lihat dokumentasi Momen Kegiatan Praktik"><img src="foto_kegiatan_1.jpg" alt="Momen Kegiatan Praktik" loading="lazy"><span>Momen Kegiatan Praktik</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Praktik & Observasi"><img src="foto_kegiatan_2.jpg" alt="Praktik & Observasi" loading="lazy"><span>Praktik & Observasi</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Suasana Diskusi"><img src="foto_kegiatan_3.jpg" alt="Suasana Diskusi" loading="lazy"><span>Suasana Diskusi</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Bengkel Las"><img src="foto_kegiatan_4.jpg" alt="Bengkel Las" loading="lazy"><span>Bengkel Las</span></a></div>
+        </div>
       </div>
     </div>
   </section>
@@ -2147,21 +2193,6 @@
     </div>
   </section>
 
-  <div id="splash-selector">
-    <h1 class="splash-title">Pilih Portofolio</h1>
-    <div class="splash-cards">
-      <a href="#analisis" class="splash-card">
-        <div class="splash-icon">📚</div>
-        <h3>Semester 1</h3>
-        <p>Portofolio Praktik Pengalaman Lapangan Terbimbing.</p>
-      </a>
-      <a href="semester2.html" class="splash-card">
-        <div class="splash-icon">🚀</div>
-        <h3>Semester 2</h3>
-        <p>Eksplorasi dan pengembangan kompetensi lanjutan.</p>
-      </a>
-    </div>
-  </div>
 
   <section id="analisis">
     <h2 class="section-title fade-in">Analisis <span class="accent">Artefak Pembelajaran</span></h2>

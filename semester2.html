@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
@@ -1193,9 +1193,24 @@
 
     .capsule-tabs {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       gap: 0.5rem;
       width: 100%;
+    }
+
+    .seminar-capsule-tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .seminar-capsule-tabs .capsule-tab-btn {
+      min-width: 170px;
+      flex: 0 1 auto;
+      padding: 0.7rem 1.2rem;
     }
 
     .capsule-tab-btn {
@@ -1271,9 +1286,13 @@
 
     /* Responsive filter thumbnails inside media query */
     @media (max-width: 768px) {
-      .capsule-tabs {
+      .capsule-tabs:not(.seminar-capsule-tabs) {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 0.6rem !important;
+      }
+      .seminar-capsule-tabs .capsule-tab-btn {
+        min-width: 90px;
+        padding: 0.4rem 0.6rem;
       }
       .tab-thumbnail-bg {
         width: 40px !important;
@@ -1284,37 +1303,54 @@
         font-size: 1.1rem !important;
       }
       .tab-thumbnail-label {
-        font-size: 0.78rem !important;
+        font-size: 0.75rem !important;
       }
     }
 
-    /* Master filter logic for displaying cards directly */
-    .projects-grid[data-active-siklus="1"] .project-card:not([data-siklus="1"]) {
+    /* Master filter logic for SEMINAR PENDIDIKAN */
+    .seminar-grid[data-active-sem="identifikasi-diri"] .project-card:not([data-filter="identifikasi-diri"]) {
       display: none !important;
     }
-    .projects-grid[data-active-siklus="2"] .project-card:not([data-siklus="2"]) {
+    .seminar-grid[data-active-sem="sem1"] .project-card:not([data-sem~="sem1"]) {
       display: none !important;
     }
-    .projects-grid[data-active-siklus="3"] .project-card:not([data-siklus="3"]) {
+    .seminar-grid[data-active-sem="sem2"] .project-card:not([data-sem~="sem2"]) {
       display: none !important;
     }
 
-    .projects-grid[data-active-type="rpp"] .project-card:not([data-type="rpp"]) {
+    /* Master filter logic for PPL MANDIRI (5 SIKLUS) */
+    .ppl-grid[data-active-siklus="1"] .project-card:not([data-siklus="1"]) {
       display: none !important;
     }
-    .projects-grid[data-active-type="bahan-ajar"] .project-card:not([data-type="bahan-ajar"]) {
+    .ppl-grid[data-active-siklus="2"] .project-card:not([data-siklus="2"]) {
       display: none !important;
     }
-    .projects-grid[data-active-type="lkm"] .project-card:not([data-type="lkm"]) {
+    .ppl-grid[data-active-siklus="3"] .project-card:not([data-siklus="3"]) {
       display: none !important;
     }
-    .projects-grid[data-active-type="hasil-lkm"] .project-card:not([data-type="hasil-lkm"]) {
+    .ppl-grid[data-active-siklus="4"] .project-card:not([data-siklus="4"]) {
       display: none !important;
     }
-    .projects-grid[data-active-type="media"] .project-card:not([data-type="media"]) {
+    .ppl-grid[data-active-siklus="5"] .project-card:not([data-siklus="5"]) {
       display: none !important;
     }
-    .projects-grid[data-active-type="asesmen"] .project-card:not([data-type="asesmen"]) {
+
+    .ppl-grid[data-active-type="rpp"] .project-card:not([data-type="rpp"]) {
+      display: none !important;
+    }
+    .ppl-grid[data-active-type="bahan-ajar"] .project-card:not([data-type="bahan-ajar"]) {
+      display: none !important;
+    }
+    .ppl-grid[data-active-type="lkm"] .project-card:not([data-type="lkm"]) {
+      display: none !important;
+    }
+    .ppl-grid[data-active-type="hasil-lkm"] .project-card:not([data-type="hasil-lkm"]) {
+      display: none !important;
+    }
+    .ppl-grid[data-active-type="media"] .project-card:not([data-type="media"]) {
+      display: none !important;
+    }
+    .ppl-grid[data-active-type="asesmen"] .project-card:not([data-type="asesmen"]) {
       display: none !important;
     }
 
@@ -1752,9 +1788,52 @@
       display: flex;
       flex-direction: row;
       flex: 1;
-      height: calc(100% - 60px); /* header height offset */
+      min-height: 0;
       overflow: hidden;
       background: #fff;
+    }
+
+    .preview-document-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      gap: 0.6rem;
+      padding: 0.85rem 1.8rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .preview-document-switcher[hidden] {
+      display: none;
+    }
+
+    .preview-document-switcher button {
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 30px;
+      background: var(--bg);
+      color: var(--secondary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .preview-document-switcher button[aria-selected="true"] {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .project-card[data-ppt-url] .card-buttons {
+      flex-wrap: wrap;
+    }
+
+    .project-card[data-ppt-url] .card-btn {
+      flex: 1 1 140px;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.5;
     }
 
     .preview-modal-iframe-wrapper {
@@ -2054,34 +2133,46 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
   </style>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="identifikasi-diri.css">
+  <link rel="stylesheet" href="rpp-media.css">
+  <script src="dashboard.js" defer></script>
 </head>
 
-<body>
+<body class="dashboard-layout">
 
   <canvas id="bg-canvas"></canvas>
 
-  <nav>
-    <div class="logo-container">
-      <img src="ust-logo.png" alt="UST Logo" class="ust-logo">
-      <span class="logo-uni">Universitas Sarjanawiyata Tamansiswa</span>
-    </div>
-    <div class="menu-toggle" id="menuToggle" onclick="document.querySelector('nav ul').classList.toggle('open');">
-      <span></span><span></span><span></span></div>
-    <ul>
-      <li><a href="#splash-selector" style="color: var(--primary); font-weight: bold;">⬅ Pilih Semester</a></li>
-      <li><a href="#profil">Profil</a></li>
-      <li><a href="#analisis">Seminar Pendidikan</a></li>
-      <li><a href="#dokumentasi">Dokumentasi</a></li>
-      <li><a href="#analisis-produk">Analisis Produk</a></li>
-      <li><a href="#lampiran">Lampiran</a></li>
-      <li><a href="#model-guru">Model Guru</a></li>
-      <li><a href="#refleksi-akhir">Refleksi Akhir</a></li>
-      <li><a href="#filosofi-mengajar">Filosofi Mengajar</a></li>
-      <li><a href="#contact">Kontak</a></li>
-    </ul>
+  <a class="skip-dashboard" href="#dashboard">Lewati ke dashboard</a>
+  <button class="dashboard-mobile-toggle" type="button" aria-controls="dashboard-sidebar" aria-expanded="false" aria-label="Buka menu navigasi"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  <button class="dashboard-scrim" type="button" tabindex="-1" aria-label="Tutup menu navigasi"></button>
+  <nav class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Navigasi e-portofolio">
+    <div class="logo-container"><img src="ust-logo.png" alt="UST Logo" class="ust-logo"><span class="logo-uni">Universitas Sarjanawiyata Tamansiswa</span></div>
+    <div class="sidebar-person"><img src="foto-profil-terbaru.jpg" alt="Foto Fery Nur Indahsari"><div><strong>Fery Nur Indahsari</strong><small>PPG Prajabatan · 2025/2026</small></div></div>
+    <p class="sidebar-label">RUANG PORTOFOLIO</p>
+    <ul><li><a href="#dashboard" aria-current="location"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Dashboard</span></a></li>
+    <li><a href="#layanan-portofolio"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>Layanan E-Portofolio</span></a></li>
+    <li><a href="#splash-selector"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>⬅ Pilih Semester</span></a></li>
+<li><a href="index.html#profil"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Profil</span></a></li>
+<li><a href="#analisis"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><span>Seminar Pendidikan</span></a></li>
+<li><a href="#ppl-mandiri"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-3 2 2 3 3-1 2 4 3-1 1-3 3-1-1-3 3-2-2-3-3 1-2-4Z"/><circle cx="11" cy="10" r="3"/></svg><span>PPL Mandiri</span></a></li>
+<li><a href="#dokumentasi"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-7 5 8"/></svg><span>Dokumentasi</span></a></li>
+<li><a href="#analisis-produk"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><span>Analisis Produk</span></a></li>
+<li><a href="#lampiran"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg><span>Lampiran</span></a></li>
+<li><a href="#model-guru"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Model Guru</span></a></li>
+<li><a href="#refleksi-akhir"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Refleksi Akhir</span></a></li>
+<li><a href="#filosofi-mengajar"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><span>Filosofi Mengajar</span></a></li>
+<li><a href="#contact"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H3l1.5-4A9 9 0 1 1 21 11Z"/><path d="M8 9h8M8 13h5"/></svg><span>Kontak</span></a></li></ul>
+    <div class="sidebar-bottom"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><div><span>E-Portofolio Digital</span><small>Mendidik dengan dedikasi & hati</small></div></div>
   </nav>
 
-  <section id="hero">
+  <section id="dashboard" aria-label="Dashboard e-portofolio digital">
+    <header class="dashboard-topbar">
+      <div class="dashboard-heading"><p class="dashboard-eyebrow">E-Portofolio Digital · PPG</p><h2>Dashboard</h2></div>
+      <label class="dashboard-search" for="dashboard-search"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><input id="dashboard-search" type="search" placeholder="Cari layanan portofolio…" aria-label="Cari layanan portofolio" aria-controls="dashboard-services" autocomplete="off"><button type="button" id="dashboard-search-clear" aria-label="Hapus pencarian" hidden>×</button></label>
+      <span class="dashboard-semester">Semester 2</span>
+    </header>
+      <section id="hero">
     <div class="hero-bg-gears">
       <!-- Simple SVG Gears -->
       <svg class="gear-icon gear-1" viewBox="0 0 100 100">
@@ -2107,9 +2198,22 @@
         <a href="#contact" class="btn secondary">Hubungi Saya</a>
       </div>
     </div>
+    <div class="dashboard-portrait"><img src="foto-profil-terbaru.jpg" alt="Fery Nur Indahsari"></div>
   </section>
-
-  <div id="splash-selector">
+    <div class="dashboard-stats" aria-label="Ringkasan portofolio"><a class="dashboard-stat" href="#splash-selector"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg><div><strong>2</strong><span>Semester portofolio</span></div></a><a class="dashboard-stat" href="#layanan-portofolio"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8Zm-10 10 10 5 10-5M2 18l10 5 10-5"/></svg><div><strong>5</strong><span>Layanan e-portofolio</span></div></a><a class="dashboard-stat" href="semester2.html#ppl-mandiri"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-3 2 2 3 3-1 2 4 3-1 1-3 3-1-1-3 3-2-2-3-3 1-2-4Z"/><circle cx="11" cy="10" r="3"/></svg><div><strong>6</strong><span>Komponen pembelajaran</span></div></a><a class="dashboard-stat" href="semester2.html#analisis"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg><div><strong>6</strong><span>LK 2 refleksi semester 2</span></div></a></div>
+    <div class="dashboard-grid">
+      <div class="dashboard-panel" id="layanan-portofolio">
+        <div class="dashboard-panel-head"><h2>Layanan E-Portofolio PPG</h2><small id="dashboard-search-status" role="status" aria-live="polite">Klik untuk masuk</small></div>
+        <div class="dashboard-services" id="dashboard-services"><a class="dashboard-service" href="index.html#analisis"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H5v20h14V7Z"/><path d="M14 2v6h5M8 12h8M8 16h6"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 1 · UTS PPL I</span><h3>E-Portofolio 1: PPL Terbimbing</h3><p>Perangkat pembelajaran, dokumentasi praktik, analisis produk & lampiran penilaian.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="index.html#refleksi-akhir"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 1 · UAS PPL I</span><h3>E-Portofolio 2: Refleksi & Filosofi</h3><p>Refleksi akhir PPL Terbimbing, model guru dan filosofi mengajar.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#ppl-mandiri"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 3-1 3-3 1 1 3-3 2 2 3 3-1 2 4 3-1 1-3 3-1-1-3 3-2-2-3-3 1-2-4Z"/><circle cx="11" cy="10" r="3"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · Praktik Mandiri</span><h3>E-Portofolio: 6 Komponen Mandiri</h3><p>RPP, bahan ajar, media, LKM, hasil lembar murid dan asesmen.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#ppl-mandiri"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="m8 12-2 10 6-3 6 3-2-10"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · UTS & UAS Mandiri</span><h3>E-Portofolio 2: UTS & UAS PPL II</h3><p>Perangkat praktik mandiri dalam 5 siklus beserta dokumentasi pembelajaran.</p></div><span class="service-arrow" aria-hidden="true">›</span></a>
+<a class="dashboard-service" href="semester2.html#analisis"><span class="service-icon"><svg class="dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-6-2-10 1Z"/></svg></span><div class="service-copy"><span class="service-kicker">Semester 2 · Seminar PPG</span><h3>Seminar PPG: Refleksi 5 MK</h3><p>Refleksi pengalaman belajar, PPT, LK 2 dan refleksi keseluruhan PPG.</p></div><span class="service-arrow" aria-hidden="true">›</span></a></div>
+        <p class="dashboard-empty" id="dashboard-search-empty" hidden>Layanan belum ditemukan. Coba kata “refleksi”, “mandiri”, atau “seminar”.</p>
+        <div class="dashboard-links" aria-label="Pintasan isi portofolio"><a href="index.html#profil">Profil mahasiswa</a><a href="#lampiran">Lampiran penilaian</a><a href="#filosofi-mengajar">Filosofi mengajar</a><a href="#contact">Kontak</a></div>
+      </div>
+      <div class="dashboard-right">
+        <div class="dashboard-panel">  <div id="splash-selector">
     <h1 class="splash-title">Pilih Portofolio</h1>
     <div class="splash-cards">
       <a href="index.html" class="splash-card">
@@ -2124,66 +2228,163 @@
       </a>
     </div>
   </div>
+<p class="dashboard-note">Pilih semester untuk menjelajahi materi dan pengalaman belajar.</p></div>
+        <div class="dashboard-panel">
+          <div class="dashboard-panel-head"><h2>Galeri Kegiatan</h2><a href="#dokumentasi">Lihat semua ›</a></div>
+          <div class="dashboard-gallery"><a href="#dokumentasi" aria-label="Lihat dokumentasi Momen Kegiatan Praktik"><img src="foto_kegiatan_1.jpg" alt="Momen Kegiatan Praktik" loading="lazy"><span>Momen Kegiatan Praktik</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Praktik & Observasi"><img src="foto_kegiatan_2.jpg" alt="Praktik & Observasi" loading="lazy"><span>Praktik & Observasi</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Suasana Diskusi"><img src="foto_kegiatan_3.jpg" alt="Suasana Diskusi" loading="lazy"><span>Suasana Diskusi</span></a><a href="#dokumentasi" aria-label="Lihat dokumentasi Bengkel Las"><img src="foto_kegiatan_4.jpg" alt="Bengkel Las" loading="lazy"><span>Bengkel Las</span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <section id="analisis">
     <h2 class="section-title fade-in">Seminar <span class="accent">Pendidikan</span></h2>
+    <div style="max-width: 900px; margin: 0 auto; text-align: center; color: var(--secondary); line-height: 1.8; margin-bottom: 2rem;" class="fade-in">
+      <p>Hasil Refleksi Pengalaman Belajar Mata Kuliah PPG Prajabatan Semester 1 &amp; Semester 2.</p>
+    </div>
 
     <!-- Photo Navigation Submenu -->
     <div class="ruang-karya-container fade-in">
       <div class="artefak-badge-wrapper" style="margin-top: 1rem;">
-        <div class="artefak-badge">REFLEKSI HASIL BELAJAR</div>
+        <div class="artefak-badge">HASIL REFLEKSI PENGALAMAN BELAJAR</div>
+      </div>
+      
+      <!-- Thumbnail Kapsul Khusus Hasil Refleksi Belajar Sem 1 & Sem 2 -->
+      <div class="capsule-tabs-wrapper">
+        <div class="seminar-capsule-tabs">
+          <button class="capsule-tab-btn seminar-filter-btn active" data-sem="semua">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #f7f1ee, #e9ded9);">
+              <span class="tab-thumbnail-icon">✨</span>
+            </div>
+            <span class="tab-thumbnail-label">Semua Refleksi</span>
+          </button>
+          <button class="capsule-tab-btn seminar-filter-btn" data-sem="identifikasi-diri">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #e7f0f5, #bdd3e3);">
+              <span class="tab-thumbnail-icon">👤</span>
+            </div>
+            <span class="tab-thumbnail-label">Identifikasi Diri</span>
+          </button>
+          <button class="capsule-tab-btn seminar-filter-btn" data-sem="sem1">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #f0eae5, #d5c8be);">
+              <span class="tab-thumbnail-icon">📚</span>
+            </div>
+            <span class="tab-thumbnail-label">Hasil Refleksi Belajar Sem 1</span>
+          </button>
+          <button class="capsule-tab-btn seminar-filter-btn" data-sem="sem2">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #ebdcd6, #ccb4a9);">
+              <span class="tab-thumbnail-icon">🎓</span>
+            </div>
+            <span class="tab-thumbnail-label">Hasil Refleksi Belajar Sem 2</span>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="projects-grid" data-active-type="semua">
+    <div class="projects-grid seminar-grid" data-active-sem="semua">
       <!-- RPP Standalone Cards -->
       <!-- RPP Siklus 1 -->
-      <div class="project-card fade-in" data-type="rpp" data-siklus="1" onclick="openPreviewModal(this)"
-           data-title="Identifikasi Diri - Mengidentifikasi Visi Pribadi" 
-           data-url="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/preview"
-           data-konteks="Lembar kerja ini berfokus pada proses refleksi mendalam mengenai visi pribadi sebagai calon pendidik profesional dalam program Seminar Pendidikan Profesi Guru (PPG)."
-           data-tujuan="Bertujuan untuk membantu mahasiswa merumuskan cita-cita pendidikan, memetakan potensi diri, serta menyusun strategi konkret untuk mencapai visi pribadi sebagai guru yang inspiratif."
-           data-kelebihan="Struktur lembar kerja yang terarah memudahkan mahasiswa untuk melakukan introspeksi diri secara terstruktur dan merumuskan langkah-langkah pencapaian yang realistis."
-           data-kekurangan="Proses identifikasi ini bergantung pada tingkat kejujuran dan kedalaman refleksi individu, sehingga hasilnya bersifat sangat subjektif dan membutuhkan keterbukaan diri.">
-        <div class="card-cover-preview rpp-cover">
-          <span class="cover-format-badge">PDF</span>
-          <span class="cover-category-badge">Preview</span>
-          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #3182ce 100%);"></div>
-          <div class="cover-logos-row">
-            <div class="logo-emblem"></div>
-            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+      <article class="identity-article" id="identifikasi-diri-artikel" data-sem="sem1" data-filter="identifikasi-diri" aria-labelledby="identity-title">
+        <header class="identity-header">
+          <span class="identity-eyebrow">Identifikasi Diri · Catatan Reflektif</span>
+          <h2 id="identity-title">Dari Harapan Orang Tua,<br>Menjadi <em>Panggilan Hati</em></h2>
+          <p class="identity-deck">Mengenali visi pribadi, memaknai pilihan menjadi guru, dan merawat langkah untuk berbakti melalui pendidikan.</p>
+          <div class="identity-byline"><img src="foto-profil-terbaru.jpg" alt="Fery Nur Indahsari" width="42" height="42"><div><strong>Fery Nur Indahsari</strong><span>PPG Prajabatan 2025/2026 Gelombang 1<br>Universitas Sarjanawiyata Tamansiswa</span></div></div>
+        </header>
+        <p class="identity-intro">Perjalanan saya menuju dunia pendidikan berawal dari nilai yang ditanamkan orang tua: ilmu adalah bekal berharga bagi kehidupan. Seiring waktu, dorongan itu tumbuh menjadi keinginan saya sendiri untuk mengabdi. Mengenali diri sebagai calon guru berarti memahami alasan saya memilih jalan ini, pendidikan seperti apa yang saya impikan, dan bagaimana saya akan mewujudkannya.</p>
+        <button class="identity-read" type="button">Baca artikel Identifikasi Diri <span aria-hidden="true">↗</span></button>
+        <div class="identity-full">
+          <figure class="identity-hero">
+            <img src="images/identifikasi-diri-belajar-bersama.png" width="1672" height="941" alt="Ilustrasi seorang guru perempuan berhijab mendampingi murid SMK berdiskusi tentang gambar teknik di sekitar meja belajar.">
+            <figcaption>Ilustrasi pembelajaran yang ingin saya hadirkan: dekat dengan murid, terbuka terhadap gagasan, dan relevan dengan dunia kejuruan. Gambar pendukung dibuat dengan AI.</figcaption>
+          </figure>
+          <div class="identity-toc" aria-label="Daftar isi artikel">
+            <p>Dalam cerita ini</p>
+            <ol><li><a href="#identity-awal"><span>01</span>Berawal dari rumah</a></li><li><a href="#identity-visi"><span>02</span>Harapan untuk pendidikan</a></li><li><a href="#identity-guru"><span>03</span>Guru yang ingin saya jadi</a></li><li><a href="#identity-langkah"><span>04</span>Langkah mewujudkan visi</a></li></ol>
           </div>
-          <div class="rpp-title-block">
-            <h4 class="rpp-main-title" style="font-size: 1.5rem;">IDENTIFIKASI DIRI</h4>
-            <p class="rpp-sub-title"></p>
-            <p class="rpp-detail-title"></p>
+          <section class="identity-chapter" id="identity-awal" aria-labelledby="identity-awal-title">
+            <span class="identity-eyebrow">01 · Latar Belakang & Motivasi</span>
+            <h3 id="identity-awal-title">Keinginan yang berawal dari rumah</h3>
+            <p>Sejak kecil, orang tua saya menanamkan keyakinan bahwa ilmu adalah bekal terbaik yang dapat diberikan kepada anak. Mereka juga mengenalkan saya pada kemuliaan profesi guru, seseorang yang dapat membuka jalan kebaikan bagi banyak orang. Nilai itu menjadi titik awal saya memandang pendidikan sebagai bagian penting dari kehidupan.</p>
+            <p>Dalam perjalanan saya, harapan orang tua tersebut perlahan menjadi keyakinan pribadi. Saya ingin ikut berbakti kepada negeri melalui pendidikan, karena kualitas generasi muda turut menentukan kemajuan bangsa. Pilihan menjadi guru pun saya maknai sebagai kesempatan untuk mengambil bagian dalam pertumbuhan mereka.</p>
+            <p>Mengingat alasan ini membantu saya menjaga arah. Ketika saya belajar merancang pembelajaran, memahami peserta didik, atau memperbaiki cara mengajar, ada niat yang terus saya rawat: semoga ilmu yang saya pelajari dapat menjadi sesuatu yang berguna bagi orang lain.</p>
+          </section>
+          <blockquote class="identity-quote"><p>“Pendidikan yang merata, bermutu, dan berpihak pada seluruh anak bangsa.”</p><cite>Visi pribadi untuk pendidikan Indonesia</cite></blockquote>
+          <section class="identity-chapter" id="identity-visi" aria-labelledby="identity-visi-title">
+            <span class="identity-eyebrow">02 · Visi untuk Pendidikan Indonesia</span>
+            <h3 id="identity-visi-title">Setiap anak berhak mendapat kesempatan untuk tumbuh</h3>
+            <p>Saya membayangkan pendidikan Indonesia yang memberi ruang bagi setiap anak untuk berkembang. Anak yang belajar di kota besar maupun di daerah terpencil sama-sama berhak memperoleh akses dan pengalaman belajar yang bermutu. Harapan ini menjadi dasar bagi saya untuk terus belajar menghadirkan pembelajaran yang berpihak pada kebutuhan peserta didik.</p>
+            <p>Generasi yang saya harapkan adalah generasi yang cerdas, memiliki karakter, dan mampu menghadapi persaingan global sambil tetap menjaga jati diri bangsa. Karena itu, keberhasilan belajar perlu memberi tempat bagi perkembangan sikap, kemandirian, dan kecintaan kepada tanah air, berdampingan dengan pencapaian akademik.</p>
+            <ul class="identity-values">
+              <li><strong>Cerdas dan berkarakter</strong>Pengetahuan dan keterampilan tumbuh bersama kejujuran, tanggung jawab, serta kesadaran untuk menggunakan kemampuan bagi kebaikan.</li>
+              <li><strong>Merata dan bermutu</strong>Kesempatan memperoleh pembelajaran yang baik terbuka bagi anak dengan beragam latar belakang dan tempat tinggal.</li>
+              <li><strong>Mandiri dan mencintai tanah air</strong>Peserta didik berkembang menjadi pribadi yang mampu mengambil peran, mengenali potensinya, dan tetap berakar pada nilai bangsa.</li>
+            </ul>
+          </section>
+          <section class="identity-chapter" id="identity-guru" aria-labelledby="identity-guru-title">
+            <span class="identity-eyebrow">03 · Visi sebagai Calon Guru</span>
+            <h3 id="identity-guru-title">Hadir sebagai teladan, tumbuh sebagai pembelajar</h3>
+            <p>Saya ingin menjadi guru yang mampu memberi teladan dan menumbuhkan motivasi belajar. Di kelas, saya ingin menghadirkan pembelajaran yang bermakna, dekat dengan kebutuhan zaman, dan terbuka terhadap keberagaman karakter peserta didik. Setiap murid perlu merasa diterima dan memiliki kesempatan untuk mengambil bagian dalam proses belajar.</p>
+            <p>Untuk mewujudkan hal itu, saya perlu terus bertumbuh sebagai <strong>pembelajar sepanjang hayat</strong>. Perkembangan ilmu pengetahuan dan teknologi mengajak saya untuk memperbarui pemahaman, mencoba media yang sesuai, serta menilai kembali cara saya mendampingi murid. Kemauan untuk belajar menjadi bagian dari keteladanan yang ingin saya hadirkan.</p>
+            <p>Saya juga berharap peran tersebut dapat memberi pengaruh yang baik bagi lingkungan sekolah dan masyarakat. Komunikasi dengan rekan pendidik, orang tua, dan lingkungan sekitar menjadi bagian dari upaya membangun suasana pendidikan yang saling mendukung.</p>
+          </section>
+          <div class="identity-photo-story">
+            <figure><img src="foto_kegiatan_1.jpg" width="768" height="1024" loading="lazy" alt="Murid SMK mengerjakan kegiatan belajar di kelas, dengan laptop di meja bagian depan."><figcaption>Dokumentasi kegiatan belajar dari arsip e-portofolio. Kelas menjadi ruang untuk mengenali kebutuhan dan perkembangan murid.</figcaption></figure>
+            <figure><img src="foto_kegiatan_2.jpg" width="720" height="727" loading="lazy" alt="Seorang murid menyelesaikan tugas tertulis dengan sumber belajar digital di meja."><figcaption>Dokumentasi proses belajar murid dari arsip e-portofolio. Teknologi dapat mendukung kegiatan belajar ketika penggunaannya sesuai dengan tujuan pembelajaran.</figcaption></figure>
           </div>
-          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
-          <span class="cover-footer-right-pill">Lihat Refleksi</span>
+          <section class="identity-chapter" id="identity-langkah" aria-labelledby="identity-langkah-title">
+            <span class="identity-eyebrow">04 · Strategi Pencapaian</span>
+            <h3 id="identity-langkah-title">Enam langkah untuk membawa visi ke dalam keseharian</h3>
+            <p>Visi memberi arah, sedangkan kebiasaan dan tindakan membantu saya mendekatinya. Dalam proses menjadi guru, saya merumuskan enam langkah berikut sebagai pegangan untuk terus mengembangkan diri.</p>
+            <ol class="identity-steps">
+              <li><div><h4>Meningkatkan kompetensi secara berkelanjutan</h4><p>Saya akan memperkuat kompetensi pedagogik dan profesional melalui program PPG, pelatihan, lokakarya, serta belajar mandiri. Bekal tersebut saya perlukan untuk merancang dan melaksanakan pembelajaran yang bermutu.</p></div></li>
+              <li><div><h4>Membiasakan refleksi setelah pembelajaran</h4><p>Saya ingin menyediakan waktu untuk meninjau kembali proses belajar: apa yang sudah membantu murid, bagian mana yang perlu diperbaiki, dan cara apa yang lebih sesuai dengan kebutuhan mereka. Hasil refleksi menjadi dasar perbaikan pada pertemuan berikutnya.</p></div></li>
+              <li><div><h4>Memanfaatkan teknologi dan media pembelajaran</h4><p>Saya akan mengembangkan kemampuan memilih serta menggunakan teknologi dan media yang mendukung tujuan belajar. Penggunaannya perlu membantu murid memahami materi dan membuat pengalaman belajar lebih menarik serta relevan.</p></div></li>
+              <li><div><h4>Membangun kolaborasi dalam ekosistem pendidikan</h4><p>Saya ingin menjaga komunikasi dengan sesama pendidik, orang tua, dan masyarakat. Melalui kerja sama, dukungan untuk perkembangan peserta didik dapat tumbuh lebih kuat dan berkesinambungan.</p></div></li>
+              <li><div><h4>Menanamkan karakter melalui keteladanan</h4><p>Nilai karakter dan cinta tanah air perlu hadir dalam sikap sehari-hari. Saya ingin belajar menjaga konsistensi antara hal yang saya sampaikan kepada murid dan perilaku yang mereka lihat dari diri saya.</p></div></li>
+              <li><div><h4>Berkontribusi dalam pendidikan di luar sekolah</h4><p>Saya berharap dapat berperan dalam kegiatan literasi, pengabdian masyarakat, atau kegiatan sosial yang berkaitan dengan pendidikan. Langkah ini menjadi bagian dari niat saya untuk memberi manfaat bagi lingkungan yang lebih luas.</p></div></li>
+            </ol>
+          </section>
+          <div class="identity-closing">
+            <span class="identity-eyebrow">Menjaga Niat, Melanjutkan Langkah</span>
+            <h3>Bakti kepada negeri melalui pendidikan</h3>
+            <p>Di sepanjang proses ini, saya ingin menjaga motivasi dan semangat mengabdi dengan mengingat kembali dorongan orang tua serta niat untuk memberi kontribusi bagi pendidikan Indonesia. Saya masih terus belajar, dan visi ini menjadi pengingat untuk melangkah dengan lebih sadar.</p>
+            <p>Semoga setiap upaya memperbaiki pembelajaran, setiap kemauan mendengarkan murid, dan setiap kesempatan bekerja sama dapat mendekatkan saya pada sosok pendidik yang saya cita-citakan. Bagi saya, jalan ini juga menjadi bentuk penghormatan atas doa dan harapan orang tua yang telah mengantarkan saya ke dunia pendidikan.</p>
+            <p class="identity-signature">Fery Nur Indahsari</p>
+          </div>
+          <div class="identity-source" data-worksheet-label="Lembar Kerja 2 (LK 2)" data-title="Identifikasi Diri - Mengidentifikasi Visi Pribadi"
+             data-url="https://drive.google.com/file/d/1ltkN7BMBH7UcHO-Cg1_M8ErDG4aIDggP/preview"
+             data-view-url="https://docs.google.com/presentation/d/1ltkN7BMBH7UcHO-Cg1_M8ErDG4aIDggP/edit"
+             data-ppt-url="https://drive.google.com/file/d/1ltkN7BMBH7UcHO-Cg1_M8ErDG4aIDggP/preview"
+             data-ppt-view-url="https://docs.google.com/presentation/d/1ltkN7BMBH7UcHO-Cg1_M8ErDG4aIDggP/edit"
+             data-worksheet-url="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/preview"
+             data-worksheet-view-url="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/view"
+             data-konteks="Lembar kerja ini berfokus pada proses refleksi mendalam mengenai visi pribadi sebagai calon pendidik profesional dalam program Seminar Pendidikan Profesi Guru (PPG)."
+             data-tujuan="Bertujuan untuk membantu mahasiswa merumuskan cita-cita pendidikan, memetakan potensi diri, serta menyusun strategi konkret untuk mencapai visi pribadi sebagai guru yang inspiratif."
+             data-kelebihan="Struktur lembar kerja yang terarah memudahkan mahasiswa untuk melakukan introspeksi diri secara terstruktur dan merumuskan langkah-langkah pencapaian yang realistis."
+             data-kekurangan="Proses identifikasi ini bergantung pada tingkat kejujuran dan kedalaman refleksi individu, sehingga hasilnya bersifat sangat subjektif dan membutuhkan keterbukaan diri.">
+            <h3>Dokumen pendukung</h3>
+            <p>Artikel ini mengolah isi PPT “Mengidentifikasi Visi Pribadi dan Strategi Pencapaiannya” menjadi narasi. PPT sumber memuat materi LK 1 Identifikasi Diri, sedangkan LK 2 memuat refleksi atas artefak tersebut. Keduanya tetap dapat dipratinjau sebagai dokumen pendukung.</p>
+            <div class="identity-source-buttons"><button type="button" onclick="openPreviewModal(this.closest('.identity-source'), 'ppt')">Pratinjau PPT asli</button><button type="button" onclick="openPreviewModal(this.closest('.identity-source'), 'worksheet')">Pratinjau LK 2</button></div>
+          </div>
         </div>
-        <div class="card-content-area">
-          <div class="card-tags">
-            <span class="card-tag tag-category">Preview</span>
-            <span class="card-tag tag-cycle">Lihat Refleksi</span>
-          </div>
-          <h3 class="card-item-title">Identifikasi Diri</h3>
-          <p class="card-item-desc">Menguraikan visi pribadi untuk pendidikan Indonesia, latar belakang dan motivasi menjadi guru, visi sebagai calon pendidik, serta langkah-langkah konkret untuk mewujudkannya.</p>
-          <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/1gEjlLV9ekr-Jx3m90O50Ff8lGiBH5cFG/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
-          </div>
-        </div>
-      </div>
+      </article>
+
 
       <!-- RPP Siklus 2 -->
-      <div class="project-card fade-in" data-type="rpp" data-siklus="2" onclick="openPreviewModal(this)"
-           data-title="Filosofi Pendidikan" 
-           data-url="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/preview"
+      <div class="project-card fade-in" data-type="rpp" data-siklus="2" data-sem="sem1" data-filter="filosofi" onclick="openPreviewModal(this)"
+           data-title="Filosofi Pendidikan"
+           data-url="https://drive.google.com/file/d/1QYfuRfTVquzJ0N5dkv8ScBoWlYjmvqtJ/preview"
+           data-view-url="https://docs.google.com/presentation/d/1QYfuRfTVquzJ0N5dkv8ScBoWlYjmvqtJ/edit"
+           data-ppt-url="https://drive.google.com/file/d/1QYfuRfTVquzJ0N5dkv8ScBoWlYjmvqtJ/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1QYfuRfTVquzJ0N5dkv8ScBoWlYjmvqtJ/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/view"
            data-konteks="Dokumen ini berisi refleksi mendalam mengenai filosofi pendidikan Ki Hajar Dewantara dan penerapannya dalam konteks pembelajaran abad 21."
            data-tujuan="Bertujuan untuk menginternalisasi nilai-nilai luhur pendidikan dan merumuskan pendekatan pedagogis yang berpusat pada peserta didik."
            data-kelebihan="Memberikan fondasi pemikiran yang kuat bagi calon guru dalam memaknai peran strategisnya sebagai pendidik."
            data-kekurangan="Konsep filosofis yang abstrak terkadang memerlukan penyesuaian ekstra agar dapat diimplementasikan secara praktis di lingkungan kelas nyata.">
         <div class="card-cover-preview rpp-cover">
-          <span class="cover-format-badge">PDF</span>
+          <span class="cover-format-badge">PPT + LK</span>
           <span class="cover-category-badge">Preview</span>
           <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #5a4b51 100%);"></div>
           <div class="cover-logos-row">
@@ -2196,7 +2397,7 @@
             <p class="rpp-detail-title"></p>
           </div>
           <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
-          <span class="cover-footer-right-pill">Lihat Refleksi</span>
+          <span class="cover-footer-right-pill">Lihat PPT &amp; LK</span>
         </div>
         <div class="card-content-area">
           <div class="card-tags">
@@ -2206,22 +2407,27 @@
           <h3 class="card-item-title">Filosofi Pendidikan</h3>
           <p class="card-item-desc">Menyajikan refleksi filosofi pendidikan dengan model 4C (Connection, Challenge, Concept, Change) untuk menghubungkan pengalaman belajar PPG dengan pemikiran Ki Hajar Dewantara demi mewujudkan aksi nyata dalam pembelajaran.</p>
           <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/1cTk1yX5Zz4CzpNFTC6OjaH4i_BkwDHaC/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja</button>
           </div>
         </div>
       </div>
 
       <!-- RPP Siklus 3 -->
-      <div class="project-card fade-in" data-type="rpp" data-siklus="3" onclick="openPreviewModal(this)"
-           data-title="Pemahaman Peserta Didik" 
-           data-url="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/preview"
+      <div class="project-card fade-in" data-type="rpp" data-siklus="3" data-sem="sem1" data-filter="ppdp" onclick="openPreviewModal(this)"
+           data-title="Pemahaman Peserta Didik"
+           data-url="https://drive.google.com/file/d/12pTkUQR5EFDyS6uzRupi2BNIUQ1b94PY/preview"
+           data-view-url="https://docs.google.com/presentation/d/12pTkUQR5EFDyS6uzRupi2BNIUQ1b94PY/edit"
+           data-ppt-url="https://drive.google.com/file/d/12pTkUQR5EFDyS6uzRupi2BNIUQ1b94PY/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/12pTkUQR5EFDyS6uzRupi2BNIUQ1b94PY/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/view"
            data-konteks="Laporan observasi dan analisis karakteristik, kebutuhan, serta gaya belajar peserta didik di lingkungan sekolah tempat praktik mengajar."
            data-tujuan="Memetakan profil peserta didik guna merancang strategi pembelajaran yang diferensiatif, inklusif, dan sesuai dengan tahap perkembangan kognitif mereka."
            data-kelebihan="Membantu pendidik mengenali keberagaman siswa secara mendalam sehingga pendekatan pengajaran menjadi lebih relevan, personal, dan empatik."
            data-kekurangan="Dinamika perkembangan emosional dan sosial peserta didik yang cepat membuat data observasi ini harus terus diperbarui secara berkala.">
         <div class="card-cover-preview rpp-cover">
-          <span class="cover-format-badge">PDF</span>
+          <span class="cover-format-badge">PPT + LK</span>
           <span class="cover-category-badge">Preview</span>
           <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #8fa6a3 100%);"></div>
           <div class="cover-logos-row">
@@ -2234,7 +2440,7 @@
             <p class="rpp-detail-title"></p>
           </div>
           <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
-          <span class="cover-footer-right-pill">Lihat Refleksi</span>
+          <span class="cover-footer-right-pill">Lihat PPT &amp; LK</span>
         </div>
         <div class="card-content-area">
           <div class="card-tags">
@@ -2244,60 +2450,70 @@
           <h3 class="card-item-title">Pemahaman Peserta Didik</h3>
           <p class="card-item-desc">Refleksi mata kuliah Pemahaman Peserta Didik dan Pembelajaran (PPDP) menggunakan model 4C untuk mengidentifikasi keragaman, potensi, dan kebutuhan belajar peserta didik guna merancang pembelajaran yang lebih efektif dan bermakna.</p>
           <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/1b0XIWAhjU3n9Gqa1M24MkiptemquEx5z/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja</button>
           </div>
         </div>
       </div>
 
       <!-- BAHAN AJAR Standalone Cards -->
       <!-- Bahan Ajar Siklus 1 -->
-      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="1" onclick="openPreviewModal(this)"
-           data-title="Pembelajaran Mendalam dan Asesmen Dasar" 
-           data-url="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/preview"
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="1" data-sem="sem1" data-filter="pma" onclick="openPreviewModal(this)"
+           data-title="Pembelajaran Mendalam (PMA)"
+           data-url="https://drive.google.com/file/d/1ymBFOAAY8VK35w6H1fMkYsDQF7BNhkJB/preview"
+           data-view-url="https://docs.google.com/presentation/d/1ymBFOAAY8VK35w6H1fMkYsDQF7BNhkJB/edit"
+           data-ppt-url="https://drive.google.com/file/d/1ymBFOAAY8VK35w6H1fMkYsDQF7BNhkJB/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1ymBFOAAY8VK35w6H1fMkYsDQF7BNhkJB/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/view"
            data-konteks="Rancangan dan implementasi siklus pembelajaran mendalam (deep learning) yang dipadukan dengan desain asesmen dasar untuk mengukur pemahaman konsep secara holistik."
            data-tujuan="Meningkatkan kualitas interaksi pedagogis serta mengevaluasi efektivitas rubrik asesmen dalam memonitor kemajuan proses belajar dan pemahaman kognitif siswa."
            data-kelebihan="Secara efektif mendorong kemampuan berpikir tingkat tinggi (HOTS) peserta didik dan memberikan umpan balik yang lebih representatif terhadap performa mereka."
            data-kekurangan="Membutuhkan alokasi waktu persiapan yang lebih panjang bagi guru dalam menyusun skenario pembelajaran dan instrumen asesmen yang benar-benar bermakna.">
         <div class="card-cover-preview" style="background: linear-gradient(135deg, #e8caca, #cbb5b5); border-bottom: 1px solid var(--accent);">
-          <span class="cover-format-badge">PDF</span>
+          <span class="cover-format-badge">PPT + LK</span>
           <span class="cover-category-badge">Preview</span>
           <div class="book-binding-strip"></div>
           <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
             <div class="cover-logos" style="margin-bottom: 0.5rem;">
               <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
             </div>
-            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.2;">PEMBELAJARAN MENDALAM DAN ASESMEN DASAR</h4>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.2;">PEMBELAJARAN MENDALAM (PMA)</h4>
             <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;"></p>
             <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;"></p>
           </div>
           <span class="cover-footer-left" style="left: 2rem;">MODUL MANDIRI</span>
-          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat Refleksi</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT &amp; LK</span>
         </div>
         <div class="card-content-area">
           <div class="card-tags">
             <span class="card-tag tag-category">Preview</span>
             <span class="card-tag tag-cycle">Lihat Refleksi</span>
           </div>
-          <h3 class="card-item-title">Pembelajaran Mendalam dan Asesmen Dasar</h3>
+          <h3 class="card-item-title">Pembelajaran Mendalam (PMA)</h3>
           <p class="card-item-desc">Refleksi mata kuliah Pembelajaran Mendalam dan Asesmen (PMA) di SMK dengan model 4C untuk memahami penerapan Deep Learning, Constructive Alignment, dan Understanding by Design (UbD) dalam rancangan pembelajaran vokasional.</p>
           <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/1Tmk1afp7s6_7jnEfE-UoKg8yA5OxV8m0/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja</button>
           </div>
         </div>
       </div>
 
       <!-- Bahan Ajar Siklus 2 -->
-      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="2" onclick="openPreviewModal(this)"
-           data-title="Praktik Pengalaman Lapangan (PPL) Terbimbing" 
-           data-url="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/preview"
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="2" data-sem="sem1" data-filter="ppl-terbimbing" onclick="openPreviewModal(this)"
+           data-title="Praktik Pengalaman Lapangan (PPL) Terbimbing"
+           data-url="https://drive.google.com/file/d/10YLGrcMVZ0rLSJG7QgG4T4g9Zt7et8-g/preview"
+           data-view-url="https://docs.google.com/presentation/d/10YLGrcMVZ0rLSJG7QgG4T4g9Zt7et8-g/edit"
+           data-ppt-url="https://drive.google.com/file/d/10YLGrcMVZ0rLSJG7QgG4T4g9Zt7et8-g/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/10YLGrcMVZ0rLSJG7QgG4T4g9Zt7et8-g/edit"
+           data-worksheet-url="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/view"
            data-konteks="Dokumentasi dan refleksi komprehensif atas pelaksanaan kegiatan mengajar terbimbing selama masa Praktik Pengalaman Lapangan di sekolah mitra PPG."
            data-tujuan="Mengaplikasikan teori-teori pedagogi ke dalam praktik mengajar nyata di kelas bawah bimbingan dan pengawasan intensif dari guru pamong serta dosen pembimbing lapangan."
            data-kelebihan="Memberikan pengalaman faktual dan adaptasi kultural yang tak ternilai dalam menghadapi situasi pengelolaan dinamika kelas yang sesungguhnya."
            data-kekurangan="Fase adaptasi awal dengan budaya sekolah dan penyesuaian gaya mengajar terhadap karakteristik siswa seringkali memicu beban kerja administratif yang cukup menantang.">
         <div class="card-cover-preview" style="background: linear-gradient(135deg, #ebdcd6, #bca0a0); border-bottom: 1px solid var(--accent);">
-          <span class="cover-format-badge">PDF</span>
+          <span class="cover-format-badge">PPT + LK</span>
           <span class="cover-category-badge">Preview</span>
           <div class="book-binding-strip"></div>
           <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
@@ -2309,7 +2525,7 @@
             <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;"></p>
           </div>
           <span class="cover-footer-left" style="left: 2rem;">Buku Saku</span>
-          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat Refleksi</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT &amp; LK</span>
         </div>
         <div class="card-content-area">
           <div class="card-tags">
@@ -2319,22 +2535,27 @@
           <h3 class="card-item-title">Praktik Pengalaman Lapangan (PPL) Terbimbing</h3>
           <p class="card-item-desc">Refleksi mata kuliah PPL Terbimbing di SMK Negeri 2 Depok melalui tahapan observasi, praktik asistensi, dan tiga siklus praktik mengajar terbimbing untuk meningkatkan kompetensi mengajar secara nyata.</p>
           <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/11MM0_KOegNQoK2L7akbdm0_CGVFSFNRl/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja</button>
           </div>
         </div>
       </div>
 
       <!-- Bahan Ajar Siklus 3 -->
-      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="3" onclick="openPreviewModal(this)"
-           data-title="Pola Pikir Bertumbuh (Growth Mindset)" 
-           data-url="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/preview"
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="3" data-sem="sem1" data-filter="mindset" onclick="openPreviewModal(this)"
+           data-title="Pola Pikir Bertumbuh (Growth Mindset)"
+           data-url="https://drive.google.com/file/d/1h3KZ0xFLVEk1FiO6zpKJ5q7_Gld6AJ0o/preview"
+           data-view-url="https://docs.google.com/presentation/d/1h3KZ0xFLVEk1FiO6zpKJ5q7_Gld6AJ0o/edit"
+           data-ppt-url="https://drive.google.com/file/d/1h3KZ0xFLVEk1FiO6zpKJ5q7_Gld6AJ0o/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1h3KZ0xFLVEk1FiO6zpKJ5q7_Gld6AJ0o/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/view"
            data-konteks="Kajian kritis dan strategi pengembangan pola pikir bertumbuh (growth mindset) yang berorientasi pada peningkatan ketangguhan mental bagi pendidik dan peserta didik."
            data-tujuan="Menstimulasi kesadaran diri untuk terus belajar, meningkatkan resiliensi dalam menghadapi tantangan, dan merekonstruksi cara pandang bahwa kegagalan adalah ruang esensial untuk berkembang."
            data-kelebihan="Sangat efektif dalam membangun lingkungan belajar yang positif, suportif, serta mendorong kemandirian dan rasa percaya diri siswa di dalam kelas."
            data-kekurangan="Mengubah pola pikir yang sudah lama mengakar (fixed mindset) merupakan proses jangka panjang yang menuntut konsistensi serta afirmasi positif yang berulang.">
         <div class="card-cover-preview" style="background: linear-gradient(135deg, #e3d3c8, #bca598); border-bottom: 1px solid var(--accent);">
-          <span class="cover-format-badge">PDF</span>
+          <span class="cover-format-badge">PPT + LK</span>
           <span class="cover-category-badge">Preview</span>
           <div class="book-binding-strip"></div>
           <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
@@ -2346,7 +2567,7 @@
             <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;"></p>
           </div>
           <span class="cover-footer-left" style="left: 2rem;">Panduan Mutu</span>
-          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat Refleksi</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT &amp; LK</span>
         </div>
         <div class="card-content-area">
           <div class="card-tags">
@@ -2356,13 +2577,1590 @@
           <h3 class="card-item-title">Pola Pikir Bertumbuh (Growth Mindset)</h3>
           <p class="card-item-desc">Refleksi mata kuliah Pola Pikir Bertumbuh dengan model 4C untuk memahami pentingnya growth mindset dan neuroplastisitas otak dalam proses belajar serta pengembangan diri yang berkelanjutan.</p>
           <div class="card-buttons">
-            <button class="card-btn btn-refleksi">Refleksi</button>
-            <a href="https://drive.google.com/file/d/1Y_86T0hNw0iNOJKG9LSpkVdcdmXTY8gS/view?usp=drive_link" target="_blank" class="card-btn btn-artefak" onclick="event.stopPropagation();">Artefak</a>
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="pma-lanjut" onclick="openPreviewModal(this)"
+           data-title="Pembelajaran Mendalam Lanjut (PMA Lanjut)"
+           data-url="https://drive.google.com/file/d/1B5Pg_l_Eg9F7CZArI--IcUpc5nC--tjh/preview"
+           data-view-url="https://docs.google.com/presentation/d/1B5Pg_l_Eg9F7CZArI--IcUpc5nC--tjh/edit"
+           data-ppt-url="https://drive.google.com/file/d/1B5Pg_l_Eg9F7CZArI--IcUpc5nC--tjh/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1B5Pg_l_Eg9F7CZArI--IcUpc5nC--tjh/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1KicHruCbCvf5HBcals4qnk0aiUPpMSSG/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1KicHruCbCvf5HBcals4qnk0aiUPpMSSG/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Pengalaman belajar Pembelajaran Mendalam Lanjut pada semester 2 PPG."
+           data-tujuan="Meninjau pilihan kegiatan dan asesmen agar sesuai dengan tujuan belajar serta kebutuhan peserta didik."
+           data-kelebihan="Menghubungkan perencanaan pembelajaran dengan pertimbangan dalam pelaksanaan dan evaluasinya."
+           data-kekurangan="Analisis perlu didukung perangkat pembelajaran, respons siswa, dan hasil asesmen yang relevan.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #dce8e5, #a4bcb5); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">PEMBELAJARAN MENDALAM LANJUT</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Pembelajaran Mendalam Lanjut (PMA Lanjut)</h3>
+          <p class="card-item-desc">Refleksi pembelajaran semester 2 untuk meninjau keselarasan tujuan, aktivitas, dan asesmen dalam pembelajaran kejuruan.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
           </div>
         </div>
       </div>
 
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="inovasi-kejuruan" onclick="openPreviewModal(this)"
+           data-title="Inovasi Pembelajaran Kejuruan"
+           data-url="https://drive.google.com/file/d/1Bs7hGxwOMC8Vi4mzAccEb6-OsFMlyc7A/preview"
+           data-view-url="https://docs.google.com/presentation/d/1Bs7hGxwOMC8Vi4mzAccEb6-OsFMlyc7A/edit"
+           data-ppt-url="https://drive.google.com/file/d/1Bs7hGxwOMC8Vi4mzAccEb6-OsFMlyc7A/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1Bs7hGxwOMC8Vi4mzAccEb6-OsFMlyc7A/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1C8sHfillTQMxaRz0ZBcN5QbqdWaKA7qW/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1C8sHfillTQMxaRz0ZBcN5QbqdWaKA7qW/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Pengembangan inovasi yang berkaitan dengan kebutuhan pembelajaran fabrikasi logam."
+           data-tujuan="Menghubungkan tujuan belajar dengan pemilihan media dan kebutuhan pendampingan praktik."
+           data-kelebihan="Menghadirkan karya media yang dapat ditinjau dan dikembangkan berdasarkan masukan pengguna."
+           data-kekurangan="Manfaat media perlu ditelaah melalui bukti penggunaan, kesesuaian teknis, dan hasil belajar.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e9dfd3, #c4aa85); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">INOVASI PEMBELAJARAN KEJURUAN</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Inovasi Pembelajaran Kejuruan</h3>
+          <p class="card-item-desc">Refleksi pengembangan media pembelajaran kejuruan, termasuk MetalVerseFery untuk simulasi fabrikasi logam dan buku digital.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
+          </div>
+        </div>
+      </div>
 
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="pse" onclick="openPreviewModal(this)"
+           data-title="Pembelajaran Sosial Emosional (PSE)"
+           data-url="https://drive.google.com/file/d/1OxLFMO_kOs4ksbp2DP2YWh6JLiOZEt6m/preview"
+           data-view-url="https://docs.google.com/presentation/d/1OxLFMO_kOs4ksbp2DP2YWh6JLiOZEt6m/edit"
+           data-ppt-url="https://drive.google.com/file/d/1OxLFMO_kOs4ksbp2DP2YWh6JLiOZEt6m/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1OxLFMO_kOs4ksbp2DP2YWh6JLiOZEt6m/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1pEtXJfQgGYiP85UfZELWW3e_it5ylyDg/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1pEtXJfQgGYiP85UfZELWW3e_it5ylyDg/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Pengalaman belajar Pembelajaran Sosial Emosional pada semester 2 PPG."
+           data-tujuan="Merefleksikan cara guru mendampingi peserta didik dan membangun interaksi belajar yang mendukung."
+           data-kelebihan="Memberi ruang meninjau pengelolaan diri, komunikasi, dan hubungan dalam pembelajaran."
+           data-kekurangan="Penerapan perlu diperkuat dengan pengamatan interaksi kelas dan umpan balik peserta didik.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #eadde7, #c4a5ba); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">PEMBELAJARAN SOSIAL EMOSIONAL</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Pembelajaran Sosial Emosional (PSE)</h3>
+          <p class="card-item-desc">Refleksi PSE dengan model 4C untuk menghubungkan kesadaran diri, komunikasi, dan suasana belajar yang mendukung peserta didik.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="projek-kepemimpinan" onclick="openPreviewModal(this)"
+           data-title="Projek Kepemimpinan"
+           data-url="https://drive.google.com/file/d/1m8AUZrkz09J5K6Z92Z113PhRO7Sfj-1A/preview"
+           data-view-url="https://docs.google.com/presentation/d/1m8AUZrkz09J5K6Z92Z113PhRO7Sfj-1A/edit"
+           data-ppt-url="https://drive.google.com/file/d/1m8AUZrkz09J5K6Z92Z113PhRO7Sfj-1A/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1m8AUZrkz09J5K6Z92Z113PhRO7Sfj-1A/edit"
+           data-worksheet-url="https://drive.google.com/file/d/17MNHmtnbhs4Ezgv-QxQUXl530m4vzFBq/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/17MNHmtnbhs4Ezgv-QxQUXl530m4vzFBq/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Pengalaman belajar melalui Projek Kepemimpinan selama PPG."
+           data-tujuan="Meninjau peran, proses koordinasi, dan pelajaran yang diperoleh dalam kegiatan projek."
+           data-kelebihan="Menghubungkan pengalaman bekerja sama dengan pengembangan komunikasi dan tanggung jawab."
+           data-kekurangan="Kesimpulan refleksi perlu didukung dokumentasi kegiatan dan umpan balik pihak yang terlibat.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e7e2d0, #bab18d); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">REFLEKSI PROJEK KEPEMIMPINAN</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Projek Kepemimpinan</h3>
+          <p class="card-item-desc">Refleksi pengalaman merencanakan kegiatan, berkoordinasi dalam tim, serta merumuskan pembelajaran dan tindak lanjut projek.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="refleksi-ppg" onclick="openPreviewModal(this)"
+           data-title="Refleksi Keseluruhan Pengalaman Belajar PPG"
+           data-url="https://drive.google.com/file/d/1MS5xRsHSoi_EasUcMU1d7_dGlzXD3psx/preview"
+           data-view-url="https://docs.google.com/presentation/d/1MS5xRsHSoi_EasUcMU1d7_dGlzXD3psx/edit"
+           data-ppt-url="https://drive.google.com/file/d/1MS5xRsHSoi_EasUcMU1d7_dGlzXD3psx/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1MS5xRsHSoi_EasUcMU1d7_dGlzXD3psx/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1SpHK6QfAzBqAKUnrIzWfjzhbOHziaO_6/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1SpHK6QfAzBqAKUnrIzWfjzhbOHziaO_6/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Refleksi pengalaman belajar selama mengikuti program PPG secara keseluruhan."
+           data-tujuan="Merumuskan makna pengalaman belajar dan arah pengembangan diri sebagai calon pendidik."
+           data-kelebihan="Menghubungkan pembelajaran dari beberapa mata kuliah dengan pengalaman praktik."
+           data-kekurangan="Refleksi perlu menunjukkan hubungan yang jelas antara kesimpulan, artefak, dan bukti belajar.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e5dce8, #b6a3c1); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">REFLEKSI PENGALAMAN BELAJAR PPG</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Refleksi Keseluruhan Pengalaman Belajar PPG</h3>
+          <p class="card-item-desc">Rangkuman refleksi semester 1 dan 2 yang menghubungkan pengalaman belajar, artefak, perubahan cara pandang, dan rencana perbaikan.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card fade-in" data-type="media" data-sem="sem2" data-filter="ppl-mandiri-refleksi" onclick="openPreviewModal(this)"
+           data-title="Refleksi 4C PPL Mandiri"
+           data-url="https://drive.google.com/file/d/1kSY-VY7mfLxMe7r63GWCfOjswXBhKgTi/preview"
+           data-view-url="https://docs.google.com/presentation/d/1kSY-VY7mfLxMe7r63GWCfOjswXBhKgTi/edit"
+           data-ppt-url="https://drive.google.com/file/d/1kSY-VY7mfLxMe7r63GWCfOjswXBhKgTi/preview"
+           data-ppt-view-url="https://docs.google.com/presentation/d/1kSY-VY7mfLxMe7r63GWCfOjswXBhKgTi/edit"
+           data-worksheet-url="https://drive.google.com/file/d/1egZ44F2Gri4qT0_hjpAhvs_LQQgx_Y1y/preview"
+           data-worksheet-view-url="https://drive.google.com/file/d/1egZ44F2Gri4qT0_hjpAhvs_LQQgx_Y1y/view"
+           data-worksheet-label="Lembar Kerja 2 (LK 2)"
+           data-konteks="Pengalaman praktik mengajar mandiri di SMK Negeri 2 Depok Sleman."
+           data-tujuan="Menghubungkan teori dengan pengalaman lapangan, menelaah tantangan, dan merumuskan perubahan pembelajaran."
+           data-kelebihan="Memberi alur refleksi untuk meninjau keputusan mengajar dan kebutuhan pendampingan siswa."
+           data-kekurangan="Rencana perbaikan perlu ditindaklanjuti dan ditinjau melalui pengamatan serta bukti praktik.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #dbe5ed, #a1b5c8); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PPT + LK 2</span>
+          <span class="cover-category-badge">Semester 2</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--text); margin:0; line-height: 1.3;">REFLEKSI 4C PPL MANDIRI</h4>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">REFLEKSI SEMESTER 2</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Lihat PPT</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">Presentasi &amp; LK 2</span>
+            <span class="card-tag tag-cycle">Semester 2</span>
+          </div>
+          <h3 class="card-item-title">Refleksi 4C PPL Mandiri</h3>
+          <p class="card-item-desc">Refleksi PPL mandiri dengan Connection, Challenge, Concept, dan Change untuk mengkaji pengalaman mengajar serta rencana perbaikan.</p>
+          <div class="card-buttons">
+            <button type="button" class="card-btn btn-refleksi" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'ppt');">Preview PPT</button>
+            <button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'), 'worksheet');">Preview Lembar Kerja 2</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEKSI PRAKTIK PENGALAMAN PPL MANDIRI (5 SIKLUS) -->
+  <section id="ppl-mandiri">
+    <h2 class="section-title fade-in">Praktik Pengalaman <span class="accent">PPL Mandiri</span></h2>
+    <div style="max-width: 900px; margin: 0 auto; text-align: center; color: var(--secondary); line-height: 1.8; margin-bottom: 2rem;" class="fade-in">
+      <p>Dokumentasi 5 siklus pelaksanaan pembelajaran mandiri di sekolah mitra, merangkum RPP, Bahan Ajar, Media Pembelajaran Interaktif, LKM, Hasil Lembar Murid, dan Asesmen Evaluasi Komprehensif.</p>
+    </div>
+
+    <!-- Photo Navigation Submenu -->
+    <div class="ruang-karya-container fade-in">
+      <div class="artefak-badge-wrapper" style="margin-top: 1rem;">
+        <div class="artefak-badge">ARTEFAK PPL MANDIRI</div>
+      </div>
+      
+      <div class="siklus-tabs ppl-siklus-tabs">
+        <button class="siklus-tab-btn active" data-siklus="1">Siklus 1</button>
+        <button class="siklus-tab-btn" data-siklus="2">Siklus 2</button>
+        <button class="siklus-tab-btn" data-siklus="3">Siklus 3</button>
+        <button class="siklus-tab-btn" data-siklus="4">Siklus 4</button>
+        <button class="siklus-tab-btn" data-siklus="5">Siklus 5</button>
+      </div>
+      
+      <div class="capsule-tabs-wrapper">
+        <div class="capsule-tabs ppl-capsule-tabs">
+          <button class="capsule-tab-btn active" data-type="semua">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #f7f1ee, #e9ded9);">
+              <span class="tab-thumbnail-icon">✨</span>
+            </div>
+            <span class="tab-thumbnail-label">Semua</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="rpp">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #f0eae5, #d5c8be);">
+              <span class="tab-thumbnail-icon">📄</span>
+            </div>
+            <span class="tab-thumbnail-label">RPP</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="bahan-ajar">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #ebdcd6, #ccb4a9);">
+              <span class="tab-thumbnail-icon">📘</span>
+            </div>
+            <span class="tab-thumbnail-label">Bahan Ajar</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="media">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #e8d0ca, #cca49a);">
+              <span class="tab-thumbnail-icon">🖥️</span>
+            </div>
+            <span class="tab-thumbnail-label">Media</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="lkm">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #e3d3c8, #c4ae9e);">
+              <span class="tab-thumbnail-icon">📝</span>
+            </div>
+            <span class="tab-thumbnail-label">LKM</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="hasil-lkm">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #e5ebd9, #c8ccb4);">
+              <span class="tab-thumbnail-icon">📋</span>
+            </div>
+            <span class="tab-thumbnail-label">Hasil Lembar Murid</span>
+          </button>
+          <button class="capsule-tab-btn" data-type="asesmen">
+            <div class="tab-thumbnail-bg" style="background: linear-gradient(135deg, #ebdcdb, #cdb4b2);">
+              <span class="tab-thumbnail-icon">📊</span>
+            </div>
+            <span class="tab-thumbnail-label">Asesmen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="projects-grid ppl-grid" data-active-siklus="1" data-active-type="semua">
+      
+      <!-- ================= SIKLUS 1 CARDS ================= -->
+      <!-- RPP Siklus 1 -->
+      <div class="project-card fade-in" data-type="rpp" data-siklus="1" data-library-updated="20261028" data-view-url="files/rpp/RPP_Siklus_1_K3LH_dan_Budaya_Industri.pdf" data-source-url="https://drive.google.com/file/d/1jsXAo4gM02xrjdVNp9g26EHgjMC8EEFk/view" data-source-file="RPP_Siklus_1_K3LH_dan_Budaya_Industri.pdf" onclick="openPreviewModal(this)"
+           data-title="RPP Siklus 1 - K3LH dan Budaya Industri" 
+           data-url="pdf-viewer.html?file=files%2Frpp%2FRPP_Siklus_1_K3LH_dan_Budaya_Industri.pdf"
+           data-konteks="Rencana pembelajaran K3LH, identifikasi bahaya, APD, tanggap darurat dan budaya industri 5R untuk kelas XI TFLM."
+           data-tujuan="Menerapkan prosedur K3LH dan budaya kerja industri dalam kegiatan bengkel fabrikasi logam."
+           data-kelebihan="Dokumen RPP disajikan utuh dalam PDF dan dapat dipratinjau langsung sesuai nomor siklus."
+           data-kekurangan="Penerapan RPP tetap perlu menyesuaikan kesiapan murid, fasilitas bengkel dan jadwal pembelajaran.">
+        <div class="card-cover-preview rpp-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">RPP</span>
+          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #3182ce 100%);"></div>
+          <div class="cover-logos-row">
+            <div class="logo-emblem"></div>
+            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+          </div>
+          <div class="rpp-title-block">
+            <h4 class="rpp-main-title">RPP S1</h4>
+            <p class="rpp-sub-title">K3LH &amp; BUDAYA INDUSTRI</p>
+            <p class="rpp-detail-title">KELAS XI TFLM · FASE F</p>
+          </div>
+          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
+          <span class="cover-footer-right-pill">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">RPP</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">RPP Siklus 1 - K3LH dan Budaya Industri</h3>
+          <p class="card-item-desc">Rencana pembelajaran K3LH, identifikasi bahaya, APD, tanggap darurat dan budaya industri 5R untuk kelas XI TFLM.</p>
+          <div class="card-footer-tags"><span class="footer-tag">K3LH</span><span class="footer-tag">Budaya 5R</span><span class="footer-tag">Siklus 1</span></div>
+          <p class="linked-source-file">RPP_Siklus_1_K3LH_dan_Budaya_Industri.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1jsXAo4gM02xrjdVNp9g26EHgjMC8EEFk/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- Bahan Ajar Siklus 1 -->
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="1" onclick="openPreviewModal(this)"
+           data-title="Bahan Ajar Siklus 1 - Gambar Teknik Manufaktur & CAD" 
+           data-url="https://docs.google.com/document/d/1YBlKzJiGF13IiJ2T7bKmPGi-VNcjSi-E/preview"
+           data-konteks="Modul pembelajaran mandiri yang memuat tutorial pemodelan parametrik 3D, kaidah proyeksi Amerika/Eropa, penetapan tanda pengerjaan, dan simbol toleransi geometri."
+           data-tujuan="Sebagai rujukan belajar komprehensif bagi murid untuk memahami simbol ketelitian gambar manufaktur dan alur perancangan komponen mesin secara profesional."
+           data-kelebihan="Dilengkapi studi kasus benda riil manufaktur dan ilustrasi langkah kerja langkah-demi-langkah yang memicu kemandirian belajar (self-directed learning)."
+           data-kekurangan="Diperlukan penambahan suplemen video tutorial singkat untuk murid yang membutuhkan bantuan visual dinamis saat operasi fitur pemodelan tingkat lanjut.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e8caca, #cbb5b5); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Bahan Ajar</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); margin:0;">BAHAN AJAR S1</h4>
+            <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;">DESAIN MANUFAKTUR & CAD</p>
+            <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;">LAB CAD S1 MANDIRI</p>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">MODUL MANDIRI</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">BAHAN AJAR</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">Bahan Ajar Siklus 1 - Gambar Teknik Manufaktur &amp; CAD</h3>
+          <p class="card-item-desc">Modul mandiri perancangan mekanik, simbol toleransi geometrik, proyeksi ortogonal, serta etiket gambar kerja manufaktur...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">CAD 3D</span>
+            <span class="footer-tag">Toleransi ISO</span>
+            <span class="footer-tag">Siklus 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Siklus 1 -->
+      <div class="project-card fade-in" data-type="media" data-siklus="1" data-library-updated="20261028" data-view-url="files/media/Media_K3LH_Fabrikasi_Logam.pdf" data-source-url="https://drive.google.com/file/d/1T4PiyDJO3mSntAtAfC5W1bzLSgeHlAGJ/view" data-source-file="Media ajar_K3LH tentang Fabrikasi Logam.pptx" onclick="openPreviewModal(this)"
+           data-title="Media Siklus 1 - K3LH tentang Fabrikasi Logam" 
+           data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_K3LH_Fabrikasi_Logam.pdf"
+           data-konteks="Presentasi tentang keselamatan kerja, pengenalan risiko dan budaya kerja di bengkel fabrikasi logam."
+           data-tujuan="Mendukung pemahaman materi K3LH tentang Fabrikasi Logam pada Siklus 1."
+           data-kelebihan="Isi media tersedia sebagai PDF untuk dibaca langsung. Berkas asli tetap tersedia melalui tautan sumber Drive."
+           data-kekurangan="Salinan PDF menampilkan isi visual statis; animasi atau interaksi presentasi mengikuti berkas asli.">
+        <div class="card-cover-preview media-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Media</span>
+          <div class="media-slide-screen">
+            <div class="slide-header">
+              <span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-body" style="background-image: linear-gradient(135deg, #fcece8 0%, #ebdcd6 100%);">
+              <span class="slide-badge">PRESENTASI</span>
+              <h5 class="slide-title">MEDIA S1</h5>
+              <p class="slide-subtitle">K3LH tentang Fabrikasi Logam</p>
+            </div>
+          </div>
+          <span class="cover-footer-left">MEDIA INTERAKTIF</span>
+          <span class="cover-footer-right">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">MEDIA</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">Media Siklus 1 - K3LH tentang Fabrikasi Logam</h3>
+          <p class="card-item-desc">Presentasi tentang keselamatan kerja, pengenalan risiko dan budaya kerja di bengkel fabrikasi logam.</p>
+          <div class="card-footer-tags"><span class="footer-tag">K3LH</span><span class="footer-tag">Budaya 5R</span><span class="footer-tag">Siklus 1</span></div>
+          <p class="linked-source-file">Media ajar_K3LH tentang Fabrikasi Logam.pptx</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1T4PiyDJO3mSntAtAfC5W1bzLSgeHlAGJ/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- LKM Siklus 1 -->
+      <div class="project-card fade-in" data-type="lkm" data-siklus="1" onclick="openPreviewModal(this)"
+           data-title="LKM Siklus 1 - Proyek Desain Komponen Mesin" 
+           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
+           data-konteks="Lembar Kerja Murid berbasis lembar tugas proyek pemodelan CAD yang dilengkapi tabel spesifikasi teknis dan kriteria checklist mandiri."
+           data-tujuan="Memandu murid merancang komponen mekanik presisi secara mandiri sesuai dengan lembar order kerja manufaktur."
+           data-kelebihan="Struktur tugas bertahap memandu murid dari sketsa konseptual, penentuan dimensi kritis, hingga layouting gambar kerja siap cetak."
+           data-kekurangan="Murid dengan kecepatan belajar tinggi membutuhkan tantangan pengayaan fitur tingkat lanjut (seperti sheet metal atau surface modeling).">
+        <div class="card-cover-preview blueprint">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">LKM S1</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">PROYEK CAD</span>
+              <h4 class="blueprint-title">LKM S1</h4>
+              <p class="blueprint-subtitle">Gambar Kerja Komponen</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>SEKOLAH: SMK NEGERI 2 DEPOK SLEMAN</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
+          <span class="cover-footer-right">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">LKM Siklus 1 - Proyek Desain Komponen Mesin</h3>
+          <p class="card-item-desc">Lembar kerja penugasan proyek perancangan komponen bubut berdimensi presisi menggunakan perangkat lunak CAD...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Tugas Proyek</span>
+            <span class="footer-tag">Gambar Kerja</span>
+            <span class="footer-tag">Siklus 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 1 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="1" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus1.png"
+           data-title="Hasil LKM Siklus 1 - Pemodelan 3D & Gambar Kerja Murid" 
+           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
+           data-konteks="Portofolio otentik lembar kerja murid yang telah terselesaikan, memuat gambar kerja 2D proyeksi ortogonal komponen poros bertingkat lengkap dengan dimensi toleransi ISO."
+           data-tujuan="Mendokumentasikan pencapaian kompetensi murid dalam memproduksi dokumen gambar teknik yang siap diaplikasikan pada proses fabrikasi bengkel."
+           data-kelebihan="Gambar kerja yang dihasilkan murid menunjukkan penguasaan yang sangat baik pada aspek kerapian garis, proporsi skala, dan kejelasan etiket gambar."
+           data-kekurangan="Beberapa murid masih memerlukan penguatan dalam penempatan simbol kekasaran permukaan (Ra) pada bidang silindris yang tepat.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus1.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PNG</span>
+          <span class="cover-category-badge">Hasil S1</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S1</h4>
+              <p class="blueprint-subtitle">Gambar Kerja CAD</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 1 - Pemodelan 3D &amp; Gambar Kerja Murid</h3>
+          <p class="card-item-desc">Dokumentasi portofolio hasil desain 3D murid dan layout gambar kerja 2D yang memenuhi kaidah toleransi ISO...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Karya Siswa</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Portofolio CAD</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siklus 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asesmen Siklus 1 -->
+      <div class="project-card fade-in" data-type="asesmen" data-siklus="1" onclick="openPreviewModal(this)"
+           data-title="Asesmen Siklus 1 - Penilaian Proyek Gambar Manufaktur" 
+           data-url="https://drive.google.com/file/d/1Uqcm91u_KJmTdSLJc03QR-lkjLg1tUDc/preview"
+           data-konteks="Instrumen rubrik asesmen autentik untuk mengevaluasi produk gambar teknik CAD murid berdasarkan aspek keakuratan ukuran, kelengkapan simbol ISO, dan etika kerja digital."
+           data-tujuan="Memberikan penilaian objektif dan umpan balik konstruktif terhadap penguasaan kompetensi dasar gambar manufaktur murid."
+           data-kelebihan="Rubrik analitik dengan deskriptor capaian yang terukur memudahkan pendidik dan murid dalam melakukan refleksi performa belajar."
+           data-kekurangan="Proses asesmen detail pada tiap berkas file CAD memerlukan alokasi waktu verifikasi yang cukup intensif dari guru.">
+        <div class="card-cover-preview asesmen-paper">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Asesmen</span>
+          <div class="cover-paper-sheet">
+            <div class="paper-header">
+              <span class="paper-subtitle">Lampiran Penilaian</span>
+              <h5 class="paper-title">ASESMEN S1</h5>
+              <p class="paper-meta">Gambar CAD Manufaktur</p>
+            </div>
+            <div class="paper-table-mock">
+              <div class="table-mock-row header">
+                <span>No</span><span>Kriteria</span><span>Skor</span>
+              </div>
+              <div class="table-mock-row">
+                <span>1</span><span>Keakuratan Ukuran</span><span>Bobot 40%</span>
+              </div>
+              <div class="table-mock-row">
+                <span>2</span><span>Kelengkapan Etiket</span><span>Bobot 30%</span>
+              </div>
+            </div>
+          </div>
+          <span class="cover-footer-left">INSTRUMEN EVALUASI</span>
+          <span class="cover-footer-right">Siklus 1</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">ASESMEN</span>
+            <span class="card-tag tag-cycle">SIKLUS 1</span>
+          </div>
+          <h3 class="card-item-title">Asesmen Siklus 1 - Penilaian Proyek Gambar Manufaktur</h3>
+          <p class="card-item-desc">Rubrik penilaian holistik mencakup keakuratan ukuran, kelengkapan etiket, kesesuaian proyeksi, dan ketelitian...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Rubrik ISO</span>
+            <span class="footer-tag">Asesmen Proyek</span>
+            <span class="footer-tag">Siklus 1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SIKLUS 2 CARDS ================= -->
+      <!-- RPP Siklus 2 -->
+      <div class="project-card fade-in" data-type="rpp" data-siklus="2" data-library-updated="20261028" data-view-url="files/rpp/RPP_Siklus_2_Pembentukan_Bending_Pelat.pdf" data-source-url="https://drive.google.com/file/d/1C662UPR9ko3Iwqh-8qNOoq7HbqcivcU8/view" data-source-file="RPP_Siklus_2_Pembentukan_Bending_Pelat.pdf" onclick="openPreviewModal(this)"
+           data-title="RPP Siklus 2 - Pembentukan dan Penekukan (Bending) Pelat" 
+           data-url="pdf-viewer.html?file=files%2Frpp%2FRPP_Siklus_2_Pembentukan_Bending_Pelat.pdf"
+           data-konteks="Rencana pembelajaran pembentukan dingin pelat, bentangan, urutan tekuk, penyetelan mesin dan kompensasi springback."
+           data-tujuan="Menentukan bentangan dan urutan penekukan serta melakukan pembentukan pelat sesuai prosedur kerja."
+           data-kelebihan="Dokumen RPP disajikan utuh dalam PDF dan dapat dipratinjau langsung sesuai nomor siklus."
+           data-kekurangan="Penerapan RPP tetap perlu menyesuaikan kesiapan murid, fasilitas bengkel dan jadwal pembelajaran.">
+        <div class="card-cover-preview rpp-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">RPP</span>
+          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #5a4b51 100%);"></div>
+          <div class="cover-logos-row">
+            <div class="logo-emblem"></div>
+            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+          </div>
+          <div class="rpp-title-block">
+            <h4 class="rpp-main-title">RPP S2</h4>
+            <p class="rpp-sub-title">PEMBENTUKAN &amp; BENDING</p>
+            <p class="rpp-detail-title">KELAS XI TFLM · FASE F</p>
+          </div>
+          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
+          <span class="cover-footer-right-pill">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">RPP</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">RPP Siklus 2 - Pembentukan dan Penekukan (Bending) Pelat</h3>
+          <p class="card-item-desc">Rencana pembelajaran pembentukan dingin pelat, bentangan, urutan tekuk, penyetelan mesin dan kompensasi springback.</p>
+          <div class="card-footer-tags"><span class="footer-tag">Bending</span><span class="footer-tag">Pelat</span><span class="footer-tag">Siklus 2</span></div>
+          <p class="linked-source-file">RPP_Siklus_2_Pembentukan_Bending_Pelat.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1C662UPR9ko3Iwqh-8qNOoq7HbqcivcU8/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- Bahan Ajar Siklus 2 -->
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="2" onclick="openPreviewModal(this)"
+           data-title="Bahan Ajar Siklus 2 - Parameter Pemotongan Mesin Bubut" 
+           data-url="https://docs.google.com/document/d/1hrKnxpam9fHaI1bqA_KYoWEYZHK2HbvU/preview"
+           data-konteks="Buku saku praktis mengenai rumus parameter pemotongan bubut (kecepatan potong Cs, putaran spindel n, kecepatan pemakanan f), serta geometri asah pahat HSS."
+           data-tujuan="Memberikan dasar perhitungan matematis teknis agar murid mampu menentukan setelan tuas putaran mesin bubut secara mandiri dan akurat."
+           data-kelebihan="Tabel konversi material benda kerja dan grafik putaran spindel memudahkan murid dalam mengambil keputusan teknis di lapangan tanpa perlu menghafal rumus rumit."
+           data-kekurangan="Diperlukan pengulangan demonstrasi pembacaan skala tabel girboks pada beberapa tipe mesin bubut merk yang berbeda di bengkel sekolah.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #ebdcd6, #bca0a0); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Buku Saku</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); margin:0;">BAHAN AJAR S2</h4>
+            <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;">PARAMETER PEMOTONGAN</p>
+            <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;">BENGKEL BUBUT S2</p>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">Buku Saku</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">BAHAN AJAR</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">Bahan Ajar Siklus 2 - Parameter Pemotongan Mesin Bubut</h3>
+          <p class="card-item-desc">Buku saku pedoman perhitungan kecepatan potong (Cs), putaran spindel (Rpm), feeding, serta teknik penyetelan pahat...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Cutting Speed</span>
+            <span class="footer-tag">Pahat HSS</span>
+            <span class="footer-tag">Siklus 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Siklus 2 -->
+      <div class="project-card fade-in" data-type="media" data-siklus="2" data-library-updated="20261028" data-view-url="files/media/Media_Pembentukan_Penekukan.pdf" data-source-url="https://drive.google.com/file/d/18pu3j79eDqmVAGURq0k4Yc_VwAq6diBJ/view" data-source-file="Media_Ajar_BAB_V_TFLM_Pembentukan&amp;Penekuan.pptx" onclick="openPreviewModal(this)"
+           data-title="Media Siklus 2 - Pembentukan dan Penekukan Pelat" 
+           data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_Pembentukan_Penekukan.pdf"
+           data-konteks="Presentasi Bab V TFLM tentang pembentukan dan penekukan pelat sebagai pendamping pembelajaran bending."
+           data-tujuan="Mendukung pemahaman materi Pembentukan dan Penekukan Pelat pada Siklus 2."
+           data-kelebihan="Isi media tersedia sebagai PDF untuk dibaca langsung. Berkas asli tetap tersedia melalui tautan sumber Drive."
+           data-kekurangan="Salinan PDF menampilkan isi visual statis; animasi atau interaksi presentasi mengikuti berkas asli.">
+        <div class="card-cover-preview media-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Media</span>
+          <div class="media-slide-screen">
+            <div class="slide-header">
+              <span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-body" style="background-image: linear-gradient(135deg, #fcece8 0%, #ebdcd6 100%);">
+              <span class="slide-badge">PRESENTASI</span>
+              <h5 class="slide-title">MEDIA S2</h5>
+              <p class="slide-subtitle">Pembentukan dan Penekukan Pelat</p>
+            </div>
+          </div>
+          <span class="cover-footer-left">MEDIA INTERAKTIF</span>
+          <span class="cover-footer-right">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">MEDIA</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">Media Siklus 2 - Pembentukan dan Penekukan Pelat</h3>
+          <p class="card-item-desc">Presentasi Bab V TFLM tentang pembentukan dan penekukan pelat sebagai pendamping pembelajaran bending.</p>
+          <div class="card-footer-tags"><span class="footer-tag">Bending</span><span class="footer-tag">Pelat</span><span class="footer-tag">Siklus 2</span></div>
+          <p class="linked-source-file">Media_Ajar_BAB_V_TFLM_Pembentukan&amp;Penekuan.pptx</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/18pu3j79eDqmVAGURq0k4Yc_VwAq6diBJ/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- LKM Siklus 2 -->
+      <div class="project-card fade-in" data-type="lkm" data-siklus="2" onclick="openPreviewModal(this)"
+           data-title="LKM Siklus 2 - Praktikum Poros Bertingkat & Ulir" 
+           data-url="https://docs.google.com/document/d/1cvqnGdP1CQkJOVdjQjnnBZld6rlaSPeQ/preview"
+           data-konteks="Job-sheet panduan praktikum pembubutan bertingkat dengan toleransi dimensi ±0.05 mm, dilengkapi ceklis tahapan pemotongan kasar (roughing) dan halus (finishing)."
+           data-tujuan="Mengarahkan murid bekerja secara prosedural, sistematis, dan mencatat deviasi ukuran pada lembar kerja saat benda kerja masih terpasang di cekam."
+           data-kelebihan="Menghindarkan kesalahan pembubutan berlebih (undercut) berkat adanya kolom verifikasi ukuran intermediate di setiap tingkat diameter poros."
+           data-kekurangan="Lembar kerja fisik rentan kotor oleh cairan pendingin (coolant) dan gram mesin jika tidak diberi pelindung map transparan.">
+        <div class="card-cover-preview blueprint">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">LKM S2</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">PRAKTIK BUBUT</span>
+              <h4 class="blueprint-title">LKM S2</h4>
+              <p class="blueprint-subtitle">Job Sheet Poros Bertingkat</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>MATERI: BUBUT BERTINGKAT & ULIR</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
+          <span class="cover-footer-right">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">LKM Siklus 2 - Praktikum Poros Bertingkat &amp; Ulir</h3>
+          <p class="card-item-desc">Job sheet praktikum mandiri dan kelompok untuk langkah kerja pembubutan poros bertingkat toleransi ±0.05 mm...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Job Sheet</span>
+            <span class="footer-tag">Praktikum Bubut</span>
+            <span class="footer-tag">Siklus 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 2 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="2" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus2.png"
+           data-title="Hasil LKM Siklus 2 - Lembar Pemeriksaan Benda Bubut" 
+           data-url="https://docs.google.com/document/d/1cvqnGdP1CQkJOVdjQjnnBZld6rlaSPeQ/preview"
+           data-konteks="Rekaman hasil pemeriksaan dimensi aktual benda kerja poros bertingkat yang diukur menggunakan mikrometer luar dan mal ulir oleh murid."
+           data-tujuan="Menyajikan bukti autentik keberhasilan murid dalam mencapai toleransi geometrik dan kehalusan permukaan hasil pembubutan."
+           data-kelebihan="Tingkat ketuntasan dimensi murid mencapai 90% dalam batas toleransi izin, serta mampu menjelaskan faktor penyebab getaran (chatter) pada benda kerja."
+           data-kekurangan="Beberapa murid masih memerlukan latihan ekstra dalam pembubutan chamfer 45 derajat agar tampak simetris dan rapi.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus2.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PNG</span>
+          <span class="cover-category-badge">Hasil S2</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S2</h4>
+              <p class="blueprint-subtitle">Inspeksi Poros Bubut</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 2 - Lembar Pemeriksaan Benda Bubut</h3>
+          <p class="card-item-desc">Lembar data hasil inspeksi mandiri ukuran diameter poros bertingkat dan kecocokan profil ulir murid...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Data Dimensi</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Benda Bubut</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siklus 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asesmen Siklus 2 -->
+      <div class="project-card fade-in" data-type="asesmen" data-siklus="2" onclick="openPreviewModal(this)"
+           data-title="Asesmen Siklus 2 - Observasi Unjuk Kerja Pemesinan Bubut" 
+           data-url="https://drive.google.com/file/d/1Uqcm91u_KJmTdSLJc03QR-lkjLg1tUDc/preview"
+           data-konteks="Lembar observasi unjuk kerja proses dan hasil benda bubut yang menilai kecepatan kerja, ketepatan penyetelan feeding, penggunaan kacamata pelindung, dan kebersihan mesin pasca-praktik."
+           data-tujuan="Menilai kompetensi psikomotorik dan kedisiplinan budaya kerja industri 5R secara komprehensif saat murid mengoperasikan mesin."
+           data-kelebihan="Memberikan gambaran seimbang antara aspek kualitas fisik produk akhir dan etika kepatuhan K3 selama di bengkel."
+           data-kekurangan="Memerlukan pengawasan simultan oleh guru pamong saat banyak mesin beroperasi secara serentak.">
+        <div class="card-cover-preview asesmen-paper">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Asesmen</span>
+          <div class="cover-paper-sheet">
+            <div class="paper-header">
+              <span class="paper-subtitle">Rubrik Unjuk Kerja</span>
+              <h5 class="paper-title">ASESMEN S2</h5>
+              <p class="paper-meta">Pemesinan Bubut Presisi</p>
+            </div>
+            <div class="paper-table-mock">
+              <div class="table-mock-row header">
+                <span>No</span><span>Aspek Unjuk Kerja</span><span>Bobot</span>
+              </div>
+              <div class="table-mock-row">
+                <span>1</span><span>Kepatuhan K3 & 5R</span><span>20%</span>
+              </div>
+              <div class="table-mock-row">
+                <span>2</span><span>Akurasi Dimensi Bubut</span><span>50%</span>
+              </div>
+            </div>
+          </div>
+          <span class="cover-footer-left">INSTRUMEN EVALUASI</span>
+          <span class="cover-footer-right">Siklus 2</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">ASESMEN</span>
+            <span class="card-tag tag-cycle">SIKLUS 2</span>
+          </div>
+          <h3 class="card-item-title">Asesmen Siklus 2 - Observasi Unjuk Kerja Pemesinan Bubut</h3>
+          <p class="card-item-desc">Instrumen evaluasi kinerja proses pemesinan bubut, kepatuhan K3 APD, manajemen waktu pengerjaan, dan toleransi...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Observasi K3</span>
+            <span class="footer-tag">Unjuk Kerja</span>
+            <span class="footer-tag">Siklus 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SIKLUS 3 CARDS ================= -->
+      <!-- RPP Siklus 3 -->
+      <div class="project-card fade-in" data-type="rpp" data-siklus="3" data-library-updated="20261028" data-view-url="files/rpp/RPP_Siklus_3_Pemotongan_Termal_OFC_PAC.pdf" data-source-url="https://drive.google.com/file/d/15zdN73MuSmHSbH1A9BJQXH1k03bvpBIA/view" data-source-file="RPP_Siklus_3_Pemotongan_Termal_OFC_PAC.pdf" onclick="openPreviewModal(this)"
+           data-title="RPP Siklus 3 - Pemotongan Termal OFC dan PAC" 
+           data-url="pdf-viewer.html?file=files%2Frpp%2FRPP_Siklus_3_Pemotongan_Termal_OFC_PAC.pdf"
+           data-konteks="Rencana pembelajaran pemotongan termal dengan oxy-fuel cutting dan plasma arc cutting, penyetelan peralatan serta pemeriksaan hasil potong."
+           data-tujuan="Memahami prinsip OFC dan PAC serta melaksanakan pemotongan termal sesuai gambar kerja dan prosedur keselamatan."
+           data-kelebihan="Dokumen RPP disajikan utuh dalam PDF dan dapat dipratinjau langsung sesuai nomor siklus."
+           data-kekurangan="Penerapan RPP tetap perlu menyesuaikan kesiapan murid, fasilitas bengkel dan jadwal pembelajaran.">
+        <div class="card-cover-preview rpp-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">RPP</span>
+          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #8fa6a3 100%);"></div>
+          <div class="cover-logos-row">
+            <div class="logo-emblem"></div>
+            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+          </div>
+          <div class="rpp-title-block">
+            <h4 class="rpp-main-title">RPP S3</h4>
+            <p class="rpp-sub-title">PEMOTONGAN TERMAL</p>
+            <p class="rpp-detail-title">KELAS XI TFLM · FASE F</p>
+          </div>
+          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
+          <span class="cover-footer-right-pill">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">RPP</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">RPP Siklus 3 - Pemotongan Termal OFC dan PAC</h3>
+          <p class="card-item-desc">Rencana pembelajaran pemotongan termal dengan oxy-fuel cutting dan plasma arc cutting, penyetelan peralatan serta pemeriksaan hasil potong.</p>
+          <div class="card-footer-tags"><span class="footer-tag">OFC</span><span class="footer-tag">PAC</span><span class="footer-tag">Siklus 3</span></div>
+          <p class="linked-source-file">RPP_Siklus_3_Pemotongan_Termal_OFC_PAC.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/15zdN73MuSmHSbH1A9BJQXH1k03bvpBIA/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- Bahan Ajar Siklus 3 -->
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="3" onclick="openPreviewModal(this)"
+           data-title="Bahan Ajar Siklus 3 - Teknik Pengelasan Busur Manual" 
+           data-url="https://docs.google.com/document/d/1HzwP3oYjPrvWO17BOtznNzswLOFqlHkI/preview"
+           data-konteks="Bahan ajar materi klasifikasi elektroda las AWS (seperti E6013), pengaruh variasi arus listrik terhadap penetrasi las, dan teknik pembersihan kerak terak dengan palu terak."
+           data-tujuan="Sebagai panduan teoretis murid dalam menganalisis fenomena metalurgi las dan mencegah cacat porositas atau undercut pada sambungan."
+           data-kelebihan="Uraian materi didukung foto makro penampang sambungan las yang baik versus yang cacat, memberikan referensi visual yang sangat jelas."
+           data-kekurangan="Konsep tegangan sisa dan distorsi termal pada pelat tipis masih membutuhkan penjelasan analogi sederhana agar lebih mudah diresapi.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e3d3c8, #bca598); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Panduan Mutu</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); margin:0;">BAHAN AJAR S3</h4>
+            <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;">TEKNIK PENGELASAN SMAW</p>
+            <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;">BENGKEL LAS S3</p>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">Panduan Mutu</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">BAHAN AJAR</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">Bahan Ajar Siklus 3 - Teknik Pengelasan Busur Manual</h3>
+          <p class="card-item-desc">Modul materi pemilihan elektroda E6013, penentuan kuat arus (Ampere), sudut elektroda, dan pencegahan cacat las...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Elektroda E6013</span>
+            <span class="footer-tag">Ampere Las</span>
+            <span class="footer-tag">Siklus 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Siklus 3 -->
+      <div class="project-card fade-in" data-type="media" data-siklus="3" data-library-updated="20261028" data-view-url="files/media/Materi_Pemotongan_Mekanik_Termal.pdf" data-source-url="https://drive.google.com/file/d/1dWH-PCu-81N7FGvMSBbp5wNX_HIzjEij/view" data-source-file="Materi_Pemotongan_Mekanik_test.pdf" onclick="openPreviewModal(this)"
+           data-title="Media Siklus 3 - Pemotongan Mekanik dan Termal (OFC/PAC)" 
+           data-url="pdf-viewer.html?file=files%2Fmedia%2FMateri_Pemotongan_Mekanik_Termal.pdf&amp;page=13"
+           data-konteks="Modul pemotongan pelat yang memuat Bab 6 Pemotongan Termal. Pratinjau dibuka pada halaman PDF 13, awal materi OFC/PAC."
+           data-tujuan="Mendukung pemahaman materi Pemotongan Mekanik dan Termal (OFC/PAC) pada Siklus 3."
+           data-kelebihan="Isi media tersedia sebagai PDF untuk dibaca langsung. Berkas asli tetap tersedia melalui tautan sumber Drive."
+           data-kekurangan="Salinan PDF menampilkan isi visual statis; animasi atau interaksi presentasi mengikuti berkas asli.">
+        <div class="card-cover-preview media-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Media</span>
+          <div class="media-slide-screen">
+            <div class="slide-header">
+              <span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-body" style="background-image: linear-gradient(135deg, #fcece8 0%, #ebdcd6 100%);">
+              <span class="slide-badge">PRESENTASI</span>
+              <h5 class="slide-title">MEDIA S3</h5>
+              <p class="slide-subtitle">Pemotongan Mekanik dan Termal (OFC/PAC)</p>
+            </div>
+          </div>
+          <span class="cover-footer-left">MEDIA INTERAKTIF</span>
+          <span class="cover-footer-right">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">MEDIA</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">Media Siklus 3 - Pemotongan Mekanik dan Termal (OFC/PAC)</h3>
+          <p class="card-item-desc">Modul pemotongan pelat yang memuat Bab 6 Pemotongan Termal. Pratinjau dibuka pada halaman PDF 13, awal materi OFC/PAC.</p>
+          <div class="card-footer-tags"><span class="footer-tag">OFC</span><span class="footer-tag">PAC</span><span class="footer-tag">Siklus 3</span></div>
+          <p class="linked-source-file">Materi_Pemotongan_Mekanik_test.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1dWH-PCu-81N7FGvMSBbp5wNX_HIzjEij/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- LKM Siklus 3 -->
+      <div class="project-card fade-in" data-type="lkm" data-siklus="3" onclick="openPreviewModal(this)"
+           data-title="LKM Siklus 3 - Praktik Sambungan Pelat Baja SMAW" 
+           data-url="https://docs.google.com/document/d/165ZQ8GD7u1QQUC2h3LH7GlT6tw_z-DWk/preview"
+           data-konteks="Lembar kerja instruksi kerja persiapan kampuh V tunggal, penandaan tack-weld (las titik), pengelasan jalur akar (root pass), dan jalur penutup (capping pass)."
+           data-tujuan="Memandu murid menerapkan SOP fabrikasi pengelasan pelat baja secara bertahap dan mengutamakan presisi sudut sambungan."
+           data-kelebihan="Dilengkapi kolom pencatatan parameter aktual (arus amperemeter dan jenis elektroda) untuk setiap lintasan las."
+           data-kekurangan="Beberapa murid masih membutuhkan pengawasan tambahan saat membersihkan terak dengan sikat baja agar serpihan terak tidak mengenai rekan kerja.">
+        <div class="card-cover-preview blueprint">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">LKM S3</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">PRAKTIK LAS</span>
+              <h4 class="blueprint-title">LKM S3</h4>
+              <p class="blueprint-subtitle">Sambungan Pelat Baja</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>MATERI: PENGELASAN SMAW POSISI 1G</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
+          <span class="cover-footer-right">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">LKM Siklus 3 - Praktik Sambungan Pelat Baja SMAW</h3>
+          <p class="card-item-desc">Panduan langkah kerja persiapan kampuh las, pembersihan spatter, dan pelaksanaan pengelasan posisi datar...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Job Sheet Las</span>
+            <span class="footer-tag">Pelat Baja</span>
+            <span class="footer-tag">Siklus 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 3 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="3" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus3.png"
+           data-title="Hasil LKM Siklus 3 - Lembar Evaluasi Visual Sambungan Las" 
+           data-url="https://docs.google.com/document/d/10db256nSPqcROkVkCwQP1HZd80TBf94j/preview"
+           data-konteks="Laporan hasil pemeriksaan visual hasil sambungan las murid menggunakan welding gauge, mencakup lebar rigi las, tinggi penguatan las (reinforcement), dan penetrasi."
+           data-tujuan="Mendokumentasikan hasil penguasaan keterampilan mengelas murid dan kemampuan mengevaluasi kualitas sambungannya sendiri."
+           data-kelebihan="Rigi las murid terbentuk lurus, rata, dan bebas retak (crack) permukaan dengan reinforcement teratur setinggi 2-3 mm."
+           data-kekurangan="Masih ditemukan sedikit percikan las (spatter) di sekitar kampuh las yang membutuhkan pembersihan mekanik lebih cermat.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus3.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PNG</span>
+          <span class="cover-category-badge">Hasil S3</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S3</h4>
+              <p class="blueprint-subtitle">Evaluasi Visual Las</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 3 - Lembar Evaluasi Visual Sambungan Las</h3>
+          <p class="card-item-desc">Form laporan hasil inspeksi visual deposit lasan, keseragaman rigi-rigi las, dan penetrasi sambungan murid...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Rigi Las</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Inspeksi Visual</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siklus 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asesmen Siklus 3 -->
+      <div class="project-card fade-in" data-type="asesmen" data-siklus="3" onclick="openPreviewModal(this)"
+           data-title="Asesmen Siklus 3 - Rubrik Penilaian Pengelasan SMAW" 
+           data-url="https://drive.google.com/file/d/1Uqcm91u_KJmTdSLJc03QR-lkjLg1tUDc/preview"
+           data-konteks="Instrumen rubrik asesmen praktik pengelasan yang mengukur kualitas fisik rigi las (kerataan, kontinuitas busur, penetrasi) serta kepatuhan K3 APD lengkap (topeng las, sarung tangan kulit, apron)."
+           data-tujuan="Menilai ketercapaian kompetensi dasar pengelasan busur manual sesuai standar kualifikasi juru las pemula tingkat SMK."
+           data-kelebihan="Rubrik terperinci membedakan bobot antara kepatuhan keselamatan kerja vital dan aspek keindahan kosmetik rigi las."
+           data-kekurangan="Uji destruktif seperti uji tekuk (bending test) belum dapat dilakukan pada semua spesimen karena keterbatasan waktu laboratorium.">
+        <div class="card-cover-preview asesmen-paper">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Asesmen</span>
+          <div class="cover-paper-sheet">
+            <div class="paper-header">
+              <span class="paper-subtitle">Rubrik Pengelasan</span>
+              <h5 class="paper-title">ASESMEN S3</h5>
+              <p class="paper-meta">Pengelasan Busur SMAW</p>
+            </div>
+            <div class="paper-table-mock">
+              <div class="table-mock-row header">
+                <span>No</span><span>Aspek Penilaian</span><span>Standar</span>
+              </div>
+              <div class="table-mock-row">
+                <span>1</span><span>Kerapian Rigi Las</span><span>Kontinu</span>
+              </div>
+              <div class="table-mock-row">
+                <span>2</span><span>K3 Helm & Apron</span><span>Wajib</span>
+              </div>
+            </div>
+          </div>
+          <span class="cover-footer-left">INSTRUMEN EVALUASI</span>
+          <span class="cover-footer-right">Siklus 3</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">ASESMEN</span>
+            <span class="card-tag tag-cycle">SIKLUS 3</span>
+          </div>
+          <h3 class="card-item-title">Asesmen Siklus 3 - Rubrik Penilaian Pengelasan SMAW</h3>
+          <p class="card-item-desc">Rubrik penilaian kualitas kampuh, kebersihan benda kerja pasca-las, kepatuhan K3 helm kedok, dan kekuatan...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Rubrik SMAW</span>
+            <span class="footer-tag">K3 Bengkel</span>
+            <span class="footer-tag">Siklus 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SIKLUS 4 CARDS ================= -->
+      <!-- RPP Siklus 4 -->
+      <div class="project-card fade-in" data-type="rpp" data-siklus="4" data-library-updated="20261028" data-view-url="files/rpp/RPP_Siklus_4_Pengelasan_OAW.pdf" data-source-url="https://drive.google.com/file/d/1rM6hJ-FlClK8V01jbOn8opjvHolPv2-F/view" data-source-file="RPP_Siklus_4_Pengelasan_OAW.pdf" onclick="openPreviewModal(this)"
+           data-title="RPP Siklus 4 - Pengelasan OAW (Oksi-Asetilen)" 
+           data-url="pdf-viewer.html?file=files%2Frpp%2FRPP_Siklus_4_Pengelasan_OAW.pdf"
+           data-konteks="Rencana pembelajaran pengelasan oksi-asetilen, peralatan, pengaturan nyala, teknik pengelasan dan keselamatan kerja."
+           data-tujuan="Mengidentifikasi peralatan OAW dan menerapkan teknik dasar pengelasan oksi-asetilen secara aman sesuai prosedur."
+           data-kelebihan="Dokumen RPP disajikan utuh dalam PDF dan dapat dipratinjau langsung sesuai nomor siklus."
+           data-kekurangan="Penerapan RPP tetap perlu menyesuaikan kesiapan murid, fasilitas bengkel dan jadwal pembelajaran.">
+        <div class="card-cover-preview rpp-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">RPP</span>
+          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #3182ce 100%);"></div>
+          <div class="cover-logos-row">
+            <div class="logo-emblem"></div>
+            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+          </div>
+          <div class="rpp-title-block">
+            <h4 class="rpp-main-title">RPP S4</h4>
+            <p class="rpp-sub-title">PENGELASAN OAW</p>
+            <p class="rpp-detail-title">KELAS XI TFLM · FASE F</p>
+          </div>
+          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
+          <span class="cover-footer-right-pill">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">RPP</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">RPP Siklus 4 - Pengelasan OAW (Oksi-Asetilen)</h3>
+          <p class="card-item-desc">Rencana pembelajaran pengelasan oksi-asetilen, peralatan, pengaturan nyala, teknik pengelasan dan keselamatan kerja.</p>
+          <div class="card-footer-tags"><span class="footer-tag">OAW</span><span class="footer-tag">Oksi-Asetilen</span><span class="footer-tag">Siklus 4</span></div>
+          <p class="linked-source-file">RPP_Siklus_4_Pengelasan_OAW.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1rM6hJ-FlClK8V01jbOn8opjvHolPv2-F/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- Bahan Ajar Siklus 4 -->
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="4" onclick="openPreviewModal(this)"
+           data-title="Bahan Ajar Siklus 4 - Metrologi & Penjaminan Mutu" 
+           data-url="https://docs.google.com/document/d/1hrKnxpam9fHaI1bqA_KYoWEYZHK2HbvU/preview"
+           data-konteks="Buku panduan penggunaan instrumen ukur presisi: prinsip nonius mikrometer ketelitian 0.01 mm, kalibrasi blok ukur (gauge block), pengecekan run-out dengan dial gauge, dan analisis toleransi geometris."
+           data-tujuan="Sebagai pedoman teoritis dan praktis bagi murid dalam melaksanakan prosedur pengukuran dimensional sesuai standar industri manufaktur."
+           data-kelebihan="Uraian prosedur kalibrasi titik nol dan teknik pembacaan bebas paralaks disajikan dengan infografis detail yang sangat mudah dipelajari."
+           data-kekurangan="Diperlukan penambahan bab pengenalan alat ukur modern non-kontak (seperti profile projector atau CMM) sebagai wawasan industri 4.0.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e8caca, #cbb5b5); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Panduan Mutu</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); margin:0;">BAHAN AJAR S4</h4>
+            <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;">METROLOGI & INSPEKSI MUTU</p>
+            <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;">LAB PENGUKURAN S4</p>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">Panduan Mutu</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">BAHAN AJAR</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">Bahan Ajar Siklus 4 - Metrologi &amp; Penjaminan Mutu</h3>
+          <p class="card-item-desc">Panduan penggunaan alat ukur presisi, kalibrasi nol, pembacaan skala nonius, dan penyusunan Check Sheet QC...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Mikrometer</span>
+            <span class="footer-tag">Dial Indicator</span>
+            <span class="footer-tag">Siklus 4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Siklus 4 -->
+      <div class="project-card fade-in" data-type="media" data-siklus="4" data-library-updated="20261028" data-view-url="files/media/Media_OAW.pdf" data-source-url="https://drive.google.com/file/d/1YWbpTlXZWq6hhhyjg9aLq4notTd0Svw3/view" data-source-file="PPT_Bab_VI_Pengelasan_OAW_lengkap.pptx" onclick="openPreviewModal(this)"
+           data-title="Media Siklus 4 - Pengelasan OAW" 
+           data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_OAW.pdf"
+           data-konteks="Presentasi Bab VI tentang pengelasan oksi-asetilen, nyala api, teknik torch dan tindakan keselamatan."
+           data-tujuan="Mendukung pemahaman materi Pengelasan OAW pada Siklus 4."
+           data-kelebihan="Isi media tersedia sebagai PDF untuk dibaca langsung. Berkas asli tetap tersedia melalui tautan sumber Drive."
+           data-kekurangan="Salinan PDF menampilkan isi visual statis; animasi atau interaksi presentasi mengikuti berkas asli.">
+        <div class="card-cover-preview media-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Media</span>
+          <div class="media-slide-screen">
+            <div class="slide-header">
+              <span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-body" style="background-image: linear-gradient(135deg, #fcece8 0%, #ebdcd6 100%);">
+              <span class="slide-badge">PRESENTASI</span>
+              <h5 class="slide-title">MEDIA S4</h5>
+              <p class="slide-subtitle">Pengelasan OAW</p>
+            </div>
+          </div>
+          <span class="cover-footer-left">MEDIA INTERAKTIF</span>
+          <span class="cover-footer-right">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">MEDIA</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">Media Siklus 4 - Pengelasan OAW</h3>
+          <p class="card-item-desc">Presentasi Bab VI tentang pengelasan oksi-asetilen, nyala api, teknik torch dan tindakan keselamatan.</p>
+          <div class="card-footer-tags"><span class="footer-tag">OAW</span><span class="footer-tag">Oksi-Asetilen</span><span class="footer-tag">Siklus 4</span></div>
+          <p class="linked-source-file">PPT_Bab_VI_Pengelasan_OAW_lengkap.pptx</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1YWbpTlXZWq6hhhyjg9aLq4notTd0Svw3/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- LKM Siklus 4 -->
+      <div class="project-card fade-in" data-type="lkm" data-siklus="4" onclick="openPreviewModal(this)"
+           data-title="LKM Siklus 4 - Lembar Pemeriksaan Kualitas Produk (QC)" 
+           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
+           data-konteks="Formulir inspeksi kualitas dimensi produk (Quality Inspection Sheet) standar industri untuk mencatat pengukuran pada 5 titik kritis benda kerja."
+           data-tujuan="Membiasakan murid menyusun laporan pemeriksaan mutu yang akuntabel, menghitung deviasi simpangan, dan menyimpulkan status produk."
+           data-kelebihan="Membangun etos kerja jujur di mana murid diajarkan untuk tidak memanipulasi data ukuran yang berada di luar batas toleransi."
+           data-kekurangan="Diperlukan pengawasan ketat saat pengulangan pengukuran agar posisi sentuh ujung ukur mikrometer tegak lurus sempurna terhadap sumbu benda.">
+        <div class="card-cover-preview blueprint">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">LKM S4</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">INSPEKSI QC</span>
+              <h4 class="blueprint-title">LKM S4</h4>
+              <p class="blueprint-subtitle">Check Sheet Audit Mutu</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>STANDAR: METROLOGI &amp; QC INDUSTRI</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
+          <span class="cover-footer-right">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">LKM Siklus 4 - Lembar Pemeriksaan Kualitas Produk (QC)</h3>
+          <p class="card-item-desc">Lembar kerja audit mutu mandiri untuk mengukur 5 titik dimensi produk bubut dan memetakan toleransi simpangan...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Audit Mutu</span>
+            <span class="footer-tag">Check Sheet</span>
+            <span class="footer-tag">Siklus 4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 4 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="4" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus1.png"
+           data-title="Hasil LKM Siklus 4 - Laporan Rekapitulasi Dimensi Murid" 
+           data-url="https://docs.google.com/document/d/1CWZnkhsZd6o-ifNzlc8WKImU0ql4riCR/preview"
+           data-konteks="Berkas rekapitulasi data hasil pengukuran produk manufaktur murid yang memuat kalkulasi nilai rata-rata, rentang toleransi, dan justifikasi kelulusan inspeksi QC."
+           data-tujuan="Menyajikan bukti kemampuan analitis murid dalam mengolah data kuantitatif hasil pengukuran teknis secara sistematis."
+           data-kelebihan="Ketepatan pembacaan ukuran murid mencapai akurasi tinggi dan seluruh tabel simpangan terisi lengkap dengan analisis yang rapi."
+           data-kekurangan="Beberapa murid masih memerlukan pendampingan dalam merumuskan rekomendasi tindakan perbaikan (corrective action) untuk komponen yang reject.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus1.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PNG</span>
+          <span class="cover-category-badge">Hasil S4</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S4</h4>
+              <p class="blueprint-subtitle">Laporan Audit Dimensi</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 4 - Laporan Rekapitulasi Dimensi Murid</h3>
+          <p class="card-item-desc">Hasil pencatatan data pengukuran produk manufaktur murid dengan analisis tabel deviasi ukuran dan status kelulusan...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Data Ukur</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Lolos Inspeksi</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siklus 4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asesmen Siklus 4 -->
+      <div class="project-card fade-in" data-type="asesmen" data-siklus="4" onclick="openPreviewModal(this)"
+           data-title="Asesmen Siklus 4 - Rubrik Uji Kompetensi Metrologi Presisi" 
+           data-url="https://drive.google.com/file/d/1Uqcm91u_KJmTdSLJc03QR-lkjLg1tUDc/preview"
+           data-konteks="Instrumen rubrik uji unjuk kerja pengukuran presisi yang mencakup teknik pemegangan alat ukur (ratchet stop), kalibrasi nol, kecepatan inspeksi, dan kejujuran data."
+           data-tujuan="Mengukur kompetensi keahlian inspeksi mutu metrologi murid secara individual sesuai kriteria sertifikasi industri."
+           data-kelebihan="Standar penilaian yang ketat menstimulasi murid untuk memperlakukan alat ukur presisi dengan kehati-hatian tinggi."
+           data-kekurangan="Memerlukan waktu pengujian one-on-one antara penilai dan murid untuk memverifikasi kebenaran teknik pembacaan alat secara langsung.">
+        <div class="card-cover-preview asesmen-paper">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Asesmen</span>
+          <div class="cover-paper-sheet">
+            <div class="paper-header">
+              <span class="paper-subtitle">Rubrik Metrologi</span>
+              <h5 class="paper-title">ASESMEN S4</h5>
+              <p class="paper-meta">Uji Kompetensi Pengukuran</p>
+            </div>
+            <div class="paper-table-mock">
+              <div class="table-mock-row header">
+                <span>No</span><span>Aspek Asesmen</span><span>Kriteria</span>
+              </div>
+              <div class="table-mock-row">
+                <span>1</span><span>Kalibrasi Titik Nol</span><span>Akurat</span>
+              </div>
+              <div class="table-mock-row">
+                <span>2</span><span>Presisi Mikrometer</span><span>0.01 mm</span>
+              </div>
+            </div>
+          </div>
+          <span class="cover-footer-left">INSTRUMEN EVALUASI</span>
+          <span class="cover-footer-right">Siklus 4</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">ASESMEN</span>
+            <span class="card-tag tag-cycle">SIKLUS 4</span>
+          </div>
+          <h3 class="card-item-title">Asesmen Siklus 4 - Rubrik Uji Kompetensi Metrologi Presisi</h3>
+          <p class="card-item-desc">Instrumen asesmen ketepatan pembacaan skala, kecepatan inspeksi, kehati-hatian penanganan alat ukur, dan kejujuran data...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Rubrik Metrologi</span>
+            <span class="footer-tag">Presisi Tinggi</span>
+            <span class="footer-tag">Siklus 4</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SIKLUS 5 CARDS ================= -->
+      <!-- RPP Siklus 5 -->
+      <div class="project-card fade-in" data-type="rpp" data-siklus="5" data-library-updated="20261028" data-view-url="files/rpp/RPP_Siklus_5_Pengelasan_GTAW.pdf" data-source-url="https://drive.google.com/file/d/1YXKTd_oy6iX4gAf_l6uORRvp-8NPmjm9/view" data-source-file="RPP_Siklus_5_Pengelasan_GTAW.pdf" onclick="openPreviewModal(this)"
+           data-title="RPP Siklus 5 - Pengelasan GTAW / TIG" 
+           data-url="pdf-viewer.html?file=files%2Frpp%2FRPP_Siklus_5_Pengelasan_GTAW.pdf"
+           data-konteks="Rencana pembelajaran GTAW/TIG: pengenalan peralatan, tungsten, gas pelindung, pengendalian kawah cair dan latihan sambungan pelat."
+           data-tujuan="Mengenali komponen GTAW, menyiapkan peralatan dan bahan serta mengembangkan keterampilan dasar pengelasan TIG."
+           data-kelebihan="Dokumen RPP disajikan utuh dalam PDF dan dapat dipratinjau langsung sesuai nomor siklus."
+           data-kekurangan="Penerapan RPP tetap perlu menyesuaikan kesiapan murid, fasilitas bengkel dan jadwal pembelajaran.">
+        <div class="card-cover-preview rpp-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">RPP</span>
+          <div class="rpp-diagonal-bg" style="background: linear-gradient(135deg, #fbf2ef 0%, #fbf2ef 28%, #e8caca 28%, #e8caca 34%, #d4a5a5 34%, #5a4b51 100%);"></div>
+          <div class="cover-logos-row">
+            <div class="logo-emblem"></div>
+            <img src="ust-logo.png" alt="UST Logo" class="rpp-logo-img">
+          </div>
+          <div class="rpp-title-block">
+            <h4 class="rpp-main-title">RPP S5</h4>
+            <p class="rpp-sub-title">PENGELASAN GTAW / TIG</p>
+            <p class="rpp-detail-title">KELAS XI TFLM · FASE F</p>
+          </div>
+          <span class="cover-footer-left">PERANGKAT PEMBELAJARAN</span>
+          <span class="cover-footer-right-pill">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">RPP</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">RPP Siklus 5 - Pengelasan GTAW / TIG</h3>
+          <p class="card-item-desc">Rencana pembelajaran GTAW/TIG: pengenalan peralatan, tungsten, gas pelindung, pengendalian kawah cair dan latihan sambungan pelat.</p>
+          <div class="card-footer-tags"><span class="footer-tag">GTAW</span><span class="footer-tag">TIG</span><span class="footer-tag">Siklus 5</span></div>
+          <p class="linked-source-file">RPP_Siklus_5_Pengelasan_GTAW.pdf</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1YXKTd_oy6iX4gAf_l6uORRvp-8NPmjm9/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- Bahan Ajar Siklus 5 -->
+      <div class="project-card fade-in" data-type="bahan-ajar" data-siklus="5" onclick="openPreviewModal(this)"
+           data-title="Bahan Ajar Siklus 5 - Teknik Perakitan & Finishing Manufaktur" 
+           data-url="https://docs.google.com/document/d/1hrKnxpam9fHaI1bqA_KYoWEYZHK2HbvU/preview"
+           data-konteks="Modul teknis perakitan mekanik presisi: konsep suaian longgar, transisi, sesak (fits), pengencangan baut torsi merata, metode pelapisan semprot (spray coating), dan pencegahan korosi."
+           data-tujuan="Memberikan bekal pengetahuan komprehensif bagi murid mengenai tahap pasca-produksi dan finishing permukaan berstandar komersial."
+           data-kelebihan="Membahas secara mendalam aspek estetika dan ketahanan pakai (durability) produk yang jarang dibahas pada modul teori dasar."
+           data-kekurangan="Memerlukan simulasi penerapan kunci torsi (torque wrench) secara lebih intensif untuk standardisasi kekencangan baut sambungan.">
+        <div class="card-cover-preview" style="background: linear-gradient(135deg, #e3d3c8, #bca598); border-bottom: 1px solid var(--accent);">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Panduan Mutu</span>
+          <div class="book-binding-strip"></div>
+          <div class="cover-center-content" style="z-index: 2; margin-left: 14px;">
+            <div class="cover-logos" style="margin-bottom: 0.5rem;">
+              <img src="ust-logo.png" alt="UST Logo" style="height: 24px; width: auto;">
+            </div>
+            <h4 class="cover-main-title" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--text); margin:0;">BAHAN AJAR S5</h4>
+            <p class="cover-sub-title" style="font-size: 0.65rem; font-weight: 700; color: var(--text); margin: 0.2rem 0 0 0;">PERAKITAN &amp; FINISHING</p>
+            <p class="cover-detail-title" style="font-size: 0.72rem; font-weight: 800; color: var(--primary); margin: 0.1rem 0 0 0;">BENGKEL ASSEMBLY S5</p>
+          </div>
+          <span class="cover-footer-left" style="left: 2rem;">Panduan Mutu</span>
+          <span class="cover-footer-right" style="background: var(--primary); color: #fff; border-radius: 50px; font-size: 0.6rem; padding: 0.2rem 0.6rem;">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">BAHAN AJAR</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">Bahan Ajar Siklus 5 - Teknik Perakitan &amp; Finishing Manufaktur</h3>
+          <p class="card-item-desc">Modul panduan perakitan suaian mekanik (fit), pelapisan anti karat, standardisasi kemasan, dan kriteria laik pakai...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Suaian Mekanik</span>
+            <span class="footer-tag">Anti Karat</span>
+            <span class="footer-tag">Siklus 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Siklus 5 -->
+      <div class="project-card fade-in" data-type="media" data-siklus="5" data-library-updated="20261028" data-view-url="files/media/Media_GTAW_Komponen_Las.pdf" data-source-url="https://drive.google.com/file/d/1uRAKMsdfAyKeB9eXNPIyzJPkV-jIZB9m/view" data-source-file="ppt_Media Ajar GTAW.pptx" onclick="openPreviewModal(this)"
+           data-title="Media Siklus 5 - Komponen Las GTAW" 
+           data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_GTAW_Komponen_Las.pdf"
+           data-konteks="Presentasi pengenalan mesin, torch, tungsten, gas pelindung, kabel dan komponen GTAW untuk kelas XI/Fase F."
+           data-tujuan="Mendukung pemahaman materi Komponen Las GTAW pada Siklus 5."
+           data-kelebihan="Isi media tersedia sebagai PDF untuk dibaca langsung. Berkas asli tetap tersedia melalui tautan sumber Drive."
+           data-kekurangan="Salinan PDF menampilkan isi visual statis; animasi atau interaksi presentasi mengikuti berkas asli.">
+        <div class="card-cover-preview media-cover">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Media</span>
+          <div class="media-slide-screen">
+            <div class="slide-header">
+              <span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span>
+            </div>
+            <div class="slide-body" style="background-image: linear-gradient(135deg, #fcece8 0%, #ebdcd6 100%);">
+              <span class="slide-badge">PRESENTASI</span>
+              <h5 class="slide-title">MEDIA S5</h5>
+              <p class="slide-subtitle">Komponen Las GTAW</p>
+            </div>
+          </div>
+          <span class="cover-footer-left">MEDIA INTERAKTIF</span>
+          <span class="cover-footer-right">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">MEDIA</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">Media Siklus 5 - Komponen Las GTAW</h3>
+          <p class="card-item-desc">Presentasi pengenalan mesin, torch, tungsten, gas pelindung, kabel dan komponen GTAW untuk kelas XI/Fase F.</p>
+          <div class="card-footer-tags"><span class="footer-tag">GTAW</span><span class="footer-tag">TIG</span><span class="footer-tag">Siklus 5</span></div>
+          <p class="linked-source-file">ppt_Media Ajar GTAW.pptx</p>
+          <div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1uRAKMsdfAyKeB9eXNPIyzJPkV-jIZB9m/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div>
+        </div>
+      </div>
+
+      <!-- LKM Siklus 5 -->
+      <div class="project-card fade-in" data-type="lkm" data-siklus="5" onclick="openPreviewModal(this)"
+           data-title="LKM Siklus 5 - Lembar Prosedur Perakitan & Uji Fungsi" 
+           data-url="https://docs.google.com/document/d/10db256nSPqcROkVkCwQP1HZd80TBf94j/preview"
+           data-konteks="Lembar kerja panduan tim untuk tahapan perakitan antar-komponen, pengecekan kelonggaran mekanisme gerak, dan pengetesan beban operasional alat."
+           data-tujuan="Memfasilitasi kerja sama tim dalam memecahkan masalah integrasi mekanik dan memastikan unit produk beroperasi sesuai spesifikasi desain awal."
+           data-kelebihan="Mendorong kolaborasi positif (teamwork) dan kepemimpinan dalam pembagian tugas perakitan, inspeksi, dan pelaporan."
+           data-kekurangan="Membutuhkan ruang bengkel perakitan yang cukup lapang agar tiap kelompok dapat merakit unit dengan leluasa.">
+        <div class="card-cover-preview blueprint">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">LKM S5</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">LEMBAR KERJA MURID (LKM)</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">ASSEMBLY & UJI</span>
+              <h4 class="blueprint-title">LKM S5</h4>
+              <p class="blueprint-subtitle">Uji Fungsi &amp; Kelayakan</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PRODUK FINAL: UNIT MANUFAKTUR KREATIF</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">LEMBAR KERJA MURID</span>
+          <span class="cover-footer-right">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">LKM Siklus 5 - Lembar Prosedur Perakitan &amp; Uji Fungsi</h3>
+          <p class="card-item-desc">Panduan kerja tim merakit unit alat, mencatat kesesuaian baut dan mur, serta memvalidasi unjuk kerja mekanisme mesin...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Uji Mekanisme</span>
+            <span class="footer-tag">Teamwork</span>
+            <span class="footer-tag">Siklus 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hasil LKM Siklus 5 -->
+      <div class="project-card fade-in" data-type="hasil-lkm" data-siklus="5" onclick="openPreviewModal(this)"
+           data-preview-image="hasil_lkm_siklus2.png"
+           data-title="Hasil LKM Siklus 5 - Portofolio Unit Produk Manufaktur Final" 
+           data-url="https://docs.google.com/document/d/10db256nSPqcROkVkCwQP1HZd80TBf94j/preview"
+           data-konteks="Dokumentasi portofolio final hasil karya produk terintegrasi murid yang berhasil dirakit dan lolos serangkaian pengujian fungsional kelayakan pakai."
+           data-tujuan="Menjadi bukti puncak kompetensi kejuruan murid yang mencerminkan integrasi utuh seluruh pengetahuan dan keterampilan selama PPL Mandiri."
+           data-kelebihan="Unit produk menunjukkan fungsi mekanik yang lancar, finishing cat rapi, serta mampu beroperasi dengan aman tanpa macet."
+           data-kekurangan="Dapat diperkaya dengan estimasi kalkulasi harga pokok produksi (HPP) untuk melatih naluri bisnis siswa.">
+        <div class="card-cover-preview student-work" style="background: linear-gradient(rgba(240, 245, 242, 0.82), rgba(240, 245, 242, 0.88)), url('hasil_lkm_siklus2.png') center/cover no-repeat !important;">
+          <span class="cover-format-badge">PNG</span>
+          <span class="cover-category-badge">Hasil S5</span>
+          <div class="blueprint-frame">
+            <div class="blueprint-corner tl"></div><div class="blueprint-corner tr"></div>
+            <div class="blueprint-corner bl"></div><div class="blueprint-corner br"></div>
+            <div class="blueprint-header">
+              <span class="blueprint-label">HASIL LEMBAR MURID</span>
+            </div>
+            <div class="blueprint-body">
+              <span class="blueprint-cycle">DOKUMEN MURID</span>
+              <h4 class="blueprint-title">HASIL S5</h4>
+              <p class="blueprint-subtitle">Produk Jadi Final</p>
+            </div>
+            <div class="blueprint-footer">
+              <span>PENILAIAN: TUNTAS (A)</span>
+            </div>
+          </div>
+          <span class="cover-footer-left">KARYA SISWA</span>
+          <span class="cover-footer-right">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category" style="background: rgba(85, 122, 96, 0.1); color: #3b5c45; border: 1px solid rgba(85, 122, 96, 0.2);">Hasil LKM</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">Hasil LKM Siklus 5 - Portofolio Unit Produk Manufaktur Final</h3>
+          <p class="card-item-desc">Laporan akhir produk jadi lengkap dengan dokumentasi foto produk terpasang, lembar validasi fungsional, dan refleksi...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Produk Jadi</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siap Pakai</span>
+            <span class="footer-tag" style="background: #f0f5f2; color: #3b5c45;">Siklus 5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asesmen Siklus 5 -->
+      <div class="project-card fade-in" data-type="asesmen" data-siklus="5" onclick="openPreviewModal(this)"
+           data-title="Asesmen Siklus 5 - Rubrik Evaluasi Komprehensif Produk Jadi" 
+           data-url="https://drive.google.com/file/d/1Uqcm91u_KJmTdSLJc03QR-lkjLg1tUDc/preview"
+           data-konteks="Instrumen evaluasi sumatif akhir yang menilai aspek teknis fungsi mekanik, kepatuhan dimensi akhir, estetika finishing, daya tahan, dan performa presentasi tim."
+           data-tujuan="Memberikan penilaian holistik terhadap luaran nyata pembelajaran proyek murid selama siklus PPL Mandiri."
+           data-kelebihan="Kriteria penilaian yang komprehensif mengapresiasi kerja keras proses fabrikasi sekaligus kualitas luaran akhir produk."
+           data-kekurangan="Penilaian aspek estetika finishing memiliki unsur subjektivitas yang perlu distandardisasi dengan kartu sampel pembanding.">
+        <div class="card-cover-preview asesmen-paper">
+          <span class="cover-format-badge">PDF</span>
+          <span class="cover-category-badge">Asesmen</span>
+          <div class="cover-paper-sheet">
+            <div class="paper-header">
+              <span class="paper-subtitle">Evaluasi Sumatif</span>
+              <h5 class="paper-title">ASESMEN S5</h5>
+              <p class="paper-meta">Evaluasi Produk Final</p>
+            </div>
+            <div class="paper-table-mock">
+              <div class="table-mock-row header">
+                <span>No</span><span>Aspek Evaluasi</span><span>Status</span>
+              </div>
+              <div class="table-mock-row">
+                <span>1</span><span>Fungsi Mekanik</span><span>Optimal</span>
+              </div>
+              <div class="table-mock-row">
+                <span>2</span><span>Kualitas Finishing</span><span>Sangat Baik</span>
+              </div>
+            </div>
+          </div>
+          <span class="cover-footer-left">INSTRUMEN EVALUASI</span>
+          <span class="cover-footer-right">Siklus 5</span>
+        </div>
+        <div class="card-content-area">
+          <div class="card-tags">
+            <span class="card-tag tag-category">ASESMEN</span>
+            <span class="card-tag tag-cycle">SIKLUS 5</span>
+          </div>
+          <h3 class="card-item-title">Asesmen Siklus 5 - Rubrik Evaluasi Komprehensif Produk Jadi</h3>
+          <p class="card-item-desc">Rubrik evaluasi sumatif akhir mencakup kerapian finishing, fungsionalitas mekanik, estetika bentuk, dan daya tahan...</p>
+          <div class="card-footer-tags">
+            <span class="footer-tag">Evaluasi Sumatif</span>
+            <span class="footer-tag">Produk Selesai</span>
+            <span class="footer-tag">Siklus 5</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="additional-media" id="media-ajar-tambahan">
+      <h3 class="additional-media-title">Media Ajar Tambahan</h3>
+      <p class="additional-media-description">Materi SMAW disusun menurut pertemuan sebagai pengayaan di luar urutan RPP Siklus 1–5. Buku TFLM tersedia sebagai referensi pendamping.</p>
+      <div class="projects-grid supplemental-media-grid"><div class="project-card fade-in" data-type="media" data-library-updated="20261028" onclick="openPreviewModal(this)" data-title="Media Ajar SMAW — Pertemuan 1" data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_SMAW_Pertemuan_1.pdf" data-view-url="files/media/Media_SMAW_Pertemuan_1.pdf" data-source-url="https://drive.google.com/file/d/1_zhcD6r0EE2s8GuD6jIkex2KlDHcgg8s/view" data-source-file="Media_Ajar_SMAW_Pertemuan_1_Kelas_XI_TFLM.pptx" data-konteks="Media presentasi SMAW kelas XI TFLM untuk pertemuan 1." data-tujuan="Mendukung pengayaan materi Teknik Fabrikasi Logam dan Manufaktur." data-kelebihan="PDF dapat dipratinjau langsung; berkas sumber tetap tersedia di Drive." data-kekurangan="Pratinjau PDF bersifat statis; fitur interaktif mengikuti berkas aslinya.">
+          <div class="card-cover-preview media-cover"><span class="cover-format-badge">PDF</span><span class="cover-category-badge">Media Tambahan</span><div class="media-slide-screen"><div class="slide-header"><span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span></div><div class="slide-body"><span class="slide-badge">PENGAYAAN</span><h5 class="slide-title">SMAW</h5><p class="slide-subtitle">SMAW · PERTEMUAN 1</p></div></div><span class="cover-footer-left">MEDIA PEMBELAJARAN</span><span class="cover-footer-right">Kelas XI TFLM</span></div>
+          <div class="card-content-area"><div class="card-tags"><span class="card-tag tag-category">MEDIA</span><span class="card-tag tag-cycle">PENGAYAAN</span></div><h3 class="card-item-title">Media Ajar SMAW — Pertemuan 1</h3><p class="card-item-desc">Media presentasi SMAW kelas XI TFLM untuk pertemuan 1.</p><div class="card-footer-tags"><span class="footer-tag">SMAW</span><span class="footer-tag">Pertemuan 1</span></div><p class="linked-source-file">Media_Ajar_SMAW_Pertemuan_1_Kelas_XI_TFLM.pptx</p><div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1_zhcD6r0EE2s8GuD6jIkex2KlDHcgg8s/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div></div>
+        </div>
+<div class="project-card fade-in" data-type="media" data-library-updated="20261028" onclick="openPreviewModal(this)" data-title="Media Ajar SMAW — Pertemuan 2" data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_SMAW_Pertemuan_2.pdf" data-view-url="files/media/Media_SMAW_Pertemuan_2.pdf" data-source-url="https://drive.google.com/file/d/1lW9ctGCq5J-vYsPR3nE-EgOe0nmlO_n1/view" data-source-file="Media_Ajar_SMAW_Pertemuan_2_Kelas_XI_TFLM.pptx" data-konteks="Media presentasi SMAW kelas XI TFLM untuk pertemuan 2." data-tujuan="Mendukung pengayaan materi Teknik Fabrikasi Logam dan Manufaktur." data-kelebihan="PDF dapat dipratinjau langsung; berkas sumber tetap tersedia di Drive." data-kekurangan="Pratinjau PDF bersifat statis; fitur interaktif mengikuti berkas aslinya.">
+          <div class="card-cover-preview media-cover"><span class="cover-format-badge">PDF</span><span class="cover-category-badge">Media Tambahan</span><div class="media-slide-screen"><div class="slide-header"><span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span></div><div class="slide-body"><span class="slide-badge">PENGAYAAN</span><h5 class="slide-title">SMAW</h5><p class="slide-subtitle">SMAW · PERTEMUAN 2</p></div></div><span class="cover-footer-left">MEDIA PEMBELAJARAN</span><span class="cover-footer-right">Kelas XI TFLM</span></div>
+          <div class="card-content-area"><div class="card-tags"><span class="card-tag tag-category">MEDIA</span><span class="card-tag tag-cycle">PENGAYAAN</span></div><h3 class="card-item-title">Media Ajar SMAW — Pertemuan 2</h3><p class="card-item-desc">Media presentasi SMAW kelas XI TFLM untuk pertemuan 2.</p><div class="card-footer-tags"><span class="footer-tag">SMAW</span><span class="footer-tag">Pertemuan 2</span></div><p class="linked-source-file">Media_Ajar_SMAW_Pertemuan_2_Kelas_XI_TFLM.pptx</p><div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1lW9ctGCq5J-vYsPR3nE-EgOe0nmlO_n1/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div></div>
+        </div>
+<div class="project-card fade-in" data-type="media" data-library-updated="20261028" onclick="openPreviewModal(this)" data-title="Media Ajar SMAW — Pertemuan 3" data-url="pdf-viewer.html?file=files%2Fmedia%2FMedia_SMAW_Pertemuan_3.pdf" data-view-url="files/media/Media_SMAW_Pertemuan_3.pdf" data-source-url="https://drive.google.com/file/d/1TFIKffx3BWyKrlLN-Rg-glIolAzXz_GA/view" data-source-file="ppt SMAW pertemuan ke 3.pptx" data-konteks="Media presentasi SMAW untuk pertemuan 3, disajikan dalam salinan PDF agar dapat dibaca langsung." data-tujuan="Mendukung pengayaan materi Teknik Fabrikasi Logam dan Manufaktur." data-kelebihan="PDF dapat dipratinjau langsung; berkas sumber tetap tersedia di Drive." data-kekurangan="Pratinjau PDF bersifat statis; fitur interaktif mengikuti berkas aslinya.">
+          <div class="card-cover-preview media-cover"><span class="cover-format-badge">PDF</span><span class="cover-category-badge">Media Tambahan</span><div class="media-slide-screen"><div class="slide-header"><span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span></div><div class="slide-body"><span class="slide-badge">PENGAYAAN</span><h5 class="slide-title">SMAW</h5><p class="slide-subtitle">SMAW · PERTEMUAN 3</p></div></div><span class="cover-footer-left">MEDIA PEMBELAJARAN</span><span class="cover-footer-right">Kelas XI TFLM</span></div>
+          <div class="card-content-area"><div class="card-tags"><span class="card-tag tag-category">MEDIA</span><span class="card-tag tag-cycle">PENGAYAAN</span></div><h3 class="card-item-title">Media Ajar SMAW — Pertemuan 3</h3><p class="card-item-desc">Media presentasi SMAW untuk pertemuan 3, disajikan dalam salinan PDF agar dapat dibaca langsung.</p><div class="card-footer-tags"><span class="footer-tag">SMAW</span><span class="footer-tag">Pertemuan 3</span></div><p class="linked-source-file">ppt SMAW pertemuan ke 3.pptx</p><div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1TFIKffx3BWyKrlLN-Rg-glIolAzXz_GA/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div></div>
+        </div>
+<div class="project-card fade-in" data-type="media" data-library-updated="20261028" onclick="openPreviewModal(this)" data-title="Buku Digital TFLM Fase F — Versi PDF" data-url="pdf-viewer.html?file=files%2Fmedia%2FBuku_TFLM_Fase_F.pdf" data-view-url="files/media/Buku_TFLM_Fase_F.pdf" data-source-url="https://drive.google.com/file/d/1rTAeeKUqbOgt64GKVyrXfxVLILGLoYdB/view" data-source-file="Buku_Digital_Interaktif_TFLM_Fase_F.html" data-konteks="Versi PDF buku TFLM dari arsip pembelajaran yang sama. Berkas HTML aslinya tetap tersedia melalui tautan sumber Drive." data-tujuan="Mendukung pengayaan materi Teknik Fabrikasi Logam dan Manufaktur." data-kelebihan="PDF dapat dipratinjau langsung; berkas sumber tetap tersedia di Drive." data-kekurangan="Pratinjau PDF bersifat statis; fitur interaktif mengikuti berkas aslinya.">
+          <div class="card-cover-preview media-cover"><span class="cover-format-badge">PDF</span><span class="cover-category-badge">Media Tambahan</span><div class="media-slide-screen"><div class="slide-header"><span class="slide-dot"></span><span class="slide-dot"></span><span class="slide-dot"></span></div><div class="slide-body"><span class="slide-badge">PENGAYAAN</span><h5 class="slide-title">BUKU TFLM</h5><p class="slide-subtitle">BUKU DIGITAL TFLM</p></div></div><span class="cover-footer-left">MEDIA PEMBELAJARAN</span><span class="cover-footer-right">Fase F</span></div>
+          <div class="card-content-area"><div class="card-tags"><span class="card-tag tag-category">MEDIA</span><span class="card-tag tag-cycle">PENGAYAAN</span></div><h3 class="card-item-title">Buku Digital TFLM Fase F — Versi PDF</h3><p class="card-item-desc">Versi PDF buku TFLM dari arsip pembelajaran yang sama. Berkas HTML aslinya tetap tersedia melalui tautan sumber Drive.</p><div class="card-footer-tags"><span class="footer-tag">Buku TFLM</span><span class="footer-tag">Fase F</span></div><p class="linked-source-file">Buku_Digital_Interaktif_TFLM_Fase_F.html</p><div class="card-buttons"><button type="button" class="card-btn btn-artefak" onclick="event.stopPropagation(); openPreviewModal(this.closest('.project-card'));">Pratinjau PDF</button><a class="card-btn btn-refleksi" href="https://drive.google.com/file/d/1rTAeeKUqbOgt64GKVyrXfxVLILGLoYdB/view" target="_blank" rel="noopener" onclick="event.stopPropagation();">Sumber Drive</a></div></div>
+        </div></div>
     </div>
   </section>
 
@@ -2771,33 +4569,89 @@
         });
       }, 100);
 
-      /* ===== MASTER FILTER LOGIC ===== */
-      const grid = document.querySelector('.projects-grid');
+      /* ===== SEMINAR PENDIDIKAN FILTER LOGIC ===== */
+      const seminarGrid = document.querySelector('.seminar-grid');
+      const seminarCapsules = document.querySelectorAll('.seminar-filter-btn');
 
-      // Cycle Tabs Click Handler
-      const siklusBtns = document.querySelectorAll('.siklus-tab-btn');
-      siklusBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          siklusBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const siklusValue = btn.getAttribute('data-siklus');
-          grid.setAttribute('data-active-siklus', siklusValue);
+      function setSeminarSem(sem) {
+        if (!seminarGrid) return;
+        seminarGrid.setAttribute('data-active-sem', sem);
+        seminarCapsules.forEach(b => b.setAttribute('aria-pressed', String(b.getAttribute('data-sem') === sem)));
+        seminarCapsules.forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-sem') === sem);
         });
-      });
+      }
 
-      // Capsule Category Tabs Click Handler
-      const capsuleBtns = document.querySelectorAll('.capsule-tab-btn');
-      capsuleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          capsuleBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const typeValue = btn.getAttribute('data-type');
-          grid.setAttribute('data-active-type', typeValue);
+      if (seminarCapsules.length) {
+        seminarCapsules.forEach(btn => {
+          btn.addEventListener('click', () => {
+            setSeminarSem(btn.getAttribute('data-sem'));
+          });
         });
-      });
+      }
+
+      // Identification opens as an article, while other seminar items retain their cards.
+      document.querySelectorAll('.identity-read').forEach(button => button.addEventListener('click', () => {
+        setSeminarSem('identifikasi-diri');
+        document.getElementById('identifikasi-diri-artikel').scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+      }));
+      function openIdentityFromHash() {
+        if (location.hash === '#identifikasi-diri-artikel' || location.hash.startsWith('#identity-')) setSeminarSem('identifikasi-diri');
+      }
+      window.addEventListener('hashchange', openIdentityFromHash);
+      setSeminarSem(seminarGrid.getAttribute('data-active-sem') || 'semua');
+      openIdentityFromHash();
+
+      /* ===== PPL MANDIRI MASTER FILTER LOGIC (5 SIKLUS) ===== */
+      const pplGrid = document.querySelector('.ppl-grid');
+      const pplSiklusBtns = document.querySelectorAll('.ppl-siklus-tabs .siklus-tab-btn');
+      const pplCapsuleBtns = document.querySelectorAll('.ppl-capsule-tabs .capsule-tab-btn');
+
+      if (pplSiklusBtns.length && pplGrid) {
+        pplSiklusBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            pplSiklusBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const siklusValue = btn.getAttribute('data-siklus');
+            pplGrid.setAttribute('data-active-siklus', siklusValue);
+          });
+        });
+      }
+
+      if (pplCapsuleBtns.length && pplGrid) {
+        pplCapsuleBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            pplCapsuleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const typeValue = btn.getAttribute('data-type');
+            pplGrid.setAttribute('data-active-type', typeValue);
+          });
+        });
+      }
 
       // Preview Modal Functions
-      window.openPreviewModal = function(btn) {
+      let previewDocuments = [];
+      let previewDocumentTitle = '';
+
+      window.selectPreviewDocument = function(documentId) {
+        const selected = previewDocuments.find(doc => doc.id === documentId);
+        if (!selected) return;
+        const iframe = document.getElementById('modalIframe');
+        const img = document.getElementById('modalImage');
+        img.style.display = 'none';
+        img.src = '';
+        iframe.style.display = 'block';
+        iframe.src = selected.previewUrl;
+        iframe.title = selected.label + ' - ' + previewDocumentTitle;
+        document.getElementById('modalExternalLink').href = selected.viewUrl;
+        document.querySelectorAll('#modalDocumentTabs [data-document]').forEach(tab => {
+          tab.setAttribute('aria-selected', String(tab.getAttribute('data-document') === selected.id));
+          const doc = previewDocuments.find(item => item.id === tab.getAttribute('data-document'));
+          if (doc) tab.textContent = doc.label;
+        });
+      };
+
+      window.openPreviewModal = function(btn, preferredDocument = 'ppt') {
         const title = btn.getAttribute('data-title');
         const url = btn.getAttribute('data-url');
         const previewImage = btn.getAttribute('data-preview-image');
@@ -2811,18 +4665,34 @@
         const iframe = document.getElementById('modalIframe');
         const img = document.getElementById('modalImage');
 
+        previewDocumentTitle = title;
+        previewDocuments = [];
+        const pptUrl = btn.getAttribute('data-ppt-url');
+        const worksheetUrl = btn.getAttribute('data-worksheet-url');
+        if (pptUrl) {
+          previewDocuments.push({ id: 'ppt', label: 'PPT Presentasi', previewUrl: pptUrl, viewUrl: btn.getAttribute('data-ppt-view-url') || pptUrl });
+        }
+        if (worksheetUrl) {
+          previewDocuments.push({ id: 'worksheet', label: btn.getAttribute('data-worksheet-label') || 'Lembar Kerja', previewUrl: worksheetUrl, viewUrl: btn.getAttribute('data-worksheet-view-url') || worksheetUrl });
+        }
+        document.getElementById('modalDocumentTabs').hidden = previewDocuments.length < 2;
+        document.getElementById('modalDocumentTabs').setAttribute('aria-label', 'Pilih dokumen ' + title);
+
         if (previewImage) {
           iframe.style.display = 'none';
           iframe.src = '';
           img.style.display = 'block';
           img.src = previewImage;
           document.getElementById('modalExternalLink').href = previewImage;
+        } else if (previewDocuments.length) {
+          selectPreviewDocument(preferredDocument);
         } else {
           img.style.display = 'none';
           img.src = '';
           iframe.style.display = 'block';
           iframe.src = url;
-          let viewUrl = url.replace('/preview', '/view').replace('/embed', '/view');
+          let viewUrl = btn.getAttribute('data-view-url') || url.replace('/preview', '/view').replace('/embed', '/view');
+          iframe.title = 'Pratinjau ' + title;
           document.getElementById('modalExternalLink').href = viewUrl;
         }
 
@@ -2844,6 +4714,8 @@
         document.getElementById('modalIframe').src = '';
         const img = document.getElementById('modalImage');
         if (img) img.src = '';
+        document.getElementById('modalDocumentTabs').hidden = true;
+        previewDocuments = [];
         document.body.style.overflow = '';
       };
 
@@ -2879,9 +4751,13 @@
           </button>
         </div>
       </div>
+      <div id="modalDocumentTabs" class="preview-document-switcher" role="tablist" aria-label="Pilih dokumen" hidden>
+        <button type="button" role="tab" data-document="ppt" aria-selected="true" onclick="selectPreviewDocument('ppt')">PPT Presentasi</button>
+        <button type="button" role="tab" data-document="worksheet" aria-selected="false" onclick="selectPreviewDocument('worksheet')">Lembar Kerja</button>
+      </div>
       <div class="preview-modal-body">
         <div class="preview-modal-iframe-wrapper">
-          <iframe id="modalIframe" src="" frameborder="0" allowfullscreen></iframe>
+          <iframe id="modalIframe" src="" title="Pratinjau Dokumen" frameborder="0" allowfullscreen></iframe>
           <img id="modalImage" src="" style="width: 100%; height: 100%; object-fit: contain; background: #fafafa; display: none;" alt="Pratinjau Foto" />
         </div>
         <div class="preview-modal-sidebar">

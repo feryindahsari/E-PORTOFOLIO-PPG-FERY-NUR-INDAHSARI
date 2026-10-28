@@ -1,0 +1,11 @@
+/* Source details and supplementary media reuse the existing card theme. */
+.linked-source-file { font:400 10px/1.65 var(--font-body); color:var(--secondary); overflow-wrap:anywhere; margin:14px 0 12px; }
+.project-card[data-library-updated] .slide-subtitle { white-space:normal; line-height:1.4; overflow-wrap:anywhere; }
+.project-card[data-library-updated] .rpp-sub-title { white-space:normal; line-height:1.35; font-size:.85rem; }
+.project-card[data-library-updated] .card-buttons .card-btn { text-align:center; text-decoration:none; }
+.project-card[data-library-updated] .card-buttons .card-btn:hover { filter:brightness(.96); }
+.additional-media { max-width:1100px; margin:45px auto 0; padding-top:32px; border-top:1px solid var(--accent); }
+.additional-media-title { text-align:center; font:600 30px/1.25 var(--font-display); color:var(--text); margin:0 0 12px; }
+.additional-media-description { max-width:740px; margin:0 auto 24px; text-align:center; color:var(--secondary); font:400 12px/1.9 var(--font-body); }
+.ppl-grid:not([data-active-type="semua"]):not([data-active-type="media"]) + .additional-media { display:none; }
+@media(max-width:600px) { .additional-media { margin-top:30px; } .additional-media-title { font-size:26px; } .additional-media-description { font-size:11px; } }
