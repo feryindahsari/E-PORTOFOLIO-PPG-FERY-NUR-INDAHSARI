@@ -7,5 +7,8 @@
 .additional-media { max-width:1100px; margin:45px auto 0; padding-top:32px; border-top:1px solid var(--accent); }
 .additional-media-title { text-align:center; font:600 30px/1.25 var(--font-display); color:var(--text); margin:0 0 12px; }
 .additional-media-description { max-width:740px; margin:0 auto 24px; text-align:center; color:var(--secondary); font:400 12px/1.9 var(--font-body); }
-.ppl-grid:not([data-active-type="semua"]):not([data-active-type="media"]) + .additional-media { display:none; }
+.ppl-grid:not([data-active-type="semua"]):not([data-active-type="media"]) ~ .additional-media { display:none; }
 @media(max-width:600px) { .additional-media { margin-top:30px; } .additional-media-title { font-size:26px; } .additional-media-description { font-size:11px; } }
+
+.ppl-empty-state { max-width:740px; margin:30px auto; padding:24px; border:1px solid var(--accent); border-radius:18px; text-align:center; color:var(--secondary); font:400 13px/1.8 var(--font-body); }
+.ppl-empty-state[hidden] { display:none; }
